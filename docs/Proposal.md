@@ -3,4 +3,12 @@ layout: default
 title: Proposal
 ---
 
-r
+##Summary:
+
+
+##AI/ML Algoritms:
+
+
+##Evaluation Plan:
+
+
