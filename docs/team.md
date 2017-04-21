@@ -6,11 +6,11 @@ title:  Team
 # {{ page.title }}
 
 
+## Caitlin Creekmoore
+***UCI Net ID***: ccreekmo
+
+## Andy Vu
+***UCI Net ID***: apvu
+
 ## Andrew Do
-***UCI Net ID***: doad1
-
-## USER 2
-***UCI Net ID***: ucinetid
-
-## USER 3
-***UCI Net ID***: ucinetid
+***UCI Net ID***:  doad1
