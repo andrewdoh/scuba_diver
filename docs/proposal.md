@@ -5,6 +5,7 @@ title: Proposal
 
 ## Summary:
   The main idea for our project revolves around archery. More specifically, we would like to train an agent, via reinforcement learning, to accurately hit a target in Minecraft using a bow and arrow tool. When shooting an arrow in Minecraft, the player has control over the angle at which they aim the arrow, and the amount of force applied to that arrow (via some “charging” mechanism in the game). Similar to how a real-world user would be presented with this situation, we want the agent to have the ability to "see" the target in front of them, and will thus feed the agent input on the target's location in reference to itself. However, it will have to gradually learn what combinations of angles and force it must use in order to hit a specified target, and will produce the best result as output.
+  
   As we progress through this project, we plan on introducing the agent to new (and more difficult) obstacles. For instance, though our primary goal is to have the agent hit a stationary target (perhaps at various distances and heights), we would like to advance to moving targets as we move forward. In later stages of the project, we also aim to introduce obstacles affecting the terrain (such as a wall of water, since the drag of an arrow is greatly increased when it travels through it). As a final goal, we hope to have the agent eventually progress towards hitting hostile targets that may be charging towards it. 
   
 ## AI/ML Algorithms:
