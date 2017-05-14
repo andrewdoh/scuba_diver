@@ -1,0 +1,15 @@
+###########
+# site.title
+
+title:    'CS175-PROJECT'
+subtitle: 'CS 175: Project in AI (in Minecraft)'
+
+
+#########################
+# more settings
+
+markdown: kramdown
+
+exclude:
+- README.md
+- LICENSE.md
