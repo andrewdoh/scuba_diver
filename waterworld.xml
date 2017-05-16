@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+            <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+              <About>
+                <Summary>Hello world!</Summary>
+              </About>
+
+              <ServerSection>
+                <ServerHandlers>
+                  <FileWorldGenerator src="/Users/andyvu/Desktop/MalmoInstall/Minecraft/run/saves/WaterWorld" />
+                  <ServerQuitFromTimeUp timeLimitMs="30000"/>
+                  <ServerQuitWhenAnyAgentFinishes/>
+                </ServerHandlers>
+              </ServerSection>
+
+              <AgentSection mode="Survival">
+                <Name>MalmoTutorialBot</Name>
+                <AgentStart>
+                    <Placement x="1142.4" y="25" z="-481.6"/>
+                </AgentStart>
+                <AgentHandlers>
+              <DiscreteMovementCommands/>
+              <ObservationFromFullStats/>
+              <RewardForTouchingBlockType>
+                <Block reward="100.0" type="redstone_block" behaviour="onceOnly"/>
+              </RewardForTouchingBlockType>
+              <RewardForSendingCommand reward="-1" />
+              <AgentQuitFromTouchingBlockType>
+                  <Block type="redstone_block" />
+              </AgentQuitFromTouchingBlockType>
+              </AgentHandlers>
+              </AgentSection>
+            </Mission>
