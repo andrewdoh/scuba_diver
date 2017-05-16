@@ -119,24 +119,26 @@ class TabQAgent:
             self.logger.info("Random action: %s" % self.actions[a])
         else:
 
-            # create new temporary q_table from q_table 1 and q_table 2
-            if not self.q_table_3.has_key(current_s):
-                self.q_table_3[current_s] = ([0] * len(self.actions))
-            
+            # create new temporary q_table from q_table 1 and q_table  if it doesn't exist
+            # if not self.q_table_3.has_key(current_s):
+            #     self.q_table_3[current_s] = ([0] * len(self.actions))
+            # compute the new value to use instead of max, in this case the average
+            q_3 = list()
             for action in range(len(self.actions)):
-                 self.q_table_3[current_s][action] = \
-                  (self.q_table_1[current_s][action] + self.q_table_2[current_s][action]) / 2
+                 q_3.append(\
+                  (self.q_table_1[current_s][action] + self.q_table_2[current_s][action]) / 2)
 
             #self.logger.debug("Current values: %s" % ",".join(str(x) for x in self.q_table_1[current_s]))
-            max_value = max(self.q_table_3[current_s])
-           
+            # take the maximum in the current state of the newly created table_3
+            # max_value = max(self.q_table_3[current_s])
+            max_value = max(q_3)
             list_of_max_actions = list()
             for x in range(0, len(self.actions)):
-                if self.q_table_3[current_s][x] == max_value:
-                    l.append(x)
+                if q_3[x] == max_value:
+                    list_of_max_actions.append(x)
                 
-            y = random.randint(0, len(l)-1)
-            a = l[y]  
+            y = random.randint(0, len(list_of_max_actions)-1)
+            a = list_of_max_actions[y]  
         
             # self.logger.info("Taking q action: %s" % self.actions[a])
 
