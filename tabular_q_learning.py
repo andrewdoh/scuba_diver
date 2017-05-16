@@ -55,7 +55,9 @@ class TabQAgent:
         self.logger.addHandler(logging.StreamHandler(sys.stdout))
 
         self.actions = actions
-        self.q_table = {}
+        self.q_table_1 = {}
+        self.q_table_2 = {}
+        self.q_table_3 = {}
         self.canvas = canvas
         self.root = root
         
@@ -86,33 +88,57 @@ class TabQAgent:
             return 0
         current_s = "%d:%d" % (int(obs[u'XPos']), int(obs[u'ZPos']))
         self.logger.debug("State: %s (x = %.2f, z = %.2f)" % (current_s, float(obs[u'XPos']), float(obs[u'ZPos'])))
-        if not self.q_table.has_key(current_s):
-            self.q_table[current_s] = ([0] * len(self.actions))
+        if not self.q_table_1.has_key(current_s):
+            self.q_table_1[current_s] = ([0] * len(self.actions))
+
+        if not self.q_table_2.has_key(current_s):
+            self.q_table_2[current_s] = ([0] * len(self.actions))
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
-            old_q = self.q_table[self.prev_s][self.prev_a]
-            self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_r
-                + self.gamma * max(self.q_table[current_s]) - old_q)
+            old_q_1 = self.q_table_1[self.prev_s][self.prev_a]
+            old_q_2 = self.q_table_2[self.prev_s][self.prev_a]
+
+            #with probability 50% update q_table_1 else update q_table_2
+            if random.random() < 0.5:
+                print 'waffles'
+                self.q_table_1[self.prev_s][self.prev_a] = \
+                 old_q_1 + self.alpha * (current_r + self.gamma * self.q_table_2[current_s][self.q_table_1[current_s].index(max(self.q_table_1[current_s]))] - old_q_1)
+            else:
+                print 'pancakes'
+                #update second q_table
+                self.q_table_2[self.prev_s][self.prev_a] = \
+                old_q_2 + self.alpha * (current_r + self.gamma * self.q_table_1[current_s][self.q_table_2[current_s].index(max(self.q_table_2[current_s]))] - old_q_2)
 
         self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
 
-        # select the next action
+        # select the next action E-GREEDY
         rnd = random.random()
         if rnd < self.epsilon:
             a = random.randint(0, len(self.actions) - 1)
             self.logger.info("Random action: %s" % self.actions[a])
         else:
-            m = max(self.q_table[current_s])
-            self.logger.debug("Current values: %s" % ",".join(str(x) for x in self.q_table[current_s]))
-            l = list()
+
+            # create new temporary q_table from q_table 1 and q_table 2
+            if not self.q_table_3.has_key(current_s):
+                self.q_table_3[current_s] = ([0] * len(self.actions))
+            
+            for action in range(len(self.actions)):
+                 self.q_table_3[current_s][action] = \
+                  (self.q_table_1[current_s][action] + self.q_table_2[current_s][action]) / 2
+
+            #self.logger.debug("Current values: %s" % ",".join(str(x) for x in self.q_table_1[current_s]))
+            max_value = max(self.q_table_3[current_s])
+           
+            list_of_max_actions = list()
             for x in range(0, len(self.actions)):
-                print 'COOKIE: ', x
-                if self.q_table[current_s][x] == m:
+                if self.q_table_3[current_s][x] == max_value:
                     l.append(x)
+                
             y = random.randint(0, len(l)-1)
-            a = l[y]
-            self.logger.info("Taking q action: %s" % self.actions[a])
+            a = l[y]  
+        
+            # self.logger.info("Taking q action: %s" % self.actions[a])
 
         # send the selected action
         agent_host.sendCommand(self.actions[a])
@@ -163,7 +189,8 @@ class TabQAgent:
             
         # take first action
         total_reward += self.act(world_state,agent_host,current_r)
-        
+       
+       
         require_move = True
         check_expected_position = True
         
@@ -247,8 +274,11 @@ class TabQAgent:
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
-            old_q = self.q_table[self.prev_s][self.prev_a]
-            self.q_table[self.prev_s][self.prev_a] = old_q + self.alpha * ( current_r - old_q )
+            old_q_1 = self.q_table_1[self.prev_s][self.prev_a]
+            old_q_2 = self.q_table_2[self.prev_s][self.prev_a]
+
+            self.q_table_1[self.prev_s][self.prev_a] = old_q_1 + self.alpha * (current_r - old_q_1)
+            self.q_table_2[self.prev_s][self.prev_a] = old_q_2 + self.alpha * (current_r - old_q_2)
             
         self.drawQ()
     
@@ -270,9 +300,9 @@ class TabQAgent:
                 s = "%d:%d" % (x,y)
                 self.canvas.create_rectangle( (world_x-1-x)*scale, (world_y-1-y)*scale, (world_x-1-x+1)*scale, (world_y-1-y+1)*scale, outline="#fff", fill="#000")
                 for action in range(4):
-                    if not s in self.q_table:
+                    if not s in self.q_table_1:
                         continue
-                    value = self.q_table[s][action]
+                    value = self.q_table_1[s][action]
                     color = 255 * ( value - min_value ) / ( max_value - min_value ) # map value to 0-255
                     color = max( min( color, 255 ), 0 ) # ensure within [0,255]
                     color_string = '#%02x%02x%02x' % (255-color, color, 0)
