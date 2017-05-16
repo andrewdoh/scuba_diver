@@ -6,9 +6,17 @@
               </About>
 
               <ServerSection>
+                <ServerInitialConditions>
+                      <Time>
+                          <StartTime>6000</StartTime>
+                          <AllowPassageOfTime>false</AllowPassageOfTime>
+                      </Time>
+                      <Weather>clear</Weather>
+                      <AllowSpawning>false</AllowSpawning>
+                </ServerInitialConditions>
                 <ServerHandlers>
                   <FileWorldGenerator src="/Users/andyvu/Desktop/MalmoInstall/Minecraft/run/saves/WaterWorld" />
-                  <ServerQuitFromTimeUp timeLimitMs="30000"/>
+                  <ServerQuitFromTimeUp timeLimitMs="100"/>
                   <ServerQuitWhenAnyAgentFinishes/>
                 </ServerHandlers>
               </ServerSection>
