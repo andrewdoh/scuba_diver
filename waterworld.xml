@@ -34,9 +34,10 @@
       <DiscreteMovementCommands/>
       <ObservationFromFullStats/>
       <RewardForCollectingItem>
-        <Item reward="10"  type="ender_pearl">
+        <Item reward="10.0"  type="ender_pearl">
       </RewardForCollectingItem>
       <RewardForTouchingBlockType>
+        <Block reward="10.0" type="air" behaviour="onceOnly"/>
         <Block reward="100.0" type="redstone_block" behaviour="onceOnly"/>
       </RewardForTouchingBlockType>
       <RewardForSendingCommand reward="-1"/>
