@@ -1,15 +1,15 @@
 # ------------------------------------------------------------------------------------------------
 # Copyright (c) 2016 Microsoft Corporation
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 # associated documentation files (the "Software"), to deal in the Software without restriction,
 # including without limitation the rights to use, copy, modify, merge, publish, distribute,
 # sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all copies or
 # substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 # NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 # NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
@@ -31,10 +31,10 @@ import os
 import random
 import sys
 import time
-import Tkinter as tk
+#import Tkinter as tk
 
 save_images = False
-if save_images:        
+if save_images:
     from PIL import Image
 
 class TabQAgent:
@@ -58,9 +58,9 @@ class TabQAgent:
         self.q_table_1 = {}
         self.q_table_2 = {}
         self.q_table_3 = {}
-        self.canvas = canvas
+        #self.canvas = canvas
         self.root = root
-        
+
         self.rep = 0
 
     def loadModel(self, model_file):
@@ -79,7 +79,7 @@ class TabQAgent:
 
     def act(self, world_state, agent_host, current_r ):
         """take 1 action in response to the current world state"""
-        
+
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text) # most recent observation
         self.logger.debug(obs)
@@ -110,7 +110,7 @@ class TabQAgent:
                 self.q_table_2[self.prev_s][self.prev_a] = \
                 old_q_2 + self.alpha * (current_r + self.gamma * self.q_table_1[current_s][self.q_table_2[current_s].index(max(self.q_table_2[current_s]))] - old_q_2)
 
-        self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
+        #self.drawQ( curr_x = int(obs[u'XPos']), curr_y = int(obs[u'ZPos']) )
 
         # select the next action E-GREEDY
         rnd = random.random()
@@ -136,10 +136,10 @@ class TabQAgent:
             for x in range(0, len(self.actions)):
                 if q_3[x] == max_value:
                     list_of_max_actions.append(x)
-                
+
             y = random.randint(0, len(list_of_max_actions)-1)
-            a = list_of_max_actions[y]  
-        
+            a = list_of_max_actions[y]
+
             # self.logger.info("Taking q action: %s" % self.actions[a])
 
         # send the selected action
@@ -155,10 +155,10 @@ class TabQAgent:
         total_reward = 0
         current_r = 0
         tol = 0.01
-        
+
         self.prev_s = None
         self.prev_a = None
-        
+
         # wait for a valid observation
         world_state = agent_host.peekWorldState()
         while world_state.is_mission_running and all(e.text=='{}' for e in world_state.observations):
@@ -173,14 +173,14 @@ class TabQAgent:
 
         if not world_state.is_mission_running:
             return 0 # mission already ended
-            
+
         assert len(world_state.video_frames) > 0, 'No video frames!?'
-        
+
         obs = json.loads( world_state.observations[-1].text )
         prev_x = obs[u'XPos']
         prev_z = obs[u'ZPos']
         print 'Initial position:',prev_x,',',prev_z
-        
+
         if save_images:
             # save the frame, for debugging
             frame = world_state.video_frames[-1]
@@ -188,17 +188,17 @@ class TabQAgent:
             iFrame = 0
             self.rep = self.rep + 1
             image.save( 'rep_' + str(self.rep).zfill(3) + '_saved_frame_' + str(iFrame).zfill(4) + '.png' )
-            
+
         # take first action
         total_reward += self.act(world_state,agent_host,current_r)
-       
-       
+
+
         require_move = True
         check_expected_position = True
-        
+
         # main loop:
         while world_state.is_mission_running:
-        
+
             # wait for the position to have changed and a reward received
             print 'Waiting for data...',
             while True:
@@ -221,9 +221,9 @@ class TabQAgent:
             num_frames_seen = world_state.number_of_video_frames_since_last_state
             while world_state.is_mission_running and world_state.number_of_video_frames_since_last_state == num_frames_seen:
                 world_state = agent_host.peekWorldState()
-                
+
             num_frames_before_get = len(world_state.video_frames)
-            
+
             world_state = agent_host.getWorldState()
             for err in world_state.errors:
                 print err
@@ -237,7 +237,7 @@ class TabQAgent:
                     image = Image.frombytes('RGB', (frame.width, frame.height), str(frame.pixels) )
                     iFrame = iFrame + 1
                     image.save( 'rep_' + str(self.rep).zfill(3) + '_saved_frame_' + str(iFrame).zfill(4) + '_after_' + self.actions[self.prev_a] + '.png' )
-                
+
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
                 num_frames_after_get = len(world_state.video_frames)
@@ -269,7 +269,7 @@ class TabQAgent:
                 prev_z = curr_z
                 # act
                 total_reward += self.act(world_state, agent_host, current_r)
-                
+
         # process final reward
         self.logger.debug("Final reward: %d" % current_r)
         total_reward += current_r
@@ -281,11 +281,11 @@ class TabQAgent:
 
             self.q_table_1[self.prev_s][self.prev_a] = old_q_1 + self.alpha * (current_r - old_q_1)
             self.q_table_2[self.prev_s][self.prev_a] = old_q_2 + self.alpha * (current_r - old_q_2)
-            
-        self.drawQ()
-    
+
+        #self.drawQ()
+
         return total_reward
-        
+
     def drawQ( self, curr_x=None, curr_y=None ):
         if self.canvas is None or self.root is None:
             return
@@ -311,13 +311,13 @@ class TabQAgent:
                     self.canvas.create_oval( (world_x - 1 - x + action_positions[action][0] - action_radius ) *scale,
                                              (world_y - 1 - y + action_positions[action][1] - action_radius ) *scale,
                                              (world_x - 1 - x + action_positions[action][0] + action_radius ) *scale,
-                                             (world_y - 1 - y + action_positions[action][1] + action_radius ) *scale, 
+                                             (world_y - 1 - y + action_positions[action][1] + action_radius ) *scale,
                                              outline=color_string, fill=color_string )
         if curr_x is not None and curr_y is not None:
-            self.canvas.create_oval( (world_x - 1 - curr_x + 0.5 - curr_radius ) * scale, 
-                                     (world_y - 1 - curr_y + 0.5 - curr_radius ) * scale, 
-                                     (world_x - 1 - curr_x + 0.5 + curr_radius ) * scale, 
-                                     (world_y - 1 - curr_y + 0.5 + curr_radius ) * scale, 
+            self.canvas.create_oval( (world_x - 1 - curr_x + 0.5 - curr_radius ) * scale,
+                                     (world_y - 1 - curr_y + 0.5 - curr_radius ) * scale,
+                                     (world_x - 1 - curr_x + 0.5 + curr_radius ) * scale,
+                                     (world_y - 1 - curr_y + 0.5 + curr_radius ) * scale,
                                      outline="#fff", fill="#fff" )
         self.root.update()
 
@@ -327,7 +327,7 @@ agent_host = MalmoPython.AgentHost()
 
 # add some args
 agent_host.addOptionalStringArgument('mission_file',
-    'Path/to/file from which to load the mission.', '../Sample_missions/cliff_walking_1.xml')
+    'Path/to/file from which to load the mission.', '../Sample_missions/waterworld.xml')
 agent_host.addOptionalFloatArgument('alpha',
     'Learning rate of the Q-learning agent.', 0.1)
 agent_host.addOptionalFloatArgument('epsilon',
@@ -351,14 +351,14 @@ if agent_host.receivedArgument("test"):
     exit(0) # can't test any further because mission_file path unknowable TODO: find a way to run this sample as an integration test
 
 # -- set up the python-side drawing -- #
-scale = 40
-world_x = 6
-world_y = 14
-root = tk.Tk()
-root.wm_title("Q-table")
-canvas = tk.Canvas(root, width=world_x*scale, height=world_y*scale, borderwidth=0, highlightthickness=0, bg="black")
-canvas.grid()
-root.update()
+# scale = 40
+# world_x = 6
+# world_y = 14
+# root = tk.Tk()
+# root.wm_title("Q-table")
+# canvas = tk.Canvas(root, width=world_x*scale, height=world_y*scale, borderwidth=0, highlightthickness=0, bg="black")
+# canvas.grid()
+# root.update()
 
 if agent_host.receivedArgument("test"):
     num_maps = 1
@@ -376,9 +376,9 @@ for imap in xrange(num_maps):
         alpha=agent_host.getFloatArgument('alpha'),
         gamma=agent_host.getFloatArgument('gamma'),
         debug = agent_host.receivedArgument("debug"),
-        canvas = canvas,
-        root = root)
-
+        #canvas = canvas,
+        #root = root)
+        )
     # -- set up the mission -- #
     mission_file = agent_host.getStringArgument('mission_file')
     with open(mission_file, 'r') as f:
@@ -390,9 +390,9 @@ for imap in xrange(num_maps):
     my_mission.requestVideo( 320, 240 )
     my_mission.setViewpoint( 1 )
     # add holes for interest
-    for z in range(2,12,2):
-        x = random.randint(1,3)
-        my_mission.drawBlock( x,45,z,"lava")
+    # for z in range(2,12,2):
+    #     x = random.randint(1,3)
+    #     my_mission.drawBlock( x,45,z,"lava")
 
     my_clients = MalmoPython.ClientPool()
     my_clients.add(MalmoPython.ClientInfo('127.0.0.1', 10000)) # add Minecraft machines here as available
@@ -404,7 +404,7 @@ for imap in xrange(num_maps):
     num_repeats = 150
     cumulative_rewards = []
     for i in range(num_repeats):
-        
+
         print "\nMap %d - Mission %d of %d:" % ( imap, i+1, num_repeats )
 
         my_mission_record = MalmoPython.MissionRecordSpec( "./save_%s-map%d-rep%d.tgz" % (expID, imap, i) )
