@@ -33,6 +33,9 @@
     <AgentHandlers>
       <DiscreteMovementCommands/>
       <ObservationFromFullStats/>
+      <RewardForCollectingItem>
+        <Item reward="10"  type="ender_pearl">
+      </RewardForCollectingItem>
       <RewardForTouchingBlockType>
         <Block reward="100.0" type="redstone_block" behaviour="onceOnly"/>
       </RewardForTouchingBlockType>
