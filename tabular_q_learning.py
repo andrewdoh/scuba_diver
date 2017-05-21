@@ -99,7 +99,7 @@ class TabQAgent:
             if world_state.number_of_observations_since_last_state > 0:
                 msg = world_state.observations[-1].text
                 observations = json.loads(msg)
-                grid = observations.get(u'aroundagent3x3x3', 0)
+                grid = observations.get(u'aroundagent3x2x3', 0)
                 break
         return grid
 
