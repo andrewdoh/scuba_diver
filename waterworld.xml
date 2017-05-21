@@ -6,7 +6,7 @@
   </About>
 
   <ModSettings>
-    <MsPerTick>1</MsPerTick>
+    <MsPerTick>100</MsPerTick>
   </ModSettings>
 
   <ServerSection>
@@ -19,7 +19,7 @@
     <AllowSpawning>false</AllowSpawning>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/andyvu/Desktop/MalmoInstall/Minecraft/run/saves/WaterWorld" />
+      <FileWorldGenerator src="/Users/andrew/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorld" />
       <ServerQuitFromTimeUp timeLimitMs="100000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>
@@ -34,7 +34,7 @@
       <DiscreteMovementCommands/>
       <ObservationFromFullStats/>
       <RewardForCollectingItem>
-        <Item reward="10.0"  type="ender_pearl">
+        <Item reward="10.0"  type="ender_pearl"></Item>
       </RewardForCollectingItem>
       <RewardForTouchingBlockType>
         <Block reward="10.0" type="air" behaviour="onceOnly"/>
