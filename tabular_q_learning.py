@@ -126,6 +126,7 @@ class TabQAgent:
         #self.actions = get_possible_actions()
         grid = self.load_grid(world_state)
         print 'grid: ', grid
+        print 'size of grid: ', len(grid)
         if not self.q_table_1.has_key(current_s):
             self.q_table_1[current_s] = ([0] * len(self.actions))
 
