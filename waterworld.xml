@@ -33,6 +33,12 @@
     <AgentHandlers>
       <DiscreteMovementCommands/>
       <ObservationFromFullStats/>
+       <ObservationFromGrid>
+                      <Grid name="floor3x3">
+                        <min x="-1" y="-1" z="-1"/>
+                        <max x="1" y="-1" z="1"/>
+                      </Grid>
+                  </ObservationFromGrid>
       <RewardForCollectingItem>
         <Item reward="10.0"  type="ender_pearl"></Item>
       </RewardForCollectingItem>

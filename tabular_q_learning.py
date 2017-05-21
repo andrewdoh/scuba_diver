@@ -77,6 +77,39 @@ class TabQAgent:
         """switch to evaluation mode (no training)"""
         self.training = False
 
+    def load_grid(self, world_state):
+        """
+        Used the agent observation API to get a 21 X 21 grid box around the agent (the agent is in the middle).
+        Args
+
+        world_state:    <object>    current agent world state
+
+        Returns
+
+        grid:   <list>  the world grid blocks represented as a list of blocks (see Tutorial.pdf)
+        """
+        while world_state.is_mission_running:
+            sys.stdout.write(".")
+            time.sleep(0.1)
+            world_state = agent_host.getWorldState()
+            if len(world_state.errors) > 0:
+                raise AssertionError('Could not load grid.')
+            for error in world_state.errors:
+                print "Error:",error.text
+            if world_state.number_of_observations_since_last_state > 0:
+                msg = world_state.observations[-1].text
+                observations = json.loads(msg)
+                grid = observations.get(u'floor3x3', 0)
+                break
+        return grid
+
+
+    def get_possible_actions(self, world_state, current_s):
+
+        action_list = []
+        #to determine possible action needs a 9x9 grid around agent to "see" what's around us
+        world_state = null
+
     def act(self, world_state, agent_host, current_r ):
         """take 1 action in response to the current world state"""
 
@@ -88,6 +121,11 @@ class TabQAgent:
             return 0
         current_s = "%d:%d" % (int(obs[u'XPos']), int(obs[u'ZPos']))
         self.logger.debug("State: %s (x = %.2f, z = %.2f)" % (current_s, float(obs[u'XPos']), float(obs[u'ZPos'])))
+
+        # get possible actions
+        #self.actions = get_possible_actions()
+        grid = self.load_grid(world_state)
+        print 'grid: ', grid
         if not self.q_table_1.has_key(current_s):
             self.q_table_1[current_s] = ([0] * len(self.actions))
 
@@ -206,6 +244,7 @@ class TabQAgent:
                 if not world_state.is_mission_running:
                     print 'mission ended.'
                     break
+
                 if len(world_state.rewards) > 0 and not all(e.text=='{}' for e in world_state.observations):
                     obs = json.loads( world_state.observations[-1].text )
                     curr_x = obs[u'XPos']
@@ -375,7 +414,7 @@ for imap in xrange(num_maps):
         epsilon=agent_host.getFloatArgument('epsilon'),
         alpha=agent_host.getFloatArgument('alpha'),
         gamma=agent_host.getFloatArgument('gamma'),
-        debug = agent_host.receivedArgument("debug"),
+        debug = agent_host.receivedArgument("debug")
         #canvas = canvas,
         #root = root)
         )
