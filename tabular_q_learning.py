@@ -89,26 +89,46 @@ class TabQAgent:
         grid:   <list>  the world grid blocks represented as a list of blocks (see Tutorial.pdf)
         """
         while world_state.is_mission_running:
-            sys.stdout.write(".")
+            #sys.stdout.write(".")
             time.sleep(0.1)
             world_state = agent_host.getWorldState()
             if len(world_state.errors) > 0:
                 raise AssertionError('Could not load grid.')
-            for error in world_state.errors:
-                print "Error:",error.text
+            # for error in world_state.errors:
+            #     print "Error:",error.text
             if world_state.number_of_observations_since_last_state > 0:
                 msg = world_state.observations[-1].text
                 observations = json.loads(msg)
                 grid = observations.get(u'aroundagent3x2x3', 0)
                 break
+
         return grid
 
 
     def get_possible_actions(self, world_state, current_s):
 
         action_list = []
-        #to determine possible action needs a 9x9 grid around agent to "see" what's around us
-        world_state = null
+        #to determine possible action needs a 3x3x2 grid around agent to "see" what's around us
+        grid = self.load_grid(world_state)
+
+        #the directions
+        north = 4 - 3
+        east = 4 + 1
+        south = 4 + 3
+        west = 4 - 1
+
+        ok_things = ['water', 'wooden_door']
+        #check grid to see what block is there
+        if grid[north] in ok_things:
+            action_list.append("movenorth 1")
+        if grid[east] in ok_things:
+            action_list.append("moveeast 1")
+        if grid[south] in ok_things:
+            action_list.append("movesouth 1")
+        if grid[west] in ok_things:
+            action_list.append("movewest 1")
+
+        return action_list
 
     def act(self, world_state, agent_host, current_r ):
         """take 1 action in response to the current world state"""
@@ -124,9 +144,12 @@ class TabQAgent:
 
         # get possible actions
         #self.actions = get_possible_actions()
-        grid = self.load_grid(world_state)
-        print 'grid: ', grid
-        print 'size of grid: ', len(grid)
+        #grid = self.load_grid(world_state)
+        # print 'grid: ', grid
+        # print 'size of grid: ', len(grid)
+        self.actions = self.get_possible_actions(world_state, current_s)
+        #print 'actions: ', self.actions
+
         if not self.q_table_1.has_key(current_s):
             self.q_table_1[current_s] = ([0] * len(self.actions))
 
@@ -233,7 +256,7 @@ class TabQAgent:
 
 
         require_move = True
-        check_expected_position = True
+        check_expected_position = False
 
         # main loop:
         while world_state.is_mission_running:
@@ -441,7 +464,7 @@ for imap in xrange(num_maps):
     agentID = 0
     expID = 'tabular_q_learning'
 
-    num_repeats = 150
+    num_repeats = 1
     cumulative_rewards = []
     for i in range(num_repeats):
 

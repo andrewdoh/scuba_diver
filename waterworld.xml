@@ -19,7 +19,7 @@
     <AllowSpawning>false</AllowSpawning>
     </ServerInitialConditions>
     <ServerHandlers>
-      <FileWorldGenerator src="/Users/andrew/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorld" />
+      <FileWorldGenerator src="/Users/andrewdo/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorld" />
       <ServerQuitFromTimeUp timeLimitMs="100000"/>
       <ServerQuitWhenAnyAgentFinishes/>
     </ServerHandlers>
@@ -36,7 +36,7 @@
        <ObservationFromGrid>
                       <Grid name="aroundagent3x2x3">
                         <min x="-1" y="0" z="-1"/>
-                        <max x="1" y="1" z="1"/>
+                        <max x="1" y="0" z="1"/>
                       </Grid>
                   </ObservationFromGrid>
       <RewardForCollectingItem>
