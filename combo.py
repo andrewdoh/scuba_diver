@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "/Users/andrewdo/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorld"
+saved_filename = "/Users/andrew/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorld2Floors"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -26,7 +26,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
             </ServerInitialConditions>
             <ServerHandlers>
                 <FileWorldGenerator src="''' + saved_filename + '''"/>
-		<ServerQuitFromTimeUp timeLimitMs="100000"/>
+		<ServerQuitFromTimeUp timeLimitMs="10000"/>
                 <ServerQuitWhenAnyAgentFinishes />
             </ServerHandlers>
         </ServerSection>
@@ -78,9 +78,9 @@ class UnderwaterAgent(object):
 
         move_by = 4
         if move_up:
-            tel_y= self.curr_y+move_by 
+            tel_y= self.curr_y+move_by
         else:
-            tel_y= self.curr_y-move_by 
+            tel_y= self.curr_y-move_by
         tp_command = "tp {} {} {}".format(self.curr_x,tel_y,self.curr_z)
         #print("X,Y,Z----: {},{},{}".format(self.curr_x,tel_y,self.curr_z))
         return tp_command
@@ -98,7 +98,7 @@ class UnderwaterAgent(object):
                 if math.fabs(frame_x - teleport_x) < 0.001 and math.fabs(frame_z - teleport_z) < 0.001:
                     good_frame = True
                     end_frame = timer()'''
-        
+
 
     def get_possible_actions(self, world_state,agent_host):
         """Returns all possible actions that can be done at the current state. """
@@ -123,14 +123,14 @@ class UnderwaterAgent(object):
         return action_list
 
     def act(self,world_state,agent_host,current_reward):
-        
+
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text)
         curr_state = "%d.%d.%d" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']))
 
         #update both if action doesn't exist in one.. (so they always exist in both)
         ########3CURRENTLY USING ONLY ONE Q TABLE. CHANGE.##########
-        
+
         if curr_state not in self.q1_table:
             self.q1_table[curr_state] = ([0] * len(self.get_possible_actions(world_state,agent_host)))
 
@@ -152,7 +152,7 @@ class UnderwaterAgent(object):
                 #update second q_table
                 self.q2_table[self.prev_s][self.prev_a] = \
                 old_q_2 + self.alpha * (current_reward + self.gamma * self.q1_table[curr_state][self.q2_table[curr_state].index(max(self.q2_table[curr_state]))] - old_q_2)
-        
+
 
         #select next action
         possible_actions = self.get_possible_actions(world_state,agent_host)
@@ -162,14 +162,14 @@ class UnderwaterAgent(object):
         print("\n--TOOK ACTION: {}".format(possible_actions[a]))
         if possible_actions[a].find("tp")!=-1:
             self.sent_tp = True
+
         agent_host.sendCommand(possible_actions[a])
-        
         self.prev_s = curr_state
         self.prev_a = a
-        
+
         return current_reward
-                
-    
+
+
     def choose_action(self,curr_state,possible_actions):
 
        # select the next action E-GREEDY
@@ -183,13 +183,18 @@ class UnderwaterAgent(object):
             #     self.q_table_3[curr_state] = ([0] * len(possible_actions))
             # compute the new value to use instead of max, in this case the average
             q_3 = list()
+            print 'possible actions: ', possible_actions
+            print 'q1: ', self.q1_table[curr_state]
+            print 'q2: ', self.q2_table[curr_state]
             for action in range(len(possible_actions)):
-                print len(possible_actions)
+                print 'length: ', len(possible_actions)
+                print 'a1: ', self.q1_table[curr_state][action]
+                print 'q2: ', self.q2_table[curr_state][action]
                 q_3.append((self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2)
 
-            
+
             # take the maximum in the current state of the newly created table_3
-            
+
             max_value = max(q_3)
             list_of_max_actions = list()
             for x in range(len(possible_actions)):
@@ -203,7 +208,7 @@ class UnderwaterAgent(object):
             #choose max from these averages, or if equal max values,
             #then choose randomly among them
         return a
-    
+
     def run(self,agent_host):
 
         self.prev_s = None
@@ -211,7 +216,7 @@ class UnderwaterAgent(object):
         tol = 0.01
         current_reward = 0
         total_reward = 0
-        
+
         # wait for a valid observation
         world_state = agent_host.peekWorldState()
         while world_state.is_mission_running and all(e.text=='{}' for e in world_state.observations):
@@ -226,9 +231,9 @@ class UnderwaterAgent(object):
 
         if not world_state.is_mission_running:
             return 0 # mission already ended
-            
+
         assert len(world_state.video_frames) > 0, 'No video frames!?'
-        
+
         obs = json.loads( world_state.observations[-1].text )
         prev_x = obs[u'XPos']
         prev_y = obs[u'YPos']
@@ -244,10 +249,10 @@ class UnderwaterAgent(object):
         ################################
         require_move = True
         check_expected_position = True
-        
+
         # main loop:
         while world_state.is_mission_running:
-        
+
             # wait for the position to have changed and a reward received
             print 'Waiting for data...',
             while True:
@@ -260,7 +265,7 @@ class UnderwaterAgent(object):
                     self.curr_x = obs[u'XPos']
                     self.curr_z = obs[u'ZPos']
                     require_move = False
-                    if require_move: 
+                    if require_move:
                         if math.hypot( self.curr_x - prev_x, self.curr_y - prev_y, self.curr_z - prev_z ) > tol:
                             print 'received.'
                             break
@@ -275,19 +280,19 @@ class UnderwaterAgent(object):
                     while world_state.is_mission_running and all(e.text=='{}' for e in world_state.observations):
                         world_state = agent_host.peekWorldState()
                     break;'''
-                
+
             # wait for a frame to arrive after that
             num_frames_seen = world_state.number_of_video_frames_since_last_state
             while world_state.is_mission_running and world_state.number_of_video_frames_since_last_state == num_frames_seen:
                 world_state = agent_host.peekWorldState()
-                
+
             num_frames_before_get = len(world_state.video_frames)
-            
+
             world_state = agent_host.getWorldState()
             for err in world_state.errors:
                 print err
             current_r = sum(r.getValue() for r in world_state.rewards)
- 
+
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
                 num_frames_after_get = len(world_state.video_frames)
@@ -309,7 +314,7 @@ class UnderwaterAgent(object):
                     #    print 'as expected.'
                     curr_x_from_render = frame.xPos
                     curr_z_from_render = frame.zPos
-                    
+
                     #print 'New position from render:',curr_x_from_render,',',curr_z_from_render,'after action:',self.actions[self.prev_a], #NSWE
                     if math.hypot( curr_x_from_render - expected_x, curr_z_from_render - expected_z ) > tol:
                         print ' - ERROR DETECTED! Expected:',expected_x,',',expected_z
@@ -321,23 +326,25 @@ class UnderwaterAgent(object):
                 prev_x = self.curr_x
                 prev_y = self.curr_y
                 prev_z = self.curr_z
-                
+
                 # act
                 total_reward += self.act(world_state, agent_host, current_reward)
-                
+
         # process final reward
         #self.logger.debug("Final reward: %d" % current_reward)
         total_reward += current_reward
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
-            old_q_1 = self.q_table_1[self.prev_s][self.prev_a]
-            old_q_2 = self.q_table_2[self.prev_s][self.prev_a]
+            old_q_1 = self.q1_table[self.prev_s][self.prev_a]
+            old_q_2 = self.q2_table[self.prev_s][self.prev_a]
 
-            self.q_table_1[self.prev_s][self.prev_a] = old_q_1 + self.alpha * (current_r - old_q_1)
-            self.q_table_2[self.prev_s][self.prev_a] = old_q_2 + self.alpha * (current_r - old_q_2)
+            self.q1_table[self.prev_s][self.prev_a] = old_q_1 + self.alpha * (current_reward - old_q_1)
+            self.q2_table[self.prev_s][self.prev_a] = old_q_2 + self.alpha * (current_reward - old_q_2)
+        print'q1_table: ', self.q1_table
+        print'q2_table: ', self.q2_table
         return total_reward
- 
+
 
 def load_grid(world_state):
     """
@@ -390,7 +397,7 @@ for episode in range(num_iterations):
 
     #set up agent
     agent = UnderwaterAgent()
-    
+
     '''mission_file = agent_host.getStringArgument('mission_file')
     with open(mission_file, 'r') as f:
         print "Loading mission from %s" % mission_file
@@ -398,18 +405,18 @@ for episode in range(num_iterations):
     my_mission = MalmoPython.MissionSpec(mission_xml, True)
     my_mission_record = MalmoPython.MissionRecordSpec()
     my_mission.removeAllCommandHandlers()
-    my_mission.allowAllDiscreteMovementCommands() 
+    my_mission.allowAllDiscreteMovementCommands()
     my_mission.allowAllAbsoluteMovementCommands() #I'M SO ANNOYED. THIS WAS ALL WE NEEDED. D< !!
     my_mission.requestVideo( 320, 240 )
     my_mission.setViewpoint( 1 )
 
     cumu_rewards = []
     max_retries = 3
-    num_repeats = 150
+    num_repeats = 5
     for i in range(num_repeats):
 
         print "\nMap %d - Mission %d of %d:" % ( episode, i+1, num_repeats )
-        
+
         for retry in range(max_retries):
             try:
                 agent_host.startMission( my_mission, my_mission_record )
@@ -440,4 +447,5 @@ for episode in range(num_iterations):
 
     print
     print "Mission ended"
-
+    print "Cumulative rewards for all %d runs:" % num_repeats
+    print cumu_rewards
