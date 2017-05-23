@@ -109,15 +109,18 @@ class UnderwaterAgent(object):
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text)
         grid = load_grid(world_state)
-
+        print 'GRID SIZE: ', len(grid)
         for k,v in possibilities.items():
-            #index 22 will always be where our agent is standing in the beginning with the current setup
-            if grid[31+v+9] != 'sea_lantern' and grid[22+v+9] != 'glowstone':
-                action_list.append(k)
-        if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
-            action_list.append(self.teleport(agent_host,False))
-        if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
-            action_list.append(self.teleport(agent_host,True))
+            #with current grid, index 31 will always be our agent's current location
+            #check walls to see whether can move left,right,back,forward
+            if grid[31+v+9] == 'water' or grid[31+v+9] == 'wooden_door': #+9 because we want to check
+                action_list.append(k)                                    #where our feet are located
+            #check if you can teleport down a level
+            if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
+                action_list.append(self.teleport(agent_host,False))
+            #check if you can teleport up a level
+            if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
+                action_list.append(self.teleport(agent_host,True))
 
         print("ACTION LIST: {}".format(action_list))
         return action_list
