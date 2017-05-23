@@ -294,7 +294,7 @@ class UnderwaterAgent(object):
             world_state = agent_host.getWorldState()
             for err in world_state.errors:
                 print err
-            current_r = sum(r.getValue() for r in world_state.rewards)
+            current_reward = sum(r.getValue() for r in world_state.rewards)
 
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
