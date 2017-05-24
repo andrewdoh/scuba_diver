@@ -10,7 +10,7 @@ An application of reinforcement learning to a water biome in Minecraft. Our grou
 [code repository](https://andrewdoh.github.io/scuba_diver/)
 # Referenced resources # 
 ### Book ###
-  - [Sutton and Barto: Introduction to Reinforcement Learning](http://incompleteideas.net/sutton/book/bookdraft2016sep.pdf)
+- [Sutton and Barto: Introduction to Reinforcement Learning](http://incompleteideas.net/sutton/book/bookdraft2016sep.pdf)
 ### Minecraft ###
 - [Malmo Github](https://github.com/Microsoft/malmo) 
 
