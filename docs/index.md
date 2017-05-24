@@ -8,7 +8,7 @@ An application of reinforcement learning to a water biome in Minecraft. Our grou
 # Images/screenshots # 
 ![Image of Rock Lee](http://img13.deviantart.net/c151/i/2012/327/4/b/rock_lee_pixel_art_by_bannerwolf-d5lyxad.png)
 # Code repository #
--[code repository](https://andrewdoh.github.io/scuba_diver/)
+- [code repository](https://andrewdoh.github.io/scuba_diver/)
 
 # Referenced resources # 
 ### Book ###
