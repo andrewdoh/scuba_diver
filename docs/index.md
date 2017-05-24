@@ -8,6 +8,14 @@ title:  Home
 # Code repository #
 [code repository](https://andrewdoh.github.io/scuba_diver/)
 # Referenced resources # 
+[Sutton and Barto: Introduction to Reinforcement Learning](http://incompleteideas.net/sutton/book/bookdraft2016sep.pdf)
+
+[Malmo Github](https://github.com/Microsoft/malmo) 
+
+[Malmo Gitter](https://gitter.im/Microsoft/malmo) 
+
+[Malmo API Documentation](https://microsoft.github.io/malmo/0.21.0/Documentation/index.html) 
+
 [Q-learning wikipedia article](https://en.wikipedia.org/wiki/Q-learning) 
 
 [Double Q-learning summary](https://hadovanhasselt.files.wordpress.com/2015/12/doubleqposter.pdf) 
