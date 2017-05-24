@@ -6,7 +6,7 @@ title:  Home
 # Summary #
 An application of reinforcement learning to a water biome in Minecraft. Our group implements a Q-learning agent that is completely submerged in a water world. In each episode, the agent or in this case our scuba diver will dive and exploring looking for treasures hidden throughout the map with one caveat, it has no real scuba diving equipment. This means the amount of air it has is very limited, so, it will have to made decisions based on its current air supply whether its worthwhile to explore and find more treasure or to find air and survive. We attempt to expand on the Q-learning algorithm to the double Q-learning algorithm to solve the problem of maximum bias with a single Q-learner. we expect to run into problems with too many actions that will cause the optimal policy to never converge. To solve this problem, we will attempt to implement some form of function approximation. Overall, this project has some very interesting problems and was a very fun to learn about the applications reinforcement learning and it's various properties.
 # Images/screenshots # 
-![Image of Rock Lee](https://github.com/andrewdoh/scuba_diver/blob/master/rock_lee.png)
+![Image of Rock Lee](http://img13.deviantart.net/c151/i/2012/327/4/b/rock_lee_pixel_art_by_bannerwolf-d5lyxad.png)
 # Code repository #
 [code repository](https://andrewdoh.github.io/scuba_diver/)
 # Referenced resources # 
