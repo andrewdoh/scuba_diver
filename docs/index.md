@@ -18,6 +18,7 @@ An application of reinforcement learning to a water biome in Minecraft. Our grou
 - [Malmo Gitter](https://gitter.im/Microsoft/malmo) 
 
 - [Malmo API Documentation](https://microsoft.github.io/malmo/0.21.0/Documentation/index.html) 
+
 ### Research articles and etc. ###
 - [Q-learning wikipedia article](https://en.wikipedia.org/wiki/Q-learning) 
 
