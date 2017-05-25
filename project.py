@@ -14,7 +14,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
             <Summary>Load a world</Summary>
         </About>
         <ModSettings>
-            <MsPerTick>100</MsPerTick>
+            <MsPerTick>150</MsPerTick>
         </ModSettings>
         <ServerSection>
             <ServerInitialConditions>
@@ -110,8 +110,9 @@ class UnderwaterAgent(object):
         obs = json.loads(obs_text)
         grid = load_grid(world_state)
         
+        curr_life = obs[u'Life']
         alive = obs[u'IsAlive']
-        if alive:
+        if curr_life>0 and alive:
             #print("I'M ALIVE!!")
             for k,v in possibilities.items():
                 #with current grid, index 31 will always be our agent's current location
@@ -125,6 +126,7 @@ class UnderwaterAgent(object):
             if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,True))
         else:
+           # print("---------------------SENT QUIT--------------------------3")
             action_list.append("quit")
         #print("ACTION LIST: {}".format(action_list))
         return action_list
@@ -140,35 +142,39 @@ class UnderwaterAgent(object):
         poss_act = self.get_possible_actions(world_state,agent_host)
         #MAKRE SURE HERE THAT CURR_STATE!=prev_state... else get_possible_actions again
         while curr_state==self.prev_s:
-            print("\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR")
+            #print("\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR")
             world_state = agent_host.getWorldState() #this should fix it?
             if world_state.number_of_observations_since_last_state > 0:
                 obs_text = world_state.observations[-1].text
                 obs = json.loads(obs_text)
                 curr_state = "%d.%d.%d" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']))
                 
+        #update both if action doesn't exist in one.. (so they always exist in both)
+        #CHANGE
         if curr_state not in self.q1_table:
-            #print("JUST ADDED: {}".format(curr_state))
-            #print("possible actions from above: {}".format(self.get_possible_actions(world_state,agent_host)))
             self.q1_table[curr_state] = ([0] * len(self.get_possible_actions(world_state,agent_host)))
-        #else:
-            #print("I ALREADY HAVE {}".format(curr_state))
-        '''    self.q2_table[curr_state] = {}
-        for action in possible_actions:
-            if action not in self.q1_table[curr_state]:
-                self.q1_table[curr_state][action] = 0
-                self.q2_table[curr_state][action] = 0'''
+
+        if curr_state not in self.q2_table:
+            self.q2_table[curr_state] = ([0] * len(self.get_possible_actions(world_state,agent_host)))
+
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
-            #print("Current Reward: {}".format(current_reward))
-            #print("in update: {}".format(self.q1_table[curr_state]))
-            old_q = self.q1_table[self.prev_s][self.prev_a]
-            new_value = old_q + self.alpha * (current_reward
-                + self.gamma * max(self.q1_table[curr_state]) - old_q)
-            #print("UPDATING................................{}".format(new_value))
-            self.q1_table[self.prev_s][self.prev_a] = new_value
-        
+            old_q_1 = self.q1_table[self.prev_s][self.prev_a]
+            old_q_2 = self.q2_table[self.prev_s][self.prev_a]
+            
+            #with probability 50% update q1_table else update q2_table
+            if random.random() < 0.5:
+                #print 'waffles'
+                self.q1_table[self.prev_s][self.prev_a] = \
+                 old_q_1 + self.alpha * (current_reward + self.gamma * self.q2_table[curr_state][self.q1_table[curr_state].index(max(self.q1_table[curr_state]))] - old_q_1)
+            else:
+                #print 'pancakes'
+                #update second q_table
+                self.q2_table[self.prev_s][self.prev_a] = \
+                old_q_2 + self.alpha * (current_reward + self.gamma * self.q1_table[curr_state][self.q2_table[curr_state].index(max(self.q2_table[curr_state]))] - old_q_2)
+
+
         #select next action
         possible_actions = self.get_possible_actions(world_state,agent_host)
         a = self.choose_action(curr_state,possible_actions)
@@ -178,22 +184,6 @@ class UnderwaterAgent(object):
         if possible_actions[a].find("tp")!=-1:
             self.sent_tp = True
         agent_host.sendCommand(possible_actions[a])
-        '''if self.sent_tp:
-            split_string = possible_actions[a].split(' ')
-            good_frame = False
-            start = timer()
-            while not good_frame:
-                world_state = agent_host.getWorldState()
-                if not world_state.is_mission_running:
-                    print "Mission ended prematurely - error."
-                    exit(1)
-                if not good_frame and world_state.number_of_video_frames_since_last_state > 0:
-                    frame_x = world_state.video_frames[-1].xPos
-                    frame_z = world_state.video_frames[-1].zPos
-                    if math.fabs(frame_x - float(split_string[1])) < 0.001 and math.fabs(frame_z - float(split_string[3])) < 0.001:
-                        good_frame = True
-                        end_frame = timer()
-            self.sent_tp = False #yeah?'''
         self.prev_s = curr_state
         self.prev_a = a
         
@@ -204,27 +194,34 @@ class UnderwaterAgent(object):
 
         rnd = random.random()
         if rnd < self.epsilon:
+            #choose randomly amongst all actions
             rnd = random.random()
             a = random.randint(0,len(possible_actions) - 1)
-            #choose randomly amongst all actions
         else:
-            m = max(self.q1_table[curr_state])
-            l = list()
-            #print("POSSIBLE ACTIONS: {}".format(possible_actions))
-            #print("Q_table[curr_state]: {}".format(self.q1_table[curr_state]))
-            print("Q table: {}".format(self.q1_table))
-            #print("curr_state: {}".format(curr_state))
-            for x in range(0,len(possible_actions)):
-                #print("x: {}".format(x))
-                if self.q1_table[curr_state][x] == m:
-                    l.append(x)
-            rnd = random.random()
-            y = random.randint(0,len(l)-1)
-            a = l[y]
-            #########CHANGE ABOVE TO THE FOLLOWING FOR DOUBLE Q-LEARNING#########
-            #average actions over q1 and q2
-            #choose max from these averages, or if equal max values,
-            #then choose randomly among them
+            # create new temporary q_table from q_table 1 and q_table  if it doesn't exist
+            # if not self.q_table_3.has_key(curr_state):
+            #     self.q_table_3[curr_state] = ([0] * len(possible_actions))
+            # compute the new value to use instead of max, in this case the average
+            q_3 = list()
+            #print 'possible actions: ', possible_actions
+            #print 'q1: ', self.q1_table[curr_state]
+            #print 'q2: ', self.q2_table[curr_state]
+            for action in range(len(possible_actions)):
+                #print 'length: ', len(possible_actions)
+                #print 'a1: ', self.q1_table[curr_state][action]
+                #print 'q2: ', self.q2_table[curr_state][action]
+                q_3.append((self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2)
+
+
+            # take the maximum in the current state of the newly created table_3
+            max_value = max(q_3)
+            list_of_max_actions = list()
+            for x in range(len(possible_actions)):
+                if q_3[x] == max_value:
+                    list_of_max_actions.append(x)
+
+            y = random.randint(0, len(list_of_max_actions)-1)
+            a = list_of_max_actions[y]
         return a
 
     def compute_air_reward(self,current_air):
@@ -293,6 +290,7 @@ class UnderwaterAgent(object):
                     self.curr_x = obs[u'XPos']
                     self.curr_y = obs[u'YPos']
                     self.curr_z = obs[u'ZPos']
+                    #print "LIFE: {}".format(obs[u'Life'])
                     require_move = False
                     if require_move: 
                         if math.hypot( self.curr_x - prev_x, self.curr_y - prev_y, self.curr_z - prev_z ) > tol:
@@ -315,15 +313,24 @@ class UnderwaterAgent(object):
 
             #grab grid and figure out if standing in water/air
             grid = load_grid(world_state)
-            air_reward = 0
-            if grid[31+9] == 'wooden_door':
-                air_reward = self.compute_air_reward(obs[u'Air'])
-                #print("----------------GAVE REWARD FOR AIR: {}".format(air_reward))
+            if grid == []:
+                if not obs[u'IsAlive']:
+                    #print("-----MADE THE AGENT QUIT!!!-----1")
+                    agent_host.sendCommand("quit")
+                if obs[u'Life']==0:
+                    #print("-----MADE THE AGENT QUIT!!!-----2")
+                    agent_host.sendCommand("quit")
+                    
+            if world_state.is_mission_running:
+                air_reward = 0
+                if grid[31+9] == 'wooden_door':
+                    air_reward = self.compute_air_reward(obs[u'Air'])
+                    #print("----------------GAVE REWARD FOR AIR: {}".format(air_reward))
 
-            #compute the current_reward
-            current_reward = sum(r.getValue() for r in world_state.rewards)+air_reward
-            
-            #figure out and add reward for air here CHANGE
+                #compute the current_reward
+                current_reward = sum(r.getValue() for r in world_state.rewards)+air_reward
+                
+                #figure out and add reward for air here CHANGE
  
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
@@ -368,10 +375,13 @@ class UnderwaterAgent(object):
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
-            old_q = self.q1_table[self.prev_s][self.prev_a]
-            self.q1_table[self.prev_s][self.prev_a] = old_q + self.alpha * ( current_reward - old_q )
-            #print("~~~~UPDATING................................{}".format(old_q + self.alpha * ( current_r - old_q )))
-    
+            old_q_1 = self.q1_table[self.prev_s][self.prev_a]
+            old_q_2 = self.q2_table[self.prev_s][self.prev_a]
+
+            self.q1_table[self.prev_s][self.prev_a] = old_q_1 + self.alpha * (current_reward - old_q_1)
+            self.q2_table[self.prev_s][self.prev_a] = old_q_2 + self.alpha * (current_reward - old_q_2)
+        #print'q1_table: ', self.q1_table
+        #print'q2_table: ', self.q2_table
         return total_reward
  
 
