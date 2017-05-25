@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "C:\Users\Caitlin\Documents\CS175\WaterWorld"
+saved_filename = "C:\Users\Caitlin\Desktop\CS175-PROJECT\WaterWorldFloor2"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -36,12 +36,15 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
                 <Placement x="1142.5" y="25" z="-481.5"/>
             </AgentStart>
             <AgentHandlers>
+                <AgentQuitFromTouchingBlockType>
+                    <Block type="redstone_block"/>
+                </AgentQuitFromTouchingBlockType>
                 <ObservationFromFullStats/>
                 <AbsoluteMovementCommands/>
                 <DiscreteMovementCommands/>
                 <MissionQuitCommands/>
                 <RewardForCollectingItem>
-                    <Item type="emerald" reward="1"/>
+                    <Item reward="10.0"  type="ender_pearl"></Item>
                 </RewardForCollectingItem>
                 <RewardForTouchingBlockType>
                     <Block reward="100.0" type="redstone_block" behaviour="onceOnly"/>
@@ -82,7 +85,6 @@ class UnderwaterAgent(object):
         else:
             tel_y= self.curr_y-move_by 
         tp_command = "tp {} {} {}".format(self.curr_x,tel_y,self.curr_z)
-        #print("X,Y,Z----: {},{},{}".format(self.curr_x,tel_y,self.curr_z))
         return tp_command
         '''agent_host.sendCommand(tp_command)
         good_frame = False
@@ -104,22 +106,27 @@ class UnderwaterAgent(object):
         """Returns all possible actions that can be done at the current state. """
         action_list = []
         possibilities = {'movenorth 1': -3,'movesouth 1': 3,'moveeast 1': 1,'movewest 1': -1}
-        #check walls to see whether can move left,right,back,forward
-        #check floor beneath to see whether should do anything at all, or just nothing and sink
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text)
         grid = load_grid(world_state)
-
-        for k,v in possibilities.items():
-            #index 22 will always be where our agent is standing in the beginning with the current setup
-            if grid[31+v+9] != 'sea_lantern' and grid[22+v+9] != 'glowstone':
-                action_list.append(k)
-        if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
-            action_list.append(self.teleport(agent_host,False))
-        if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
-            action_list.append(self.teleport(agent_host,True))
-
-        print("ACTION LIST: {}".format(action_list))
+        
+        alive = obs[u'IsAlive']
+        if alive:
+            #print("I'M ALIVE!!")
+            for k,v in possibilities.items():
+                #with current grid, index 31 will always be our agent's current location
+                #check walls to see whether can move left,right,back,forward
+                if grid[31+v+9] == 'water' or grid[31+v+9] == 'wooden_door': #+9 because we want to check
+                    action_list.append(k)                                    #where our feet are located
+            #check if you can teleport down a level       
+            if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
+                action_list.append(self.teleport(agent_host,False))
+            #check if you can teleport up a level
+            if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
+                action_list.append(self.teleport(agent_host,True))
+        else:
+            action_list.append("quit")
+        #print("ACTION LIST: {}".format(action_list))
         return action_list
 
     def act(self,world_state,agent_host,current_reward):
@@ -130,8 +137,22 @@ class UnderwaterAgent(object):
 
         #update both if action doesn't exist in one.. (so they always exist in both)
         ########3CURRENTLY USING ONLY ONE Q TABLE. CHANGE.##########
+        poss_act = self.get_possible_actions(world_state,agent_host)
+        #MAKRE SURE HERE THAT CURR_STATE!=prev_state... else get_possible_actions again
+        while curr_state==self.prev_s:
+            print("\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR")
+            world_state = agent_host.getWorldState() #this should fix it?
+            if world_state.number_of_observations_since_last_state > 0:
+                obs_text = world_state.observations[-1].text
+                obs = json.loads(obs_text)
+                curr_state = "%d.%d.%d" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']))
+                
         if curr_state not in self.q1_table:
+            #print("JUST ADDED: {}".format(curr_state))
+            #print("possible actions from above: {}".format(self.get_possible_actions(world_state,agent_host)))
             self.q1_table[curr_state] = ([0] * len(self.get_possible_actions(world_state,agent_host)))
+        #else:
+            #print("I ALREADY HAVE {}".format(curr_state))
         '''    self.q2_table[curr_state] = {}
         for action in possible_actions:
             if action not in self.q1_table[curr_state]:
@@ -140,9 +161,13 @@ class UnderwaterAgent(object):
 
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
+            #print("Current Reward: {}".format(current_reward))
+            #print("in update: {}".format(self.q1_table[curr_state]))
             old_q = self.q1_table[self.prev_s][self.prev_a]
-            self.q1_table[self.prev_s][self.prev_a] = old_q + self.alpha * (current_reward
+            new_value = old_q + self.alpha * (current_reward
                 + self.gamma * max(self.q1_table[curr_state]) - old_q)
+            #print("UPDATING................................{}".format(new_value))
+            self.q1_table[self.prev_s][self.prev_a] = new_value
         
         #select next action
         possible_actions = self.get_possible_actions(world_state,agent_host)
@@ -185,11 +210,12 @@ class UnderwaterAgent(object):
         else:
             m = max(self.q1_table[curr_state])
             l = list()
-            print("POSSIBLE ACTIONS: {}".format(possible_actions))
+            #print("POSSIBLE ACTIONS: {}".format(possible_actions))
+            #print("Q_table[curr_state]: {}".format(self.q1_table[curr_state]))
             print("Q table: {}".format(self.q1_table))
-            print("curr_state: {}".format(curr_state))
+            #print("curr_state: {}".format(curr_state))
             for x in range(0,len(possible_actions)):
-                print("x: {}".format(x))
+                #print("x: {}".format(x))
                 if self.q1_table[curr_state][x] == m:
                     l.append(x)
             rnd = random.random()
@@ -200,6 +226,16 @@ class UnderwaterAgent(object):
             #choose max from these averages, or if equal max values,
             #then choose randomly among them
         return a
+
+    def compute_air_reward(self,current_air):
+        reward = 0
+        if current_air>=0 and current_air<=100:
+            reward = 10
+        elif current_air>100 and current_air<=200:
+            reward = 5
+        else: #current_air>200
+            reward = -1
+        return reward
     
     def run(self,agent_host):
 
@@ -255,6 +291,7 @@ class UnderwaterAgent(object):
                 if (len(world_state.rewards) > 0 and not all(e.text=='{}' for e in world_state.observations)):
                     obs = json.loads( world_state.observations[-1].text )
                     self.curr_x = obs[u'XPos']
+                    self.curr_y = obs[u'YPos']
                     self.curr_z = obs[u'ZPos']
                     require_move = False
                     if require_move: 
@@ -264,26 +301,29 @@ class UnderwaterAgent(object):
                     else:
                         print 'received.'
                         break
-                #CHANGE
-                #will currently stall here when trying to send 'tp' command due to receiving no rewards
-                '''if self.sent_tp:
-                    # wait for a valid observation
-                    world_state = agent_host.peekWorldState()
-                    while world_state.is_mission_running and all(e.text=='{}' for e in world_state.observations):
-                        world_state = agent_host.peekWorldState()
-                    break;'''
                 
             # wait for a frame to arrive after that
             num_frames_seen = world_state.number_of_video_frames_since_last_state
             while world_state.is_mission_running and world_state.number_of_video_frames_since_last_state == num_frames_seen:
                 world_state = agent_host.peekWorldState()
-                
+
             num_frames_before_get = len(world_state.video_frames)
             
             world_state = agent_host.getWorldState()
             for err in world_state.errors:
                 print err
-            current_r = sum(r.getValue() for r in world_state.rewards)
+
+            #grab grid and figure out if standing in water/air
+            grid = load_grid(world_state)
+            air_reward = 0
+            if grid[31+9] == 'wooden_door':
+                air_reward = self.compute_air_reward(obs[u'Air'])
+                #print("----------------GAVE REWARD FOR AIR: {}".format(air_reward))
+
+            #compute the current_reward
+            current_reward = sum(r.getValue() for r in world_state.rewards)+air_reward
+            
+            #figure out and add reward for air here CHANGE
  
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
@@ -294,7 +334,7 @@ class UnderwaterAgent(object):
                 self.curr_x = obs[u'XPos']
                 self.curr_z = obs[u'ZPos']
                 self.curr_y = obs[u'YPos']
-                print '\nX, Y, Z:',self.curr_x,',',self.curr_y,',',self.curr_z
+                #print '\nX, Y, Z:',self.curr_x,',',self.curr_y,',',self.curr_z
                 '''print 'New position from observation:',curr_x,',',curr_z,'after action:',self.action[self.prev_a], #NSWE
                 if check_expected_position:
                     expected_x = prev_x + [0,0,-1,1][self.prev_a]
@@ -329,7 +369,8 @@ class UnderwaterAgent(object):
         # update Q values
         if self.training and self.prev_s is not None and self.prev_a is not None:
             old_q = self.q1_table[self.prev_s][self.prev_a]
-            self.q1_table[self.prev_s][self.prev_a] = old_q + self.alpha * ( current_r - old_q )
+            self.q1_table[self.prev_s][self.prev_a] = old_q + self.alpha * ( current_reward - old_q )
+            #print("~~~~UPDATING................................{}".format(old_q + self.alpha * ( current_r - old_q )))
     
         return total_reward
  
@@ -361,12 +402,19 @@ def load_grid(world_state):
 
 
 ######## Create default Malmo objects:  ##############
-
+sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)  # flush print output immediately
 agent_host = MalmoPython.AgentHost()
 
 #agent_host.addOptionalStringArgument('mission_file',
 #    'Path/to/file from which to load the mission.', '../Sample_missions/cliff_walking_1.xml')
-
+agent_host.addOptionalFloatArgument('alpha',
+    'Learning rate of the Q-learning agent.', 0.1)
+agent_host.addOptionalFloatArgument('epsilon',
+    'Exploration rate of the Q-learning agent.', 0.01)
+agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)
+agent_host.addOptionalFlag('load_model', 'Load initial model from model_file.')
+agent_host.addOptionalStringArgument('model_file', 'Path to the initial model file', '')
+agent_host.addOptionalFlag('debug', 'Turn on debugging.')
 
 try:
     agent_host.parse( sys.argv )
@@ -398,16 +446,28 @@ for episode in range(num_iterations):
     my_mission.requestVideo( 320, 240 )
     my_mission.setViewpoint( 1 )
 
+    my_clients = MalmoPython.ClientPool()
+    my_clients.add(MalmoPython.ClientInfo('127.0.0.1', 10000)) # add Minecraft machines here as available
+
     cumu_rewards = []
     max_retries = 3
     num_repeats = 150
+    agentID = 0
+    expID = 'project'
+    
     for i in range(num_repeats):
 
         print "\nMap %d - Mission %d of %d:" % ( episode, i+1, num_repeats )
+
+        my_mission_record = MalmoPython.MissionRecordSpec( "./save_%s-map%d-rep%d.tgz" % (expID, episode, i) )
+        my_mission_record.recordCommands()
+        my_mission_record.recordMP4(20, 400000)
+        my_mission_record.recordRewards()
+        my_mission_record.recordObservations()
         
         for retry in range(max_retries):
             try:
-                agent_host.startMission( my_mission, my_mission_record )
+                agent_host.startMission( my_mission, my_clients, my_mission_record, agentID, "%s-%d" % (expID, i) )
                 break
             except RuntimeError as e:
                 if retry == max_retries - 1:
