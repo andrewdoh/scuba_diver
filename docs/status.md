@@ -10,5 +10,5 @@ When we first began formulating an idea for the project, we initially wanted to 
 ## Evaluation ##
 ## Remaining Goals and Challenges ##
 ### Algorithm ###
-$$ Q(s_t,a_t)  \leftarrow \underbrace{Q(s_t,a_t)}_{old value} + \alpha_t \cdot (r_{t} + 1 \gamma \cdot \max Q(s_{t+1},a) - Q(s_t,a_t)) $$
+$$ Q(s_t,a_t)  \leftarrow \underbrace{Q(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot (\underbrace{r_{t} + 1}_{\text{reward}}  \underbrace{\gamma}_{\text{discount factor}} \cdot \underbrace{\max Q(s_{t+1},a)}_{\text{estimate of optimal future value}}  - \underbrace{Q(s_t,a_t))}_{\text{old value}}  $$
 
