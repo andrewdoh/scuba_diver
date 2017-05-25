@@ -10,5 +10,5 @@ When we first began formulating an idea for the project, we initially wanted to 
 ## Evaluation ##
 ## Remaining Goals and Challenges ##
 ### Algorithm ###
-$$ Q(s_t,a_t) = \leftarrow Q(s_t,a_t) + \alpha_t \cdot (r_{t} + 1 \gamma \cdot \max Q(s_{t+1},a) - Q(s_t,a_t)) $$
+$$ Q(s_t,a_t)  \leftarrow \underbrace{Q(s_t,a_t)}_{old value} + \alpha_t \cdot (r_{t} + 1 \gamma \cdot \max Q(s_{t+1},a) - Q(s_t,a_t)) $$
 
