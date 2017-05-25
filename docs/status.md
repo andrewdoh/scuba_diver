@@ -12,11 +12,12 @@ When we first began formulating an idea for the project, we initially wanted to 
 ### Algorithm ###
 #### Q-learning algorithm ####
 $$ Q(s_t,a_t)  \leftarrow \underbrace{Q(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot \Bigg(\overbrace{\underbrace{r_{t+1}}_{\text{reward}}  \underbrace{\gamma}_{\text{discount factor}} \cdot \underbrace{\max\limits_{a} Q(s_{t+1},a)}_{\text{estimate of optimal future value}}}^{\text{learned value}}   - \underbrace{Q(s_t,a_t)}_{\text{old value}}  \Bigg)$$
+
+![Image of Q-learning](https://andrewdoh.github.io/scuba_diver/single_q_learning.png)
+
 #### Double Q-learning algorithm ####
 $$ Q_{1}(s_t,a_t)  \leftarrow \underbrace{Q_{1}(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot \Bigg(\overbrace{\underbrace{r_{t+1}}_{\text{reward}} +  \underbrace{\gamma}_{\text{discount factor}} \cdot Q_{2}\underbrace{ \big(s_{t+1},\max\limits_{a} Q_{1}(s_{t+1},a)\big)}_{\text{estimate of optimal future value}}}^{\text{learned value}}   - \underbrace{Q_{1}(s_t,a_t)}_{\text{old value}}  \Bigg)$$
 
-![Image of Q-learning](https://andrewdoh.github.io/scuba_diver/single q learning.png)
-
 $$ Q_{2}(s_t,a_t)  \leftarrow \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot \Bigg(\overbrace{\underbrace{r_{t+1}}_{\text{reward}} +  \underbrace{\gamma}_{\text{discount factor}} \cdot Q_{1}\underbrace{ \big(s_{t+1},\max\limits_{a} Q_{2}(s_{t+1},a)\big)}_{\text{estimate of optimal future value}}}^{\text{learned value}}   - \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}}  \Bigg)$$
 
-![Image of Q-learning](https://andrewdoh.github.io/scuba_diver/double q learning.png)
+![Image of Q-learning](https://andrewdoh.github.io/scuba_diver/double_q_learning.png)
