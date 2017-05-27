@@ -27,7 +27,7 @@ $$ Q_{2}(s_t,a_t)  \leftarrow \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}} + \
 #### Psuedocode ####
 <img src="images/double_q_learning.png" width="600px">
 
-<img src="images/mdp.png" width="300px">
+<img src="images/mdp.png" width="200px">
 
 <img src="images/alpha.png" width="600px">
 <img src="images/asymptotic.png" width="600px">
