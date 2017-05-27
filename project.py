@@ -14,7 +14,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
             <Summary>Load a world</Summary>
         </About>
         <ModSettings>
-            <MsPerTick>150</MsPerTick>
+            <MsPerTick>100</MsPerTick>
         </ModSettings>
         <ServerSection>
             <ServerInitialConditions>
@@ -72,7 +72,7 @@ class UnderwaterAgent(object):
         self.curr_x = 0
         self.curr_y = 0
         self.curr_z = 0
-        self.sent_tp = False
+        self.sent_tp_down = False
         self.training = True
 
 
@@ -86,20 +86,6 @@ class UnderwaterAgent(object):
             tel_y= self.curr_y-move_by 
         tp_command = "tp {} {} {}".format(self.curr_x,tel_y,self.curr_z)
         return tp_command
-        '''agent_host.sendCommand(tp_command)
-        good_frame = False
-        start = timer()
-        while not good_frame:
-            world_state = agent_host.getWorldState()
-            if not world_state.is_mission_running:
-                print "Mission ended prematurely - error."
-                exit(1)
-            if not good_frame and world_state.number_of_video_frames_since_last_state > 0:
-                frame_x = world_state.video_frames[-1].xPos
-                frame_z = world_state.video_frames[-1].zPos
-                if math.fabs(frame_x - teleport_x) < 0.001 and math.fabs(frame_z - teleport_z) < 0.001:
-                    good_frame = True
-                    end_frame = timer()'''
         
 
     def get_possible_actions(self, world_state,agent_host):
@@ -109,11 +95,19 @@ class UnderwaterAgent(object):
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text)
         grid = load_grid(world_state)
-        
-        curr_life = obs[u'Life']
-        alive = obs[u'IsAlive']
-        if curr_life>0 and alive:
-            #print("I'M ALIVE!!")
+
+        #adding in some constraints in case agent dies in the middle of grabbing actions
+        while grid==[] and obs[u'Life']>0 and obs[u'IsAlive'] and world_state.is_mission_running:
+            print("alive but somehow grid is empty??")
+            world_state = agent_host.getWorldState() #this should fix it?
+            if world_state.number_of_observations_since_last_state > 0:
+                obs_text = world_state.observations[-1].text
+                obs = json.loads(obs_text)
+                grid = load_grid(world_state)
+        if obs[u'Life']<0 or not obs[u'IsAlive'] or not world_state.is_mission_running:
+            agent_host.SendCommand("quit")
+
+        if obs[u'Life']>0 and obs[u'IsAlive']:
             for k,v in possibilities.items():
                 #with current grid, index 31 will always be our agent's current location
                 #check walls to see whether can move left,right,back,forward
@@ -126,35 +120,56 @@ class UnderwaterAgent(object):
             if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,True))
         else:
-           # print("---------------------SENT QUIT--------------------------3")
             action_list.append("quit")
-        #print("ACTION LIST: {}".format(action_list))
         return action_list
 
     def act(self,world_state,agent_host,current_reward):
         
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text)
-        curr_state = "%d.%d.%d" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']))
 
-        #update both if action doesn't exist in one.. (so they always exist in both)
-        ########3CURRENTLY USING ONLY ONE Q TABLE. CHANGE.##########
+        current_air = obs[u'Air']
+        if current_air>=0 and current_air<=100:
+            air_state = 'low'
+        elif current_air>100 and current_air<=200:
+            air_state = 'medium'
+        else: #current_air>200
+            air_state = 'high'
+            
+        curr_state = "%d.%d.%d.%s" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']),air_state)
+
+    
         poss_act = self.get_possible_actions(world_state,agent_host)
-        #MAKRE SURE HERE THAT CURR_STATE!=prev_state... else get_possible_actions again
-        while curr_state==self.prev_s:
-            #print("\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR\n\n\nERROR")
+        #making sure that curr_state!=prev_state... agent should always be moving/taking some action each step
+        curr_list=0
+        prev_list=1
+        if self.prev_s!=None:
+            cs = curr_state.split(".");
+            ps = self.prev_s.split(".");
+            curr_list = [cs[0],cs[1],cs[2]]
+            prev_list = [ps[0],ps[1],ps[2]]
+        while curr_list==prev_list and world_state.is_mission_running:
+            print "\nError: prev state == curr state"
             world_state = agent_host.getWorldState() #this should fix it?
             if world_state.number_of_observations_since_last_state > 0:
                 obs_text = world_state.observations[-1].text
                 obs = json.loads(obs_text)
-                curr_state = "%d.%d.%d" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']))
+                current_air = obs[u'Air']
+                if current_air>=0 and current_air<=100:
+                    air_state = 'low'
+                elif current_air>100 and current_air<=200:
+                    air_state = 'medium'
+                else: #current_air>200
+                    air_state = 'high'
+                curr_state = "%d.%d.%d.%s" % (int(obs[u'XPos']),int(obs[u'YPos']), int(obs[u'ZPos']),air_state)
+                cs = curr_state.split(".");
+                curr_list = [cs[0],cs[1],cs[2]]
+        if not world_state.is_mission_running:
+            agent_host.sendCommand("quit")
                 
         #update both if action doesn't exist in one.. (so they always exist in both)
-        #CHANGE
         if curr_state not in self.q1_table:
             self.q1_table[curr_state] = ([0] * len(self.get_possible_actions(world_state,agent_host)))
-
-        if curr_state not in self.q2_table:
             self.q2_table[curr_state] = ([0] * len(self.get_possible_actions(world_state,agent_host)))
 
 
@@ -166,14 +181,20 @@ class UnderwaterAgent(object):
             #with probability 50% update q1_table else update q2_table
             if random.random() < 0.5:
                 #print 'waffles'
+                #update first q_table
                 self.q1_table[self.prev_s][self.prev_a] = \
                  old_q_1 + self.alpha * (current_reward + self.gamma * self.q2_table[curr_state][self.q1_table[curr_state].index(max(self.q1_table[curr_state]))] - old_q_1)
+                print 'curr state: {}'.format(curr_state)
+                print '\nq1 old: {}'.format(old_q_1)
+                print 'q1 new: {}'.format(self.q1_table[self.prev_s][self.prev_a])
             else:
                 #print 'pancakes'
                 #update second q_table
                 self.q2_table[self.prev_s][self.prev_a] = \
                 old_q_2 + self.alpha * (current_reward + self.gamma * self.q1_table[curr_state][self.q2_table[curr_state].index(max(self.q2_table[curr_state]))] - old_q_2)
-
+                print 'curr state: {}'.format(curr_state)
+                print '\nq2 old: {}'.format(old_q_2)
+                print 'q2 new: {}'.format(self.q2_table[self.prev_s][self.prev_a])
 
         #select next action
         possible_actions = self.get_possible_actions(world_state,agent_host)
@@ -181,8 +202,12 @@ class UnderwaterAgent(object):
 
         #send selected action
         print("\n--TOOK ACTION: {}".format(possible_actions[a]))
+        
         if possible_actions[a].find("tp")!=-1:
-            self.sent_tp = True
+            new_s = possible_actions[a].split(" ")
+            old_s = curr_state.split(".")
+            if new_s[2]<old_s[1]:
+                self.sent_tp_down = True
         agent_host.sendCommand(possible_actions[a])
         self.prev_s = curr_state
         self.prev_a = a
@@ -198,20 +223,13 @@ class UnderwaterAgent(object):
             rnd = random.random()
             a = random.randint(0,len(possible_actions) - 1)
         else:
-            # create new temporary q_table from q_table 1 and q_table  if it doesn't exist
-            # if not self.q_table_3.has_key(curr_state):
-            #     self.q_table_3[curr_state] = ([0] * len(possible_actions))
-            # compute the new value to use instead of max, in this case the average
+            # average over the values of both the q tables and take the maximum among them
             q_3 = list()
-            #print 'possible actions: ', possible_actions
-            #print 'q1: ', self.q1_table[curr_state]
-            #print 'q2: ', self.q2_table[curr_state]
+            print 'length: ', len(possible_actions)
+            print 'q1_length: ',len(self.q1_table[curr_state])
+            print 'q2_length: ',len(self.q2_table[curr_state])
             for action in range(len(possible_actions)):
-                #print 'length: ', len(possible_actions)
-                #print 'a1: ', self.q1_table[curr_state][action]
-                #print 'q2: ', self.q2_table[curr_state][action]
                 q_3.append((self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2)
-
 
             # take the maximum in the current state of the newly created table_3
             max_value = max(q_3)
@@ -230,7 +248,7 @@ class UnderwaterAgent(object):
             reward = 10
         elif current_air>100 and current_air<=200:
             reward = 5
-        else: #current_air>200
+        else: # means 300>=current_air>200
             reward = -1
         return reward
     
@@ -290,7 +308,6 @@ class UnderwaterAgent(object):
                     self.curr_x = obs[u'XPos']
                     self.curr_y = obs[u'YPos']
                     self.curr_z = obs[u'ZPos']
-                    #print "LIFE: {}".format(obs[u'Life'])
                     require_move = False
                     if require_move: 
                         if math.hypot( self.curr_x - prev_x, self.curr_y - prev_y, self.curr_z - prev_z ) > tol:
@@ -313,24 +330,36 @@ class UnderwaterAgent(object):
 
             #grab grid and figure out if standing in water/air
             grid = load_grid(world_state)
-            if grid == []:
-                if not obs[u'IsAlive']:
-                    #print("-----MADE THE AGENT QUIT!!!-----1")
+            while grid==[] and world_state.is_mission_running and obs[u'Life']>0 and obs[u'IsAlive']:
+                print("alive but somehow grid is empty??----2!")
+                world_state = agent_host.getWorldState() #this should fix it?
+                if world_state.number_of_observations_since_last_state > 0:
+                    obs_text = world_state.observations[-1].text
+                    obs = json.loads(obs_text)
+                    grid = load_grid(world_state)
+                if not obs[u'IsAlive'] or obs[u'Life']==0:
                     agent_host.sendCommand("quit")
-                if obs[u'Life']==0:
-                    #print("-----MADE THE AGENT QUIT!!!-----2")
-                    agent_host.sendCommand("quit")
-                    
+
+                
             if world_state.is_mission_running:
                 air_reward = 0
                 if grid[31+9] == 'wooden_door':
                     air_reward = self.compute_air_reward(obs[u'Air'])
-                    #print("----------------GAVE REWARD FOR AIR: {}".format(air_reward))
+                    print("--GAVE REWARD FOR AIR: {}--".format(air_reward))
+                    print('current_reward -before air-: {}'.format(sum(r.getValue() for r in world_state.rewards)))
+                    print('current_reward -after air-: {}'.format(sum(r.getValue() for r in world_state.rewards)+air_reward))
 
-                #compute the current_reward
-                current_reward = sum(r.getValue() for r in world_state.rewards)+air_reward
+                tp_down_reward = 0
+                if self.sent_tp_down:
+                    tp_down_reward = 1
+                    self.sent_tp_down = False
+                    print("--GAVE REWARD FOR TRANSPORTING DOWN: {}--".format(tp_down_reward))
+                    print('current_reward -before tp_down-: {}'.format(sum(r.getValue() for r in world_state.rewards)))
+                    print('current_reward -after tp_down-: {}'.format(sum(r.getValue() for r in world_state.rewards)+air_reward+tp_down_reward))
+
+                #compute the current_reward (which includes additional award for finding air or moving down)
+                current_reward = sum(r.getValue() for r in world_state.rewards)+air_reward+tp_down_reward
                 
-                #figure out and add reward for air here CHANGE
  
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
@@ -341,7 +370,6 @@ class UnderwaterAgent(object):
                 self.curr_x = obs[u'XPos']
                 self.curr_z = obs[u'ZPos']
                 self.curr_y = obs[u'YPos']
-                #print '\nX, Y, Z:',self.curr_x,',',self.curr_y,',',self.curr_z
                 '''print 'New position from observation:',curr_x,',',curr_z,'after action:',self.action[self.prev_a], #NSWE
                 if check_expected_position:
                     expected_x = prev_x + [0,0,-1,1][self.prev_a]
@@ -370,7 +398,6 @@ class UnderwaterAgent(object):
                 total_reward += self.act(world_state, agent_host, current_reward)
                 
         # process final reward
-        #self.logger.debug("Final reward: %d" % current_reward)
         total_reward += current_reward
 
         # update Q values
@@ -380,8 +407,6 @@ class UnderwaterAgent(object):
 
             self.q1_table[self.prev_s][self.prev_a] = old_q_1 + self.alpha * (current_reward - old_q_1)
             self.q2_table[self.prev_s][self.prev_a] = old_q_2 + self.alpha * (current_reward - old_q_2)
-        #print'q1_table: ', self.q1_table
-        #print'q2_table: ', self.q2_table
         return total_reward
  
 
@@ -452,7 +477,7 @@ for episode in range(num_iterations):
     my_mission_record = MalmoPython.MissionRecordSpec()
     my_mission.removeAllCommandHandlers()
     my_mission.allowAllDiscreteMovementCommands() 
-    my_mission.allowAllAbsoluteMovementCommands() #I'M SO ANNOYED. THIS WAS ALL WE NEEDED. D< !!
+    my_mission.allowAllAbsoluteMovementCommands() 
     my_mission.requestVideo( 320, 240 )
     my_mission.setViewpoint( 1 )
 
@@ -487,7 +512,7 @@ for episode in range(num_iterations):
                     time.sleep(2)
 
         # Loop until mission starts:
-        print "Waiting for new mission to start ... ",
+        print "Waiting for new mission to start .............. ",
 
         world_state = agent_host.getWorldState()
         while not world_state.has_mission_begun:
@@ -498,7 +523,12 @@ for episode in range(num_iterations):
                 print "Error:",error.text
 
         cumu_reward = agent.run(agent_host)
+        print("REWARD FOR MISSION {}: {}".format(episode,cumu_reward))
         cumu_rewards += [cumu_reward]
+
+        #creates a file and writes reward for each respective mission that ran 
+        with open("rewards.txt", "a") as myfile:
+            myfile.write("\nREWARD FOR MISSION {}: {}".format(i,cumu_reward))
 
         #---clean up---
         time.sleep(0.5)
