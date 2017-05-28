@@ -38,20 +38,20 @@ Though Double Q-learning does not guarantee for the agent to converge any more q
 
 In order to evaluate our project in a quantitative manner, we analyzed the rewards that we were receiving at each episode, and made sure that each Q table was correctly computing those rewards. Intuitively, we know that if our rewards our increasing with each consecutive mission, and the difference in consecutive rewards is not too large (i.e. reward values are not random and there is some consistency to them), then our agent is learning something useful.  An episode, in our case, ends when either the agent dies from running out of breath, running out of time (which we set to 100 seconds), or when the agent reaches the end goal (the redstone block). We can view a sample of missions and the respective rewards received at each below:
 
-REWARD FOR MISSION 0: -208.0
-REWARD FOR MISSION 1: -240.0
-REWARD FOR MISSION 2: -241.0
-REWARD FOR MISSION 3: -139.0
-REWARD FOR MISSION 4: -217.0
-REWARD FOR MISSION 5: -181.0
-REWARD FOR MISSION 6: -163.0
-REWARD FOR MISSION 7: -145.0
-REWARD FOR MISSION 8: -168.0 
-REWARD FOR MISSION 9: -81.0   <--------- reached the redstone block!
-REWARD FOR MISSION 10: -165.0
-REWARD FOR MISSION 11: -140.0
-REWARD FOR MISSION 12: -142.0
-. . .
+- REWARD FOR MISSION 0: -208.0
+- REWARD FOR MISSION 1: -240.0
+- REWARD FOR MISSION 2: -241.0
+- REWARD FOR MISSION 3: -139.0
+- REWARD FOR MISSION 4: -217.0
+- REWARD FOR MISSION 5: -181.0
+- REWARD FOR MISSION 6: -163.0
+- REWARD FOR MISSION 7: -145.0
+- REWARD FOR MISSION 8: -168.0 
+- REWARD FOR MISSION 9: -81.0   <--------- reached the redstone block!
+- REWARD FOR MISSION 10: -165.0
+- REWARD FOR MISSION 11: -140.0
+- REWARD FOR MISSION 12: -142.0
+- . . .
 
 With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards. 
 
@@ -59,10 +59,10 @@ Another way in which we were able to evaluate our agent, quantitatively, was by 
 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
-TimeAlive FOR MISSION 0: 2108
-TimeAlive FOR MISSION 1: 4311
-TimeAlive FOR MISSION 2: 5518
-. . .
+- TimeAlive FOR MISSION 0: 2108
+- TimeAlive FOR MISSION 1: 4311
+- TimeAlive FOR MISSION 2: 5518
+- . . .
 
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
 Overall, if the agent is able to both increase the amount of time it stays alive by sustaining the appropriate amount of air as well increasing the amount of rewards it receives per mission, we are satisfied in knowing that our agent is moving towards convergence and finding an optimal policy. And with the information that we have been able to gather thus far, we believe it is doing just that. 
@@ -102,3 +102,11 @@ $$ Q_{2}(s_t,a_t)  \leftarrow \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}} + \
 <img src="images/asymptotic.png" width="600px">
 <img src="images/singleq.png" width="600px">
 <img src="images/singlevsdouble.png" width="600px">
+
+### References ###
+
+- Watkins, C. J. C. H., Dayan, P. (1992). Q-learning. Machine Learning, 8:279–292.
+- [Double Q-learning research article](https://papers.nips.cc/paper/3964-double-q-learning.pdf) 
+- [Double Q-learning Summary](https://hadovanhasselt.files.wordpress.com/2015/12/doubleqposter.pdf)
+- [Dueling Deep Q-Networks article](http://torch.ch/blog/2016/04/30/dueling_dqn.html)
+- [Deep Q-Networks blog](https://medium.com/@awjuliani/simple-reinforcement-learning-with-tensorflow-part-4-deep-q-networks-and-beyond-8438a3e2b8df)
