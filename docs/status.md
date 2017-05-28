@@ -16,8 +16,12 @@ Before discussing the main algorithm we will be using to train our agent, let’
 
 <img src="images/main environment.png" width="500px">
 
-Our agent explores a custom made map that is based on the deep sea biome environment. Since the environment is 3-Dimensional, the state of our agent will be reprsented by its current (x,y,z) location in the Minecraft map. In addition, because our agent needs to keep track of how much air it has left, we will associate the amount of breath it has with the following keywords: “high”, “medium”, “low”. So an example of a state may be x="1142.5" y="25" z="-481.5", breath=”high”. With this, you can see that even in a small environment, say a 5x5x5 cube of water, the size of our state space quickly heightens to 375 different states (5*5*5*3). However, having wall-like structures to create mazes decreases the locations in which the agent can travel to within this cube, and helps to reduce the overall state space. 
+Our agent explores a custom made map that is based on the deep sea biome environment. Since the environment is 3-Dimensional, the state of our agent will be represented by its current (x,y,z) location in the Minecraft map. In addition, because our agent needs to keep track of how much air it has left, we will associate the amount of breath it has with the following keywords: “high”, “medium”, “low”. So an example of a state may be x=”1142.5” y=”25” z=”-481.5”, breath=”high”. With this, you can see that even in a small environment, say a 5x5x5 cube of water, the size of our state space quickly heightens to 375 different states (555*3). However, having wall-like structures to create mazes decreases the locations in which the agent can travel to within this cube, and helps to reduce the overall state space. 
+
 Since this is a 3D maze, we are allowing the agent to maneuver in a 3D manner. Thus, its actions consist of the following: right, left, forward, backwards, up, down. Unfortunately, because of the way Minecraft works, there is no simple command to move up and down freely in water via Malmo commands. If the agent is not always standing on some block, it may begin to sink, which could be potentially harmful to how it updates/learns. We solved this issue by creating multiple floors, so the agent is always ‘grounded’, and can move up and down between levels by using the ‘teleport’ command. 
+ 
+ 
+ 
 
 
 <img src="images/floor and air bubbles.png" width="800px">
@@ -35,8 +39,8 @@ Though Double Q-learning does not guarantee for the agent to converge any more q
 
 #### Quantitative ####
 
-In order to evaluate our project in a quantitative manner, we analyzed the rewards that we were receiving at each episode, and made sure that each Q table was correctly computing those rewards. Intuitively, we know that if our rewards our increasing with each consecutive mission, and the difference in consecutive rewards is not too large (i.e. reward values are not random and there is some consistency to them), then our agent is learning something useful.  An episode, in our case, ends when either the agent dies from running out of breath, running out of time (which we set to 100 seconds), or when the agent reaches the end goal (the redstone block). We can view a sample of missions and the respective rewards received at each below:
-
+In order to evaluate our project in a quantitative manner, we analyzed the rewards that we were receiving at each episode, and made sure that each Q table was correctly computing those rewards. Intuitively, we know that if our rewards our increasing with each consecutive mission, and the difference in consecutive rewards is not too large (i.e. reward values are not random and there is some consistency to them), then our agent is learning something useful.  An episode, in our case, ends when either the agent dies from running out of breath, running out of time (which we set to 100 seconds), or when the agent reaches the end goal (the redstone block). We can view a sample of missions and the respective rewards received at each below: 
+ 
 - REWARD FOR MISSION 0: -208.0
 - REWARD FOR MISSION 1: -240.0
 - REWARD FOR MISSION 2: -241.0
@@ -52,8 +56,8 @@ In order to evaluate our project in a quantitative manner, we analyzed the rewar
 - REWARD FOR MISSION 12: -142.0
 - . . .
 
-With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards. 
-
+With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards.  
+ 
 Another way in which we were able to evaluate our agent, quantitatively, was by observing how long it was able to stay alive per mission. If the agent is dying rather early (before times runs out), then we know it most likely wasn’t able to sustain the amount of air it had very well. On the other hand, if the agent stays alive for a relatively long time, or dies from running out of time, then it was most likely to have found air in a sufficient manner.
 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
