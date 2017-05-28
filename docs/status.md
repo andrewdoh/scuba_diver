@@ -15,14 +15,14 @@ When we first began formulating an idea for the project, we initially wanted to 
 ## Approach ##
 Before discussing the main algorithm we will be using to train our agent, let’s look more in depth at our MDP:
 
-<img src="images/main environment.png" width="400px">
+<img src="images/main environment.png" width="500px">
 
 Our agent is exploring a 3-Dimensional, underwater maze, and as such, each of our states will include the current x,y,z location in the Minecraft map. In addition, because our agent needs to keep track of how much air it has left, we will associate the amount of breath it has with the following keywords: “high”, “medium”, “low”. So an example of a state may be x="1142.5" y="25" z="-481.5", breath=”high”. With this, you can see that even in a small environment, say a 5x5x5 cube of water, the size of our state space quickly heightens to 375 different states (5*5*5*3). However, having wall-like structures to create mazes decreases the locations in which the agent can travel to within this cube, and helps to reduce the overall state space. 
 Since this is a 3D maze, we are allowing the agent to maneuver in a 3D manner. Thus, its actions consist of the following: right, left, forward, backwards, up, down. Unfortunately, because of the way Minecraft works, there is no simple command to move up and down freely in water via Malmo commands. Furthermore, if the agent is not always standing on some block, it may begin to sink, which could be potentially harmful to how it updates/learns. We solved this issue by creating multiple floors, so the agent is always ‘grounded’, and move up and down between levels by using the ‘teleport’ command. 
 
 It should also be noted that in order to make for a more intriguing learner, we decided not to make the mazes on each floor consistent (i.e. at a position (x,y) on the first floor, a wall may be present, but at the same position (x,y) on the second floor, a wall may be non-existent). This limits the actions our agent can take given a particular state, so we constructed the following ‘observation grid’ for our agent in order to make sure that we can teleport up/down a level.
 
-<img src="images/floor and air bubbles.png" width="400px">
+<img src="images/floor and air bubbles.png" width="800px">
 
 As our agent explores the maze, it can come across three different types of rewards: receiving an ender pearl (+10 points), finding an air pocket (+10 if the agent is ‘low’ on air, +5 is the agent has ‘medium’ air, and -1 if the agent has ‘a high’ amount of air), as well as finding its goal state, the redstone_block (+100). We assign the agent different rewards for finding an air pocket based off how much air it has left in order to encourage it not only visit an air pocket when it truly needs it. In addition, in order to encourage the agent to find the goal state more quickly (which is located on the bottom-most floor), we decided to give it -1 reward for every step it takes, and +1 reward when it moves down a floor level.
 
