@@ -54,7 +54,9 @@ REWARD FOR MISSION 12: -142.0
 . . .
 
 With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards. 
-Another way in which we were able to evaluate our agent, quantitatively, was by observing how long it was able to stay alive per mission. If the agent is dying rather early (before times runs out), then we know it most likely wasn’t able to sustain the amount of air it had very well. On the other hand, if the agent stays alive for a relatively long time, or dies from running out of time, then that means it was able to receive air in a sufficient manner (enough to stay along for so long).
+
+Another way in which we were able to evaluate our agent, quantitatively, was by observing how long it was able to stay alive per mission. If the agent is dying rather early (before times runs out), then we know it most likely wasn’t able to sustain the amount of air it had very well. On the other hand, if the agent stays alive for a relatively long time, or dies from running out of time, then it was most likely to have found air in a sufficient manner.
+
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
 TimeAlive FOR MISSION 0: 2108
@@ -73,7 +75,7 @@ One basis for our observations was to verify that our agent wasn’t having any 
  
 We also manually observed the agent’s health bar and the amount of air they had left. If we noticed that the agent traveled over an air pocket, we would expect the agent’s amount of air to be fully replenished; if we saw that it wasn’t, then we knew we had some error in our code. In a similar way, we observed the agent’s health bar. If the agent was receiving damage, or if it’s health was not steadily increasing when it still had some amount of air left, then we knew there was most likely some glitch in the environment that we created. At times, we did come across these issues, and had to explore our environment manually (in creative mode) to make sure that all the levels were consistent in height and contained the correct items/block types. For instance, one issue we had was that there was a hole in one of the floors we had built. The agent would proceed to sink down into this hole while calculating its next move, and would incorrectly move into some block, be pierced, and suffocate to death. At first, our agent was moving so fast that we couldn’t detect this problem, but after increasing the amount of ticks, we realized the issue and quickly filled up the hole.
 
-<img src="images/hole.png" width="600px">
+<img src="images/hole.png" width="700px">
  
 As a final note, there were times when the agent would turn a corner or step inside a narrow path, and the perspective of the camera would close up on the back of the agent’s head, disallowing us to view the surrounding area. This didn’t impeded us from making necessary observations and evaluations, but in the future, we plan to fix the perspective of the camera so that we can always view the general area in which the agent is standing. 
 
