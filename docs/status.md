@@ -6,6 +6,8 @@ title: Status
 <p align="center">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Z_f1deLpGL0" frameborder="0" allowfullscreen></iframe>
 </p>
+
+
 ### Technical Description ###
 
 ## Project Summary ##
@@ -19,10 +21,6 @@ Before discussing the main algorithm we will be using to train our agent, let’
 Our agent explores a custom made map that is based on the deep sea biome environment. Since the environment is 3-Dimensional, the state of our agent will be represented by its current (x,y,z) location in the Minecraft map. In addition, because our agent needs to keep track of how much air it has left, we will associate the amount of breath it has with the following keywords: “high”, “medium”, “low”. So an example of a state may be x=”1142.5” y=”25” z=”-481.5”, breath=”high”. With this, you can see that even in a small environment, say a 5x5x5 cube of water, the size of our state space quickly heightens to 375 different states (555*3). However, having wall-like structures to create mazes decreases the locations in which the agent can travel to within this cube, and helps to reduce the overall state space. 
 
 Since this is a 3D maze, we are allowing the agent to maneuver in a 3D manner. Thus, its actions consist of the following: right, left, forward, backwards, up, down. Unfortunately, because of the way Minecraft works, there is no simple command to move up and down freely in water via Malmo commands. If the agent is not always standing on some block, it may begin to sink, which could be potentially harmful to how it updates/learns. We solved this issue by creating multiple floors, so the agent is always ‘grounded’, and can move up and down between levels by using the ‘teleport’ command. 
- 
- 
- 
-
 
 <img src="images/floor and air bubbles.png" width="800px">
 
