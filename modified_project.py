@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "C:\Users\Caitlin\Desktop\CS175-PROJECT\WaterWorldFloor2"
+saved_filename = "/Users/andrewdo/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorldFloor2"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -26,7 +26,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
             </ServerInitialConditions>
             <ServerHandlers>
                 <FileWorldGenerator src="''' + saved_filename + '''"/>
-		<ServerQuitFromTimeUp timeLimitMs="100000"/>
+        <ServerQuitFromTimeUp timeLimitMs="100000"/>
                 <ServerQuitWhenAnyAgentFinishes />
             </ServerHandlers>
         </ServerSection>
@@ -92,7 +92,18 @@ class UnderwaterAgent(object):
         """Returns all possible actions that can be done at the current state. """
         action_list = []
         possibilities = {'movenorth 1': -3,'movesouth 1': 3,'moveeast 1': 1,'movewest 1': -1}
+        
+        check = world_state.observations
+        #this problem occurs because we are trying to access world_state.observations[-1].text
+        #when theres nothing there so the current work around 
+        #keep checking until observations is not empty
+        while not len(check):
+            check = world_state.observations
+
+        #if we are here then the check has return not empty
+        #grab whatever obs we see
         obs_text = world_state.observations[-1].text
+
         obs = json.loads(obs_text)
         grid = load_grid(world_state)
 
@@ -105,20 +116,27 @@ class UnderwaterAgent(object):
                 obs = json.loads(obs_text)
                 grid = load_grid(world_state)
         if obs[u'Life']<0 or not obs[u'IsAlive'] or not world_state.is_mission_running:
-            agent_host.SendCommand("quit")
+            agent_host.sendCommand("quit")
 
         if obs[u'Life']>0 and obs[u'IsAlive']:
             for k,v in possibilities.items():
                 #with current grid, index 31 will always be our agent's current location
                 #check walls to see whether can move left,right,back,forward
-                if grid[31+v+9] == 'water' or grid[31+v+9] == 'wooden_door': #+9 because we want to check
-                    action_list.append(k)                                    #where our feet are located
+                try:
+                    if grid[31+v+9] == 'water' or grid[31+v+9] == 'wooden_door': #+9 because we want to check
+                        action_list.append(k)                                    #where our feet are located
+                except Exception as ex:
+                    print '**********', len(grid)
+                    print '**********', (31 + v + 9)
+                    raise ex
             #check if you can teleport down a level       
             if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,False))
+                time.sleep(0.5)
             #check if you can teleport up a level
             if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,True))
+                time.sleep(0.5)
         else:
             action_list.append("quit")
         return action_list
@@ -149,7 +167,7 @@ class UnderwaterAgent(object):
             curr_list = [cs[0],cs[1],cs[2]]
             prev_list = [ps[0],ps[1],ps[2]]
         while curr_list==prev_list and world_state.is_mission_running:
-            print "\nError: prev state == curr state"
+            # print "\nError: prev state == curr state"
             world_state = agent_host.getWorldState() #this should fix it?
             if world_state.number_of_observations_since_last_state > 0:
                 obs_text = world_state.observations[-1].text
@@ -228,8 +246,12 @@ class UnderwaterAgent(object):
             print 'length: ', len(possible_actions)
             print 'q1_length: ',len(self.q1_table[curr_state])
             print 'q2_length: ',len(self.q2_table[curr_state])
+            print 'actions: ', possible_actions
+            print 'cs: ', curr_state
+
             for action in range(len(possible_actions)):
-                q_3.append((self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2)
+                equation = (self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2
+                q_3.append(equation)
 
             # take the maximum in the current state of the newly created table_3
             max_value = max(q_3)
@@ -421,6 +443,7 @@ def load_grid(world_state):
         grid:   <list>  the world grid blocks represented as a list of blocks (see Tutorial.pdf)
     """
     grid = list()
+    num_tries = 5
     while world_state.is_mission_running:
         sys.stdout.write(".")
         time.sleep(0.1)
@@ -432,7 +455,18 @@ def load_grid(world_state):
             msg = world_state.observations[-1].text
             observations = json.loads(msg)
             grid = observations.get(u'floorAll', 0)
+            if len(grid) == 0:
+                print 'SOMETHING IS SOOOO WRONG!!!!'
+                num_tries -= 1
+
+                if num_tries < 0:
+                    raise AssertionError('OH NO!!! TOO MANY TRIES')
+                continue
+
+            if num_tries < 5:
+                raise AssertionError('******** ITS THE GOOD KIND OF ERROR')
             break
+
     return grid
 
 
@@ -531,7 +565,7 @@ for episode in range(num_iterations):
             myfile.write("\nREWARD FOR MISSION {}: {}".format(i,cumu_reward))
 
         #---clean up---
-        time.sleep(0.5)
+        time.sleep(1)
 
     print
     print "Mission ended"
