@@ -1,0 +1,1 @@
+first improvement made on the prev_state == cur_state by adding additional time.sleep(0.1) function calls throughout the code where references are made with information sent to malmo and python. This is a network problem that results in trying to obtain information not yet ready for referencing.

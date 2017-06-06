@@ -108,13 +108,19 @@ class UnderwaterAgent(object):
         grid = load_grid(world_state)
 
         #adding in some constraints in case agent dies in the middle of grabbing actions
-        while grid==[] and obs[u'Life']>0 and obs[u'IsAlive'] and world_state.is_mission_running:
+        while not grid and obs[u'Life']>0 and obs[u'IsAlive'] and world_state.is_mission_running:
             print("alive but somehow grid is empty??")
+            time.sleep(0.1)
             world_state = agent_host.getWorldState() #this should fix it?
+            
             if world_state.number_of_observations_since_last_state > 0:
                 obs_text = world_state.observations[-1].text
                 obs = json.loads(obs_text)
                 grid = load_grid(world_state)
+                print 'BACON: ', grid
+                time.sleep(0.1)
+        if not grid:
+            print 'MUFFINS', grid
         if obs[u'Life']<0 or not obs[u'IsAlive'] or not world_state.is_mission_running:
             agent_host.sendCommand("quit")
 
@@ -132,11 +138,11 @@ class UnderwaterAgent(object):
             #check if you can teleport down a level       
             if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,False))
-                time.sleep(0.5)
+                time.sleep(0.1)
             #check if you can teleport up a level
             if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,True))
-                time.sleep(0.5)
+                time.sleep(0.1)
         else:
             action_list.append("quit")
         return action_list
@@ -248,7 +254,8 @@ class UnderwaterAgent(object):
             print 'q2_length: ',len(self.q2_table[curr_state])
             print 'actions: ', possible_actions
             print 'cs: ', curr_state
-
+            print 'q1: ', self.q1_table[curr_state]
+            print 'q2: ', self.q2_table[curr_state]
             for action in range(len(possible_actions)):
                 equation = (self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2
                 q_3.append(equation)
