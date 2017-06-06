@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "/Users/andrewdo/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorldFloor2"
+saved_filename = "/Users/andrew/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorldFloor2"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -93,38 +93,26 @@ class UnderwaterAgent(object):
         action_list = []
         possibilities = {'movenorth 1': -3,'movesouth 1': 3,'moveeast 1': 1,'movewest 1': -1}
         
-        check = world_state.observations
-        #this problem occurs because we are trying to access world_state.observations[-1].text
-        #when theres nothing there so the current work around 
-        #keep checking until observations is not empty
-        while not len(check):
-            check = world_state.observations
-
-        #if we are here then the check has return not empty
-        #grab whatever obs we see
-        obs_text = world_state.observations[-1].text
-
-        obs = json.loads(obs_text)
-        grid = load_grid(world_state)
-
-        #adding in some constraints in case agent dies in the middle of grabbing actions
-        while not grid and obs[u'Life']>0 and obs[u'IsAlive'] and world_state.is_mission_running:
-            print("alive but somehow grid is empty??")
-            time.sleep(0.1)
-            world_state = agent_host.getWorldState() #this should fix it?
-            
+        while True:
+            world_state = agent_host.getWorldState()
+            if not world_state.is_mission_running:
+                print "Mission ended prematurely - error."
+                exit(1)
             if world_state.number_of_observations_since_last_state > 0:
                 obs_text = world_state.observations[-1].text
                 obs = json.loads(obs_text)
-                grid = load_grid(world_state)
-                print 'BACON: ', grid
-                time.sleep(0.1)
+                break
+        
+        grid = load_grid(world_state)
         if not grid:
-            print 'MUFFINS', grid
-        if obs[u'Life']<0 or not obs[u'IsAlive'] or not world_state.is_mission_running:
+            print 'GRID IS EMPTY WTF?'
+            print "Mission ended prematurely - error."
+            exit(1)
+            #agent_host.sendCommand("quit")
+        if obs['Life']<0 or not obs['IsAlive'] or not world_state.is_mission_running:
             agent_host.sendCommand("quit")
 
-        if obs[u'Life']>0 and obs[u'IsAlive']:
+        if obs['Life']>0 and obs['IsAlive'] and world_state.is_mission_running:
             for k,v in possibilities.items():
                 #with current grid, index 31 will always be our agent's current location
                 #check walls to see whether can move left,right,back,forward
@@ -138,11 +126,11 @@ class UnderwaterAgent(object):
             #check if you can teleport down a level       
             if grid[31-27] == 'water' or grid[31-27] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,False))
-                time.sleep(0.1)
+                #time.sleep(0.1)
             #check if you can teleport up a level
             if grid[31+45] == 'water' or grid[31+45] == 'wooden_door':
                 action_list.append(self.teleport(agent_host,True))
-                time.sleep(0.1)
+                #time.sleep(0.1)
         else:
             action_list.append("quit")
         return action_list
@@ -164,6 +152,7 @@ class UnderwaterAgent(object):
 
     
         poss_act = self.get_possible_actions(world_state,agent_host)
+        #time.sleep(0.1)
         #making sure that curr_state!=prev_state... agent should always be moving/taking some action each step
         curr_list=0
         prev_list=1
@@ -216,12 +205,13 @@ class UnderwaterAgent(object):
                 #update second q_table
                 self.q2_table[self.prev_s][self.prev_a] = \
                 old_q_2 + self.alpha * (current_reward + self.gamma * self.q1_table[curr_state][self.q2_table[curr_state].index(max(self.q2_table[curr_state]))] - old_q_2)
-                print 'curr state: {}'.format(curr_state)
+                
                 print '\nq2 old: {}'.format(old_q_2)
                 print 'q2 new: {}'.format(self.q2_table[self.prev_s][self.prev_a])
 
         #select next action
         possible_actions = self.get_possible_actions(world_state,agent_host)
+        #time.sleep(0.1)
         a = self.choose_action(curr_state,possible_actions)
 
         #send selected action
@@ -233,6 +223,7 @@ class UnderwaterAgent(object):
             if new_s[2]<old_s[1]:
                 self.sent_tp_down = True
         agent_host.sendCommand(possible_actions[a])
+        time.sleep(0.25)
         self.prev_s = curr_state
         self.prev_a = a
         
@@ -359,14 +350,14 @@ class UnderwaterAgent(object):
 
             #grab grid and figure out if standing in water/air
             grid = load_grid(world_state)
-            while grid==[] and world_state.is_mission_running and obs[u'Life']>0 and obs[u'IsAlive']:
+            while not grid and world_state.is_mission_running and obs['Life']>0 and obs['IsAlive']:
                 print("alive but somehow grid is empty??----2!")
                 world_state = agent_host.getWorldState() #this should fix it?
                 if world_state.number_of_observations_since_last_state > 0:
                     obs_text = world_state.observations[-1].text
                     obs = json.loads(obs_text)
                     grid = load_grid(world_state)
-                if not obs[u'IsAlive'] or obs[u'Life']==0:
+                if not obs['IsAlive'] or obs['Life']==0:
                     agent_host.sendCommand("quit")
 
                 
@@ -399,26 +390,7 @@ class UnderwaterAgent(object):
                 self.curr_x = obs[u'XPos']
                 self.curr_z = obs[u'ZPos']
                 self.curr_y = obs[u'YPos']
-                '''print 'New position from observation:',curr_x,',',curr_z,'after action:',self.action[self.prev_a], #NSWE
-                if check_expected_position:
-                    expected_x = prev_x + [0,0,-1,1][self.prev_a]
-                    expected_z = prev_z + [-1,1,0,0][self.prev_a]
-                    if math.hypot( curr_x - expected_x, curr_z - expected_z ) > tol:
-                        print ' - ERROR DETECTED! Expected:',expected_x,',',expected_z
-                        raw_input("Press Enter to continue...")
-                    #else:
-                    #    print 'as expected.'
-                    curr_x_from_render = frame.xPos
-                    curr_z_from_render = frame.zPos
-                    
-                    #print 'New position from render:',curr_x_from_render,',',curr_z_from_render,'after action:',self.actions[self.prev_a], #NSWE
-                    if math.hypot( curr_x_from_render - expected_x, curr_z_from_render - expected_z ) > tol:
-                        print ' - ERROR DETECTED! Expected:',expected_x,',',expected_z
-                        raw_input("Press Enter to continue...")
-                    #else:
-                        #print 'as expected.'
-                else:
-                    print'''
+           
                 prev_x = self.curr_x
                 prev_y = self.curr_y
                 prev_z = self.curr_z
