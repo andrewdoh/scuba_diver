@@ -363,20 +363,14 @@ class UnderwaterAgent(object):
             for err in world_state.errors:
                 print err
 
-            # grab grid and figure out if standing in water/air
+            # per moshe recommendation if grid returns empty we want to exit gracefully so return None
             grid = load_grid(world_state)
-            while not grid and world_state.is_mission_running and obs['Life'] > 0 and obs['IsAlive']:
-                print("alive but somehow grid is empty??----2!")
-                world_state = agent_host.getWorldState()  # this should fix it?
-                if world_state.number_of_observations_since_last_state > 0:
-                    obs_text = world_state.observations[-1].text
-                    obs = json.loads(obs_text)
-                    grid = load_grid(world_state)
-                if not obs['IsAlive'] or obs['Life'] == 0:
-                    agent_host.sendCommand("quit")
-
+            if not grid:
+                return None
+            
             if world_state.is_mission_running:
                 air_reward = 0
+                print 'LENGTH: ', len(grid)
                 if grid[31 + 9] == 'wooden_door':
                     air_reward = self.compute_air_reward(obs[u'Air'])
                     print("--GAVE REWARD FOR AIR: {}--".format(air_reward))
@@ -554,12 +548,14 @@ for episode in range(num_iterations):
                 print "Error:", error.text
 
         cumu_reward = agent.run(agent_host)
-        print("REWARD FOR MISSION {}: {}".format(episode, cumu_reward))
-        cumu_rewards += [cumu_reward]
-
+        if cumu_reward is not None:
+            print("REWARD FOR MISSION {}: {}".format(episode, cumu_reward))
+            cumu_rewards += [cumu_reward]
+            
         # creates a file and writes reward for each respective mission that ran
         with open("rewards.txt", "a") as myfile:
-            myfile.write("\nREWARD FOR MISSION {}: {}".format(i, cumu_reward))
+            if cumu_reward is not None:
+                myfile.write("\nREWARD FOR MISSION {}: {}".format(i, cumu_reward))
 
         # ---clean up---
         time.sleep(1)
