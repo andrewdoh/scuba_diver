@@ -15,15 +15,15 @@ When we first began formulating an idea for the project, we initially wanted to 
 
 ## Approach ##
 Before discussing the main algorithm we will be using to train our agent, let’s look more in depth at our MDP:
-
+<p align="center">
 <img src="images/main environment.png" width="500px">
-
+</p>
 Our agent explores a custom made map that is based on the deep sea biome environment. Since the environment is 3-Dimensional, the state of our agent will be represented by its current (x,y,z) location in the Minecraft map. In addition, because our agent needs to keep track of how much air it has left, we will associate the amount of breath it has with the following keywords: “high”, “medium”, “low”. So an example of a state may be x=”1142.5” y=”25” z=”-481.5”, breath=”high”. With this, you can see that even in a small environment, say a 5x5x5 cube of water, the size of our state space quickly heightens to 375 different states (555*3). However, having wall-like structures to create mazes decreases the locations in which the agent can travel to within this cube, and helps to reduce the overall state space. 
 
 Since this is a 3D maze, we are allowing the agent to maneuver in a 3D manner. Thus, its actions consist of the following: right, left, forward, backwards, up, down. Unfortunately, because of the way Minecraft works, there is no simple command to move up and down freely in water via Malmo commands. If the agent is not always standing on some block, it may begin to sink, which could be potentially harmful to how it updates/learns. We solved this issue by creating multiple floors, so the agent is always ‘grounded’, and can move up and down between levels by using the ‘teleport’ command. 
-
+<p align="center">
 <img src="images/floor and air bubbles.png" width="800px">
-
+</p>
 The map features familiar characteristics analogous to the typical reinforcement learning environments. Namely, it contains a start block, end block, obstacles the agent will encounter, and treasures scattered throughout the map the agent can obtain. Treasures are represented as ender pearls and are distributed via a Minecraft 'dispenser' mechanism. Obstacles consist of maze-like structures (which are built from sea_lanterns and glow_stones to allow clear, underwater vision), as well as the idea of running out of air. Air pockets (made from wooden doors) are placed randomly throughout levels to allow the agent to explore depth. It should also be noted that in order to make for a more intriguing learner, we decided not to make the mazes on each floor consistent (i.e. at a position (x,y) on the first floor, a wall may be present, but at the same position (x,y) on the second floor, a wall may be non-existent). This limits the actions our agent can take given a particular state, so we constructed an ‘observation grid’ for our agent in order to make sure that we can teleport up/down each floor level.
 
 As our agent explores the maze, it can come across three different types of rewards: receiving an ender pearl (+10 points), finding an air pocket (+10 if the agent is ‘low’ on air, +5 is the agent has ‘medium’ air, and -1 if the agent has ‘a high’ amount of air), as well as finding its goal state, the redstone_block (+100). We assign the agent different rewards for finding an air pocket based off how much air it has left in order to encourage it not only visit an air pocket when it truly needs it. In addition, in order to encourage the agent to find the goal state more quickly (which is located on the bottom-most floor), we decided to give it -1 reward for every step it takes, and +1 reward when it moves down a floor level.
@@ -33,14 +33,14 @@ As one of the first breakthroughs in reinforcement learning, the Q-learning algo
 <img src="images/double_q_learning_and_comparison.png" width="1200px">
 
 Though Double Q-learning does not guarantee for the agent to converge any more quickly, it does allow it to process complex state spaces more efficiently. One of the key differences between this method and using a single Q-table is that when choosing an action, instead of choosing the maximum action with probability (1-epsilon), we average over the values of both of the Q-tables, and take the maximum value from the results. By separating out values and averaging among them, this process helps to correct the single Q-learning algorithm’s tendencies to overestimate the optimal action choice. In other words, single Q-learning tends to lead to a maximization bias. Another difference is that when updating the Q-tables, we randomly choose to update only one on each round (each have a 50% probability). Overall, we believe this method will allow our agent to better analyze the environment in which it’s placed.
-
+<p align="center">
 #### Q-learning algorithm ####
 $$ Q(s_t,a_t)  \leftarrow \underbrace{Q(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot \Bigg(\overbrace{\underbrace{r_{t+1}}_{\text{reward}} + \underbrace{\gamma}_{\text{discount factor}} \cdot \underbrace{\max\limits_{a} Q(s_{t+1},a)}_{\text{estimate of optimal future value}}}^{\text{learned value}}   - \underbrace{Q(s_t,a_t)}_{\text{old value}}  \Bigg)$$
 
 #### Double Q-learning algorithm ####
 $$ Q_{1}(s_t,a_t)  \leftarrow \underbrace{Q_{1}(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot \Bigg(\overbrace{\underbrace{r_{t+1}}_{\text{reward}} +  \underbrace{\gamma}_{\text{discount factor}} \cdot \underbrace{Q_{2} \big(s_{t+1},\max\limits_{a} Q_{1}(s_{t+1},a)\big)}}^{\text{learned value}}_{\text{estimate of optimal future value}}  - \underbrace{Q_{1}(s_t,a_t)}_{\text{old value}}  \Bigg)$$
 $$ Q_{2}(s_t,a_t)  \leftarrow \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}} + \underbrace{\alpha_t}_{\text{learning rate}} \cdot \Bigg(\overbrace{\underbrace{r_{t+1}}_{\text{reward}} +  \underbrace{\gamma}_{\text{discount factor}} \cdot \underbrace{Q_{1} \big(s_{t+1},\max\limits_{a} Q_{2}(s_{t+1},a)\big)}}^{\text{learned value}}_{\text{estimate of optimal future value}} - \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}}  \Bigg)$$
-
+</p>
  
 ## Evaluation ##
 
@@ -87,9 +87,9 @@ In order to evaluate our agent in a qualitative manner, we physically observed t
 One basis for our observations was to verify that our agent wasn’t having any glitches in its actions. Since we were using the teleportation command to simulate the up/down movement of our agent, we needed to make sure that it was being transferred correctly. At times, we would witness the agent being pierced during teleportation commands (i.e. it would get stuck in a wall or a floor block and suffocate to death); this obviously had negative effects on our updates/learning process. We fixed this by monitoring our ‘observation grid’ more closely and confirming that the way in which we were calculating the agent’s new position was correct by printing out the agent’s current state, as well as its expected state. However, even with this, we still came across similar errors. We finally realized that our agent was processing actions choices and movements too quickly, and increased the amount of ticks (the unit that determines how quickly the agent moves) to 150. After doing so, our agent never came across the problem again.
  
 We also manually observed the agent’s health bar and the amount of air they had left. If we noticed that the agent traveled over an air pocket, we would expect the agent’s amount of air to be fully replenished; if we saw that it wasn’t, then we knew we had some error in our code. In a similar way, we observed the agent’s health bar. If the agent was receiving damage, or if it’s health was not steadily increasing when it still had some amount of air left, then we knew there was most likely some glitch in the environment that we created. At times, we did come across these issues, and had to explore our environment manually (in creative mode) to make sure that all the levels were consistent in height and contained the correct items/block types. For instance, one issue we had was that there was a hole in one of the floors we had built. The agent would proceed to sink down into this hole while calculating its next move, and would incorrectly move into some block, be pierced, and suffocate to death. At first, our agent was moving so fast that we couldn’t detect this problem, but after increasing the amount of ticks, we realized the issue and quickly filled up the hole.
-
+<p align="center">
 <img src="images/hole.png" width="700px">
- 
+ </p>
 As a final note, there were times when the agent would turn a corner or step inside a narrow path, and the perspective of the camera would close up on the back of the agent’s head, disallowing us to view the surrounding area. This didn’t impeded us from making necessary observations and evaluations, but in the future, we would like to fix the perspective of the camera so that we can always view the general area in which the agent is standing. 
 
 
