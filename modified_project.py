@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "/Users/andrewdo/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/2FloorsNoAir"
+saved_filename = "/Users/andyvu/Desktop/MalmoInstall/Minecraft/run/saves/WaterWorldFloor2"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -222,7 +222,7 @@ class UnderwaterAgent(object):
                 print 'q2 new: {}'.format(self.q2_table[self.prev_s][self.prev_a])
 
         # select next action
-        possible_actions = self.get_possible_actions(world_state, agent_host)
+        # possible_actions = self.get_possible_actions(world_state, agent_host)
         # time.sleep(0.1)
         a = self.choose_action(curr_state, possible_actions)
 
@@ -258,9 +258,13 @@ class UnderwaterAgent(object):
             print 'cs: ', curr_state
             print 'q1: ', self.q1_table[curr_state]
             print 'q2: ', self.q2_table[curr_state]
+            print 'curr State:', curr_state
+            print 'prev state:', self.prev_s
             for action in range(len(possible_actions)):
+
                 equation = (self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2
                 q_3.append(equation)
+
 
             # take the maximum in the current state of the newly created table_3
             max_value = max(q_3)
