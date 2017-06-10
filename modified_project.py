@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "/Users/andrew/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/2FloorsNoAir"
+saved_filename = "/Users/andrewdo/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/WaterWorld4x4-2ffloors"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -110,10 +110,10 @@ class UnderwaterAgent(object):
             else:
                 print '**** Still dies, but at least grid is not empty'
             raise NotImplementedError('Not really :) We just died')
-        # if not grid:
-        #     print 'GRID IS EMPTY WTF?'
-        #     print "Mission ended prematurely - error."
-        #     exit(1)
+            # if not grid:
+            #     print 'GRID IS EMPTY WTF?'
+            #     print "Mission ended prematurely - error."
+            #     exit(1)
             # agent_host.sendCommand("quit")
         # if obs['Life'] < 0 or not obs['IsAlive'] or not world_state.is_mission_running:
         #     agent_host.sendCommand("quit")
@@ -136,7 +136,7 @@ class UnderwaterAgent(object):
         # check if you can teleport up a level
         if grid[31 + 45] == 'water' or grid[31 + 45] == 'wooden_door':
             action_list.append(self.teleport(agent_host, True))
-                # time.sleep(0.1)
+            # time.sleep(0.1)
         # else:self.prev_s
         #     action_list.append("quit")
         return action_list
@@ -261,10 +261,8 @@ class UnderwaterAgent(object):
             print 'curr State:', curr_state
             print 'prev state:', self.prev_s
             for action in range(len(possible_actions)):
-
                 equation = (self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2
                 q_3.append(equation)
-
 
             # take the maximum in the current state of the newly created table_3
             max_value = max(q_3)
@@ -370,9 +368,9 @@ class UnderwaterAgent(object):
 
             # per moshe recommendation if grid returns empty we want to exit gracefully so return None
             grid = load_grid(world_state)
-            if not grid:
+            if not grid and world_state.is_mission_running:
                 return None
-            
+
             if world_state.is_mission_running:
                 air_reward = 0
                 print 'LENGTH: ', len(grid)
