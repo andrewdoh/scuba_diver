@@ -7,7 +7,7 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "/Users/andyvu/Desktop/MalmoInstall/Minecraft/run/saves/WaterWorldFloor2"
+saved_filename = "/Users/andrew/Desktop/Malmo-0.21.0-Mac-64bit/Sample_missions/2FloorsNoAir"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
@@ -296,6 +296,7 @@ class UnderwaterAgent(object):
         total_reward = 0
 
         # wait for a valid observation
+        time.sleep(0.1)
         world_state = agent_host.peekWorldState()
         while world_state.is_mission_running and all(e.text == '{}' for e in world_state.observations):
             world_state = agent_host.peekWorldState()
@@ -515,7 +516,7 @@ for episode in range(num_iterations):
 
     cumu_rewards = []
     max_retries = 3
-    num_repeats = 150
+    num_repeats = 10000
     agentID = 0
     expID = 'project'
 
@@ -555,11 +556,14 @@ for episode in range(num_iterations):
         if cumu_reward is not None:
             print("REWARD FOR MISSION {}: {}".format(episode, cumu_reward))
             cumu_rewards += [cumu_reward]
-            
+        else:
+            print("grid was empty skipped episode")
         # creates a file and writes reward for each respective mission that ran
         with open("rewards.txt", "a") as myfile:
             if cumu_reward is not None:
-                myfile.write("\nREWARD FOR MISSION {}: {}".format(i, cumu_reward))
+                myfile.write("REWARD FOR MISSION {}: {}\n".format(i, cumu_reward))
+            else:
+                myfile.write("grid was empty skipped episode {}.\n".format(i))
 
         # ---clean up---
         time.sleep(1)
