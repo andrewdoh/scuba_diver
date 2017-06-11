@@ -14,7 +14,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
             <Summary>Load a world</Summary>
         </About>
         <ModSettings>
-            <MsPerTick>100</MsPerTick>
+            <MsPerTick>150</MsPerTick>
         </ModSettings>
         <ServerSection>
             <ServerInitialConditions>
@@ -63,7 +63,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
 
 
 class UnderwaterAgent(object):
-    def __init__(self,alpha=1,gamma=1,n=1):
+    def __init__(self,alpha=.9,gamma=.6,n=1):
         self.epsilon = 0.1
         self.q1_table = {} #value of state
         self.q2_table = {} #value of advantage/action
@@ -74,6 +74,8 @@ class UnderwaterAgent(object):
         self.curr_z = 0
         self.sent_tp_down = False
         self.training = True
+
+        self.time_alive = 0
 
 
     def teleport(self, agent_host, move_up):
@@ -91,23 +93,25 @@ class UnderwaterAgent(object):
     def get_possible_actions(self, world_state,agent_host):
         """Returns all possible actions that can be done at the current state. """
         action_list = []
+        grid = []
         possibilities = {'movenorth 1': -3,'movesouth 1': 3,'moveeast 1': 1,'movewest 1': -1}
-        obs_text = world_state.observations[-1].text
-        obs = json.loads(obs_text)
-        grid = load_grid(world_state)
+        if world_state.number_of_observations_since_last_state > 0:
+            obs_text = world_state.observations[-1].text
+            obs = json.loads(obs_text)
+            self.time_alive = obs[u'TimeAlive']
+            grid = load_grid(world_state)
+        else:
+            #adding in some constraints in case agent dies in the middle of grabbing actions
+            while grid==[] and obs[u'Life']>0 and obs[u'IsAlive'] and world_state.is_mission_running:
+                print("alive but somehow grid is empty??")
+                world_state = agent_host.getWorldState() #this should fix it?
+                if world_state.number_of_observations_since_last_state > 0:
+                    obs_text = world_state.observations[-1].text
+                    obs = json.loads(obs_text)
+                    self.time_alive = obs[u'TimeAlive']
+                    grid = load_grid(world_state)
 
-        #adding in some constraints in case agent dies in the middle of grabbing actions
-        while grid==[] and obs[u'Life']>0 and obs[u'IsAlive'] and world_state.is_mission_running:
-            print("alive but somehow grid is empty??")
-            world_state = agent_host.getWorldState() #this should fix it?
-            if world_state.number_of_observations_since_last_state > 0:
-                obs_text = world_state.observations[-1].text
-                obs = json.loads(obs_text)
-                grid = load_grid(world_state)
-        if obs[u'Life']<0 or not obs[u'IsAlive'] or not world_state.is_mission_running:
-            agent_host.SendCommand("quit")
-
-        if obs[u'Life']>0 and obs[u'IsAlive']:
+        if grid!=[]:
             for k,v in possibilities.items():
                 #with current grid, index 31 will always be our agent's current location
                 #check walls to see whether can move left,right,back,forward
@@ -127,6 +131,7 @@ class UnderwaterAgent(object):
         
         obs_text = world_state.observations[-1].text
         obs = json.loads(obs_text)
+        self.time_alive = obs[u'TimeAlive']
 
         current_air = obs[u'Air']
         if current_air>=0 and current_air<=100:
@@ -154,6 +159,7 @@ class UnderwaterAgent(object):
             if world_state.number_of_observations_since_last_state > 0:
                 obs_text = world_state.observations[-1].text
                 obs = json.loads(obs_text)
+                self.time_alive = obs[u'TimeAlive']
                 current_air = obs[u'Air']
                 if current_air>=0 and current_air<=100:
                     air_state = 'low'
@@ -278,6 +284,7 @@ class UnderwaterAgent(object):
         assert len(world_state.video_frames) > 0, 'No video frames!?'
         
         obs = json.loads( world_state.observations[-1].text )
+        self.time_alive = obs[u'TimeAlive']
         prev_x = obs[u'XPos']
         prev_y = obs[u'YPos']
         prev_z = obs[u'ZPos']
@@ -305,9 +312,11 @@ class UnderwaterAgent(object):
                     break
                 if (len(world_state.rewards) > 0 and not all(e.text=='{}' for e in world_state.observations)):
                     obs = json.loads( world_state.observations[-1].text )
+                    self.time_alive = obs[u'TimeAlive']
                     self.curr_x = obs[u'XPos']
                     self.curr_y = obs[u'YPos']
                     self.curr_z = obs[u'ZPos']
+                    #print '-------------time alive: ',obs[u'TimeAlive']
                     require_move = False
                     if require_move: 
                         if math.hypot( self.curr_x - prev_x, self.curr_y - prev_y, self.curr_z - prev_z ) > tol:
@@ -336,12 +345,20 @@ class UnderwaterAgent(object):
                 if world_state.number_of_observations_since_last_state > 0:
                     obs_text = world_state.observations[-1].text
                     obs = json.loads(obs_text)
+                    self.time_alive = obs[u'TimeAlive']
                     grid = load_grid(world_state)
-                if not obs[u'IsAlive'] or obs[u'Life']==0:
+
+                    
+            if not obs[u'IsAlive'] or obs[u'Life']==0:
+                if world_state.is_mission_running:
                     agent_host.sendCommand("quit")
+                else:
+                    print("want to quit but mission isn't running... so shouldn't go into next statement")
 
                 
             if world_state.is_mission_running:
+                if grid==[]:
+                    print("grid is still empty..")
                 air_reward = 0
                 if grid[31+9] == 'wooden_door':
                     air_reward = self.compute_air_reward(obs[u'Air'])
@@ -359,7 +376,6 @@ class UnderwaterAgent(object):
 
                 #compute the current_reward (which includes additional award for finding air or moving down)
                 current_reward = sum(r.getValue() for r in world_state.rewards)+air_reward+tp_down_reward
-                
  
             if world_state.is_mission_running:
                 assert len(world_state.video_frames) > 0, 'No video frames!?'
@@ -367,6 +383,7 @@ class UnderwaterAgent(object):
                 assert num_frames_after_get >= num_frames_before_get, 'Fewer frames after getWorldState!?'
                 frame = world_state.video_frames[-1]
                 obs = json.loads( world_state.observations[-1].text )
+                self.time_alive = obs[u'TimeAlive']
                 self.curr_x = obs[u'XPos']
                 self.curr_z = obs[u'ZPos']
                 self.curr_y = obs[u'YPos']
@@ -426,6 +443,7 @@ def load_grid(world_state):
         time.sleep(0.1)
         world_state = agent_host.getWorldState()
         if len(world_state.errors) > 0:
+            print(world_state.errors)
             raise AssertionError('Could not load grid.')
 
         if world_state.number_of_observations_since_last_state > 0:
@@ -442,11 +460,11 @@ agent_host = MalmoPython.AgentHost()
 
 #agent_host.addOptionalStringArgument('mission_file',
 #    'Path/to/file from which to load the mission.', '../Sample_missions/cliff_walking_1.xml')
-agent_host.addOptionalFloatArgument('alpha',
-    'Learning rate of the Q-learning agent.', 0.1)
-agent_host.addOptionalFloatArgument('epsilon',
-    'Exploration rate of the Q-learning agent.', 0.01)
-agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)
+#agent_host.addOptionalFloatArgument('alpha',
+#    'Learning rate of the Q-learning agent.', 0.1)
+#agent_host.addOptionalFloatArgument('epsilon',
+#    'Exploration rate of the Q-learning agent.', 0.01)
+#agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)
 agent_host.addOptionalFlag('load_model', 'Load initial model from model_file.')
 agent_host.addOptionalStringArgument('model_file', 'Path to the initial model file', '')
 agent_host.addOptionalFlag('debug', 'Turn on debugging.')
@@ -526,9 +544,11 @@ for episode in range(num_iterations):
         print("REWARD FOR MISSION {}: {}".format(episode,cumu_reward))
         cumu_rewards += [cumu_reward]
 
-        #creates a file and writes reward for each respective mission that ran 
+        #creates a file and writes reward for each respective mission that ran
+        
         with open("rewards.txt", "a") as myfile:
             myfile.write("\nREWARD FOR MISSION {}: {}".format(i,cumu_reward))
+            myfile.write("\nTimeAlive FOR MISSION {}: {}".format(i,agent.time_alive))
 
         #---clean up---
         time.sleep(0.5)
