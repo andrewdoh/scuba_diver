@@ -51,7 +51,7 @@ $$ Q_{2}(s_t,a_t)  \leftarrow \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}} + \
 #### Quantitative ####
 
 In order to evaluate our project in a quantitative manner, we analyzed the rewards that we were receiving at each episode, and made sure that each Q table was correctly computing those rewards. Intuitively, we know that if our rewards our increasing with each consecutive mission, and the difference in consecutive rewards is not too large (i.e. reward values are not random and there is some consistency to them), then our agent is learning something useful.  An episode, in our case, ends when either the agent dies from running out of breath, running out of time (which we set to 100 seconds), or when the agent reaches the end goal (the redstone block). We can view a sample of missions and the respective rewards received at each below: 
- <div>
+ <div align="center">
 <img src="images/singleQ_ex_1.png" width="500px">
  
 <img src="images/doubleQ_ex_1.png" width="500px">
@@ -59,7 +59,7 @@ In order to evaluate our project in a quantitative manner, we analyzed the rewar
  <p align="center">
  <img src="images/singleQ_vs_doubleQ_ex_1.png" width="500px">
  </p>
- <div>
+ <div align="center">
 <img src="images/singleQ_ex_2.png" width="500px">
 
 <img src="images/doubleQ_ex_2.png" width="500px">
