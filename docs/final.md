@@ -75,14 +75,6 @@ In order to evaluate our project in a quantitative manner, we analyzed the rewar
 <img src="images/seabar.png" width="400px">
 <img src="images/seabox.png" width="400px">
 </div>
-<div align="center">
-<img src="images/singleQ_time.png" width="400px">
- 
-<img src="images/doubleQ_time.png" width="400px">
-</div>
- <p align="center">
- <img src="images/singleQ_vs_doubleQ_time.png" width="400px">
- </p>
 
 
 With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards.  
@@ -91,10 +83,14 @@ Another way in which we were able to evaluate our agent, quantitatively, was by 
 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
-- TimeAlive FOR MISSION 0: 2108
-- TimeAlive FOR MISSION 1: 4311
-- TimeAlive FOR MISSION 2: 5518
-- . . .
+<div align="center">
+<img src="images/singleQ_time.png" width="400px">
+ 
+<img src="images/doubleQ_time.png" width="400px">
+</div>
+ <p align="center">
+ <img src="images/singleQ_vs_doubleQ_time.png" width="400px">
+ </p>
 
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
 
