@@ -75,6 +75,7 @@ In order to evaluate our project in a quantitative manner, we analyzed the rewar
 <img src="images/seabar.png" width="400px">
 <img src="images/seabox.png" width="400px">
 </div>
+<div>
 <img src="images/singleQ_time.png" width="400px">
  
 <img src="images/doubleQ_time.png" width="400px">
