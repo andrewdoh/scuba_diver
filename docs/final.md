@@ -75,7 +75,9 @@ In order to evaluate our project in a quantitative manner, we analyzed the rewar
 <img src="images/seabar.png" width="500px">
 <img src="images/seabox.png" width="500px">
 </div>
-
+  <div align="center">
+  <img src="images/count.png" width="500px">
+  </div>
 
 With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards.  
  
