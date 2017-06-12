@@ -53,27 +53,27 @@ $$ Q_{2}(s_t,a_t)  \leftarrow \underbrace{Q_{2}(s_t,a_t)}_{\text{old value}} + \
 In order to evaluate our project in a quantitative manner, we analyzed the rewards that we were receiving at each episode, and made sure that each Q table was correctly computing those rewards. Intuitively, we know that if our rewards our increasing with each consecutive mission, and the difference in consecutive rewards is not too large (i.e. reward values are not random and there is some consistency to them), then our agent is learning something useful.  An episode, in our case, ends when either the agent dies from running out of breath, running out of time (which we set to 100 seconds), or when the agent reaches the end goal (the redstone block). We can view a sample of missions and the respective rewards received at each below: 
 <h5 align="center"> Example 1 </h5>
  <div align="center">
-<img src="images/singleQ_ex_1.png" width="400px">
+<img src="images/singleQ_ex_1.png" width="500px">
  
-<img src="images/doubleQ_ex_1.png" width="400px">
+<img src="images/doubleQ_ex_1.png" width="500px">
 </div>
  <p align="center">
- <img src="images/singleQ_vs_doubleQ_ex_1.png" width="400px">
+ <img src="images/singleQ_vs_doubleQ_ex_1.png" width="500px">
  </p>
  <h5 align="center"> Example 2 </h5>
  <div align="center">
-<img src="images/singleQ_ex_2.png" width="400px">
+<img src="images/singleQ_ex_2.png" width="500px">
 
-<img src="images/doubleQ_ex_2.png" width="400px">
+<img src="images/doubleQ_ex_2.png" width="500px">
 </div>
  <p align="center">
-<img src="images/singleQ_vs_doubleQ_ex_2.png" width="400px">
+<img src="images/singleQ_vs_doubleQ_ex_2.png" width="500px">
  </p>
   <div align="center">
-<img src="images/swarm.png" width="400px">
+<img src="images/swarm.png" width="500px">
 
-<img src="images/seabar.png" width="400px">
-<img src="images/seabox.png" width="400px">
+<img src="images/seabar.png" width="500px">
+<img src="images/seabox.png" width="500px">
 </div>
 
 
@@ -84,12 +84,12 @@ Another way in which we were able to evaluate our agent, quantitatively, was by 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
 <div align="center">
-<img src="images/singleQ_time.png" width="400px">
+<img src="images/singleQ_time.png" width="500px">
  
-<img src="images/doubleQ_time.png" width="400px">
+<img src="images/doubleQ_time.png" width="500px">
 </div>
  <p align="center">
- <img src="images/singleQ_vs_doubleQ_time.png" width="400px">
+ <img src="images/singleQ_vs_doubleQ_time.png" width="500px">
  </p>
 
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
