@@ -71,9 +71,14 @@ class UnderwaterAgent(object):
         self.q2_table = {}  # value of advantage/action
         self.n, self.alpha, self.gamma = n, alpha, gamma
 
-        self.curr_x = 0
-        self.curr_y = 0
-        self.curr_z = 0
+        self.prev_x = None
+        self.prev_y = None
+        self.prev_z = None
+
+        self.curr_x = None
+        self.curr_y = None
+        self.curr_z = None
+        
         self.sent_tp_down = False
         self.training = True
         
@@ -96,28 +101,26 @@ class UnderwaterAgent(object):
         g_z = int(g[2])
 
         direction = 'Goal' #only other possible state is the goal itself
-        if g_z>s_z:
-            direction = 'S'
-        if g_z<s_z:
-            direction = 'N'
-        if g_x>s_x:
-            if g_z == s_z:
+        if abs(g_z-s_z) > abs(g_x-s_x):
+            #should be N/S only
+            if g_z>s_z:
+                direction = 'S'
+            else:
+                direction = 'N'
+        else:
+            #should be W/E only
+            if g_x>s_x:
                 direction = 'E'
             else:
-                direction += 'E'
-        if g_x<s_x:
-            if g_z == s_z:
                 direction = 'W'
-            else:
-                direction+='W'
 
         #assuming agent always starts in right-most corner of top floor
         start = self.start_point.split(".")
         floor_num = s_x-int(start[0])
-        if floor_num != 0:
+        if floor_num >= (self.floor_side_length+1):
             while floor_num%(self.floor_side_length+1) != 0:
-                floor_num+=1
-            floor_num = (floor_num/(self.floor_side_length+1))
+                floor_num-=1
+            floor_num = (floor_num/(self.floor_side_length+1))+1
         else:
             floor_num = 1
         direction+= '%d' % floor_num
@@ -136,15 +139,17 @@ class UnderwaterAgent(object):
 
     def teleport(self, agent_host, move_up):
         """Directly teleport to a specific position."""
-
+        
         move_by = 5 #equal to how many hops we need to take to reach new floor
         if move_up:
+            #teleport up
             tel_x = self.curr_x - move_by
         else:
+            #teleport down
             tel_x = self.curr_x + move_by
         tp_command = "tp {} {} {}".format(tel_x, self.curr_y, self.curr_z)
-        #print "cs: {} {} {}".format(self.curr_x, self.curr_y, self.curr_z)
-        #print 'took: {} {} {}'.format(tel_x, self.curr_y, self.curr_z)
+        print "original state: {} {} {}".format(self.curr_x, self.curr_y, self.curr_z)
+        print 'sent command: {} {} {}'.format(tel_x, self.curr_y, self.curr_z)
         return tp_command
 
     def get_possible_actions(self, world_state, agent_host):
@@ -177,6 +182,7 @@ class UnderwaterAgent(object):
                 print '**********', len(grid)
                 print '**********', (16+v)
                 raise ex
+            
         # check if you can teleport down a level (equivalent to hopping 5 spaces to the left)
         if grid[16+5] == 'water' or grid[16+5] == 'wooden_door':
             action_list.append('tp_down')
@@ -212,9 +218,11 @@ class UnderwaterAgent(object):
             
         #keeping old state to make sure we take another step with each new action
         old_curr_state = "%d.%d.%d.%s" % (int(obs[u'XPos']), int(obs[u'YPos']), int(obs[u'ZPos']), air_state)
+        self.curr_x = obs[u'XPos']
+        self.curr_y = obs[u'YPos']
+        self.curr_z = obs[u'ZPos']
         print("\ncurr_state: {}".format(old_curr_state))
-        #reducing states by direction of goal in relation to the agent + current amount of air
-        #another part to consider == distance away from goal = int(obs[u'distanceFromGoal']) CHANGE?
+        #reducing states by euclid dist + direction of goal in relation to the agent + current amount of air
         direction = self.dir_from_goal(old_curr_state)
         curr_state = "%d.%s.%s" % (int(obs[u'distanceFromGoal']),direction,air_state)
 
@@ -243,6 +251,9 @@ class UnderwaterAgent(object):
                     air_state = 'high'
                 #curr_state = "%d.%d.%d.%s" % (int(obs[u'XPos']), int(obs[u'YPos']), int(obs[u'ZPos']), air_state)
                 old_curr_state = "%d.%d.%d.%s" % (int(obs[u'XPos']), int(obs[u'YPos']), int(obs[u'ZPos']), air_state)
+                self.curr_x = obs[u'XPos']
+                self.curr_y = obs[u'YPos']
+                self.curr_z = obs[u'ZPos']
                 direction = self.dir_from_goal(old_curr_state)
                 curr_state = "%d.%s.%s" % (int(obs[u'distanceFromGoal']),direction,air_state)
                 cs = old_curr_state.split(".");
@@ -348,7 +359,7 @@ class UnderwaterAgent(object):
             print 'q1_length: ', len(self.q1_table[curr_state])
             print 'q2_length: ', len(self.q2_table[curr_state])'''
             print 'actions: ', possible_actions
-            print '\ncs: ', curr_state
+            print 'cs: ', curr_state
             '''print 'q1: ', self.q1_table[curr_state]
             print 'q2: ', self.q2_table[curr_state]
             print 'prev state:', self.prev_s'''
@@ -394,7 +405,8 @@ class UnderwaterAgent(object):
         # wait for a valid observation
         time.sleep(0.1)
         world_state = agent_host.peekWorldState()
-        while world_state.is_mission_running and all(e.text == '{}' for e in world_state.observations):
+        # len()<2 because may only return distance to goal observation
+        while world_state.is_mission_running and len(world_state.observations)<2 and all(e.text == '{}' for e in world_state.observations):
             world_state = agent_host.peekWorldState()
         # wait for a frame to arrive after that
         num_frames_seen = world_state.number_of_video_frames_since_last_state
@@ -410,16 +422,16 @@ class UnderwaterAgent(object):
         assert len(world_state.video_frames) > 0, 'No video frames!?'
 
         obs = json.loads(world_state.observations[-1].text)
-        prev_x = obs[u'XPos']
-        prev_y = obs[u'YPos']
-        prev_z = obs[u'ZPos']
-
-        # record (for now)
-        self.curr_x = obs[u'XPos']
-        self.curr_y = obs[u'YPos']
-        self.curr_z = obs[u'ZPos']
+        try:
+            self.prev_x = obs[u'XPos']
+            self.prev_y = obs[u'YPos']
+            self.prev_z = obs[u'ZPos']
+        except KeyError:
+            print '-------',len(world_state.observations)
+            raise exception
 
         try:
+            #----------------------------call act-----------------------------------#
             total_reward += self.act(world_state, agent_host, current_reward)
         except NotImplementedError as bullshit:
             # We actually died but this is how we catch it now (CHANGE IT!!!!!)
@@ -448,7 +460,7 @@ class UnderwaterAgent(object):
                     
                     require_move = False
                     if require_move:
-                        if math.hypot(self.curr_x - prev_x, self.curr_y - prev_y, self.curr_z - prev_z) > tol:
+                        if math.hypot(self.curr_x - self.prev_x, self.curr_y - self.prev_y, self.curr_z - self.prev_z) > tol:
                             print 'received.'
                             break
                     else:
@@ -504,9 +516,9 @@ class UnderwaterAgent(object):
                 self.curr_z = obs[u'ZPos']
                 self.curr_y = obs[u'YPos']
 
-                prev_x = self.curr_x
-                prev_y = self.curr_y
-                prev_z = self.curr_z
+                self.prev_x = self.curr_x
+                self.prev_y = self.curr_y
+                self.prev_z = self.curr_z
 
                 # act
                 try:
@@ -651,12 +663,12 @@ for i in range(num_repeats):
         print("grid was empty skipped episode")
 
     # creates a file and writes reward for each respective mission that ran
-    with open("rewards_alpha9_gamma3_eps1_funcapprox.txt", "a") as myfile:
+    with open("rewards_alpha9_gamma3_eps1_funcapprox_NESWonly.txt", "a") as myfile:
         if cumu_reward is not None:
             myfile.write("REWARD FOR MISSION {}: {}\n".format(i, cumu_reward))
         else:
             myfile.write("grid was empty skipped episode {}.\n".format(i))
-    with open("timeAlive_alpha9_gamma3_eps1_funcapprox.txt", "a") as myfile:
+    with open("timeAlive_alpha9_gamma3_eps1_funcapprox_NESWonly.txt", "a") as myfile:
         if cumu_reward is not None:
             #subtracting time alive by 100000 because 100000 is the count down time. Time alive is
             #how much of that is left by the time the episode terminates. Represented in milliseconds.
