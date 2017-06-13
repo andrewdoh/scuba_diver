@@ -7,14 +7,14 @@ import random
 import math
 from timeit import default_timer as timer
 
-saved_filename = "C:\Users\Caitlin\Desktop\CS175-PROJECT\Sideways_3Floors"
+saved_filename = "C:\Users\Caitlin\Documents\CS175\maps\Sideways_3rooms"
 mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
     <Mission xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
         <About>
             <Summary>Load a world</Summary>
         </About>
         <ModSettings>
-            <MsPerTick>100</MsPerTick>
+            <MsPerTick>80</MsPerTick>
         </ModSettings>
         <ServerSection>
             <ServerInitialConditions>
@@ -62,7 +62,7 @@ mission_xml = '''<?xml version="1.0" encoding="UTF-8" ?>
 
 
 class UnderwaterAgent(object):
-    def __init__(self, alpha=1, gamma=1, n=1):
+    def __init__(self, alpha=.9, gamma=.7, n=1):
         self.epsilon = 0.1
         self.q1_table = {}  # value of state
         self.q2_table = {}  # value of advantage/action
@@ -73,26 +73,38 @@ class UnderwaterAgent(object):
         self.curr_z = 0
         self.sent_tp_down = False
         self.training = True
-        self.redstone_block_insight = False
-        self.redstone_block_action = 0;
+        
+        self.air_reward = 0
+        self.is_air_next = False
+        self.action_for_air = 0
+
+        self.time_alive = 0
 
     def teleport(self, agent_host, move_up):
         """Directly teleport to a specific position."""
 
         move_by = 5 #equal to how many hops we need to take to reach new floor
         if move_up:
-            tel_x = self.curr_x + move_by
-        else:
             tel_x = self.curr_x - move_by
+        else:
+            tel_x = self.curr_x + move_by
         tp_command = "tp {} {} {}".format(tel_x, self.curr_y, self.curr_z)
         return tp_command
 
-    def get_possible_actions(self, world_state, agent_host):
+    def get_possible_actions(self,world_state):
         """Returns all possible actions that can be done at the current state. """
         action_list = []
         #note: agent starts out facing south
         possibilities = {'movenorth 1': -11, 'movesouth 1': 11, 'moveeast 1': 1, 'movewest 1': -1}
 
+        '''if curr_state=="1150.25.-481.high" or curr_state=="1154.25.-481.medium":
+            print('EVALUATING!!!!!!!!!!!!!!')
+            print('----{}'.format(len(grid)))
+            for i in range(len(grid)):
+                print '~', grid[i],
+                if i%11==0:
+                    print '\n'
+        '''
         grid = load_grid(world_state)
         world_state = agent_host.getWorldState()
         if not world_state.is_mission_running:
@@ -101,38 +113,37 @@ class UnderwaterAgent(object):
             else:
                 print '**** Still dies, but at least grid is not empty'
             raise NotImplementedError('Not really :) We just died')
-
-        for k, v in possibilities.items():
-            # with current grid, index 16 will always be our agent's current location
-            # check walls to see whether can move left,right,back,forward
-            try:
-                if grid[16 + v] == 'water' or grid[16 + v] == 'wooden_door':  # +9 because we want to check
-                    action_list.append(k)  # where our feet are located
-                    #check for redstone block
-                    if grid[16+v] == 'redstone_block':
-                        self.redstone_block_insight = True
-                        self.redstone_block_action = k
                     
+        for k, v in possibilities.items():
+            try:
+                # with current grid, index 16 will always be our agent's current location
+                # check walls to see whether can move left,right,back,forward
+                if grid[16 + v]=="water" or grid[16 + v]=="wooden_door" or grid[16+v]=="heavy_weighted_pressure_plate" or grid[16+v]=="flowing_water": 
+                    action_list.append(k)  
+                    #check for redstone block (only air right now)
+                    if grid[16+v] == "wooden_door":
+                        self.is_air_next = True
+                        self.action_for_air = k
             except Exception as ex:
                 print '**********', len(grid)
-                print '**********', (16+v)
+                print '**********', (31 + v + 9)
                 raise ex
+            
         # check if you can teleport down a level (equivalent to hopping 5 spaces to the left)
-        if grid[16-5] == 'water' or grid[16-5] == 'wooden_door':
+        if grid[16+5] == "water" or grid[16+5] == "wooden_door" or grid[16+5]=="heavy_weighted_pressure_plate"or grid[16+5]=="flowing_water":
             action_list.append(self.teleport(agent_host, False))
-            #check for redstone_block
-            if grid[16-5] == 'redstone_block':
-                self.redstone_block_insight = True
-                self.redstone_block_action = self.teleport(agent_host, False)
-            # time.sleep(0.1)
+            #check for redstone_block (only air right now)
+            if grid[16+5] == "wooden_door":
+                self.is_air_next = True
+                self.action_for_air = self.teleport(agent_host, False)
+
         # check if you can teleport up a level (equivalent to hopping 5 spaces to the right)
-        if grid[16+5] == 'water' or grid[16+5] == 'wooden_door':
+        if grid[16-5] == "water" or grid[16-5] == "wooden_door" or grid[16-5]=="heavy_weighted_pressure_plate"or grid[16-5]=="flowing_water":
             action_list.append(self.teleport(agent_host, True))
-            # time.sleep(0.1)
-            #check for redstone_block
-            if grid[16+5] == 'redstone_block':
-                self.redstone_block_insight = True
-                self.redstone_block_action = self.teleport(agent_host, True)
+            #check for redstone_block (only air right now)
+            if grid[16-5] == "wooden_door":
+                self.is_air_next = True
+                self.action_for_air = self.teleport(agent_host, True)
         
         return action_list
 
@@ -149,10 +160,9 @@ class UnderwaterAgent(object):
         else:  # current_air>200
             air_state = 'high'
 
+        #update current_state
         curr_state = "%d.%d.%d.%s" % (int(obs[u'XPos']), int(obs[u'YPos']), int(obs[u'ZPos']), air_state)
 
-        # poss_act = self.get_possible_actions(world_state, agent_host)
-        # time.sleep(0.1)
         # making sure that curr_state!=prev_state... agent should always be moving/taking some action each step
         curr_list = 0
         prev_list = 1
@@ -181,8 +191,11 @@ class UnderwaterAgent(object):
             agent_host.sendCommand("quit")
 
         # update both if action doesn't exist in one.. (so they always exist in both)
-        possible_actions = self.get_possible_actions(world_state, agent_host)
+        possible_actions = self.get_possible_actions(world_state)
         if curr_state not in self.q1_table:
+            '''print("Initializing table!")
+            print '--cs: ',curr_state
+            print '--possible actions: ',possible_actions'''
             self.q1_table[curr_state] = ([0] * len(possible_actions))
             self.q2_table[curr_state] = ([0] * len(possible_actions))
 
@@ -221,20 +234,19 @@ class UnderwaterAgent(object):
         # time.sleep(0.1)
         a = self.choose_action(curr_state, possible_actions)
 
-        if self.redstone_block_insight:
-            if possible_actions[a]==self.redstone_block_action:
-                print("\nHIT REDSTONE BLOCK.\nHIT REDSTONE BLOCK.\nHIT REDSTONE BLOCK.")
-            self.redstone_block_insight = False;
+        if self.is_air_next:
+            if possible_actions[a]==self.action_for_air:
+                self.air_reward = self.compute_air_reward(current_air)
+            self.is_air_next = False;
 
         # send selected action
-        print("\n--TOOK ACTION: {}".format(possible_actions[a]))
-
         if possible_actions[a].find("tp") != -1:
             new_s = possible_actions[a].split(" ")
             old_s = curr_state.split(".")
-            if new_s[2] < old_s[1]:
+            if new_s[1] > old_s[0]:
                 self.sent_tp_down = True
         agent_host.sendCommand(possible_actions[a])
+        print("\n--TOOK ACTION: {}".format(possible_actions[a]))
         time.sleep(0.25)
         self.prev_s = curr_state
         self.prev_a = a
@@ -254,12 +266,14 @@ class UnderwaterAgent(object):
             '''print 'length: ', len(possible_actions)
             print 'q1_length: ', len(self.q1_table[curr_state])
             print 'q2_length: ', len(self.q2_table[curr_state])
-            print 'actions: ', possible_actions
-            print 'cs: ', curr_state
             print 'q1: ', self.q1_table[curr_state]
-            print 'q2: ', self.q2_table[curr_state]
-            print 'curr State:', curr_state
-            print 'prev state:', self.prev_s'''
+            print 'q2: ', self.q2_table[curr_state]'''
+            #print 'ps:', self.prev_s
+            print 'cs:', curr_state
+            #print 'actions: ', possible_actions
+            #if self.prev_s!=None:
+            #    print '-q1_ps: ',self.q1_table[self.prev_s]
+            #print '-q1_cs: ',self.q1_table[curr_state]
             for action in range(len(possible_actions)):
                 equation = (self.q1_table[curr_state][action] + self.q2_table[curr_state][action]) / 2
                 q_3.append(equation)
@@ -349,6 +363,7 @@ class UnderwaterAgent(object):
                     self.curr_x = obs[u'XPos']
                     self.curr_y = obs[u'YPos']
                     self.curr_z = obs[u'ZPos']
+                    self.time_alive = obs[u'TimeAlive']
                     
                     require_move = False
                     if require_move:
@@ -372,20 +387,21 @@ class UnderwaterAgent(object):
 
             # per moshe recommendation if grid returns empty we want to exit gracefully so return None
             grid = load_grid(world_state)
+            air_reward = 0
+            tp_down_reward = 0
             if grid and world_state.is_mission_running:
-                air_reward = 0
-                if grid[16] == 'wooden_door': #this right? CHANGE
-                    air_reward = self.compute_air_reward(obs[u'Air'])
-                    '''print("--GAVE REWARD FOR AIR: {}--".format(air_reward))
+                if self.air_reward != 0:
+                    air_reward = self.air_reward
+                    self.air_reward = 0
+                    '''print("--------------GAVE REWARD FOR AIR: {}".format(air_reward))
                     print('current_reward -before air-: {}'.format(sum(r.getValue() for r in world_state.rewards)))
                     print('current_reward -after air-: {}'.format(
                         sum(r.getValue() for r in world_state.rewards) + air_reward))'''
 
-                tp_down_reward = 0
                 if self.sent_tp_down:
                     tp_down_reward = 1
                     self.sent_tp_down = False
-                    '''print("--GAVE REWARD FOR TRANSPORTING DOWN: {}--".format(tp_down_reward))
+                    '''print("--GAVE REWARD FOR TRANSPORTING DOWN: {}".format(tp_down_reward))
                     print('current_reward -before tp_down-: {}'.format(sum(r.getValue() for r in world_state.rewards)))
                     print('current_reward -after tp_down-: {}'.format(
                         sum(r.getValue() for r in world_state.rewards) + air_reward + tp_down_reward))'''
@@ -393,6 +409,10 @@ class UnderwaterAgent(object):
                 # compute the current_reward (which includes additional award for finding air or moving down)
                 current_reward = sum(r.getValue() for r in world_state.rewards) + air_reward + tp_down_reward
             else:
+                if world_state.is_mission_running:
+                    print("MISSION IS STILL RUNNNING?")
+                else:
+                    print("ERASE LOAD GRID!")
                 print("\nBREAKING LOOP. EXITING.\nBREAKING LOOP. EXITING.\nBREAKING LOOP. EXITING.")
                 current_reward = sum(r.getValue() for r in world_state.rewards) + air_reward + tp_down_reward
                 break;
@@ -466,11 +486,11 @@ agent_host = MalmoPython.AgentHost()
 
 # agent_host.addOptionalStringArgument('mission_file',
 #    'Path/to/file from which to load the mission.', '../Sample_missions/cliff_walking_1.xml')
-agent_host.addOptionalFloatArgument('alpha',
+'''agent_host.addOptionalFloatArgument('alpha',
                                     'Learning rate of the Q-learning agent.', 0.1)
 agent_host.addOptionalFloatArgument('epsilon',
                                     'Exploration rate of the Q-learning agent.', 0.01)
-agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)
+agent_host.addOptionalFloatArgument('gamma', 'Discount factor.', 1.0)'''
 agent_host.addOptionalFlag('load_model', 'Load initial model from model_file.')
 agent_host.addOptionalStringArgument('model_file', 'Path to the initial model file', '')
 agent_host.addOptionalFlag('debug', 'Turn on debugging.')
@@ -504,14 +524,16 @@ my_mission.setViewpoint(1)
 my_clients = MalmoPython.ClientPool()
 my_clients.add(MalmoPython.ClientInfo('127.0.0.1', 10000))  # add Minecraft machines here as available
 
+end_trials = False
 cumu_rewards = []
 max_retries = 3
-num_repeats = 10000
+num_repeats = 1000
 agentID = 0
 expID = 'project'
 
 for i in range(num_repeats):
 
+    my_mission.forceWorldReset()
     print "\nEpisode %d of %d:" % (i + 1, num_repeats)
 
     my_mission_record = MalmoPython.MissionRecordSpec("./save_%s-ep%d.tgz" % (expID, i))
@@ -543,14 +565,14 @@ for i in range(num_repeats):
             print "Error:", error.text
 
 
-    '''if (i + 1)%5 == 0:
-        best_policy = agent.best_policy(agent_host)
-        if best_policy:
+
+    cumu_reward = agent.run(agent_host)
+
+    if (i + 1)%5 == 0:
+        if cumu_reward == 97: #best solution for 4x4 3-floor map
+            end_trials = True
             print 'Found Solution'
             print 'Done'
-            break;
-    else:'''
-    cumu_reward = agent.run(agent_host)
     
     if cumu_reward is not None:
         print("REWARD FOR MISSION {}: {}".format(i, cumu_reward))
@@ -559,12 +581,21 @@ for i in range(num_repeats):
         print("grid was empty skipped episode")
 
     # creates a file and writes reward for each respective mission that ran
-    with open("rewards.txt", "a") as myfile:
+    with open("new_rewards_3floor_alph9_gamma7.txt", "a") as myfile:
         if cumu_reward is not None:
             myfile.write("REWARD FOR MISSION {}: {}\n".format(i, cumu_reward))
         else:
             myfile.write("grid was empty skipped episode {}.\n".format(i))
-    ##save time alive too CHANGE
+    with open("new_timeAlive_3floor_alph9_gamma7.txt", "a") as myfile:
+        if cumu_reward is not None:
+            #subtracting time alive by 100000 because 100000 is the count down time. Time alive is
+            #how much of that is left by the time the episode terminates. Represented in ms
+            myfile.write("TIME ALIVE FOR MISSION {}: {}\n".format(i, 100000-agent.time_alive))
+        else:
+            myfile.write("grid was empty skipped episode {}.\n".format(i))
+            
+    if end_trials:
+        break;
 
     # ---clean up---
     time.sleep(1)
