@@ -17,25 +17,21 @@ After going through an array of options, we finally settled on the idea of a dee
 
 However, it wasn’t as simple as that; rewards were only one aspect of the underlying issue. There were quite a few milestones we had to meet before ultimately accomplishing this task. This included simply getting the agent to survive in the underwater maze (i.e. finding the goal before running out of air), providing an incentive for the agent to explore its surroundings, having it realize the importance of how much air it has left, as well as being able to maximize its rewards (i.e. not just going straight to the goal state), and doing all of this in an efficient manner. And the fact that we were conducting this all in a 3D environment seemed to make it all the more challenging.
 
-In order to see how we would go about constructing this problem, let’s take a brief look at the MDP:
-
-- ...
-
-Since the environment is 3D, we want to allow the agent to maneuver in a 3D manner as well (in order to simulate the effect of having it swim around, rather than just having it walk on the floor-bed). Thus, its actions consist of the following: right, left, forward, backwards, up, down. The states will consist of x, y, z coordinates, as well as 3 different stages of air capacity (‘low’, ‘medium’, and ‘high’). You might notice that having all of these variables rapidly begins to increase the size of the state space depending on the depth of the environment. Fortunately, having maze-like structures to provide obstacles for the agent, will help reduce the amount of areas it can visit. Lastly, the agent can  come across three different types of rewards: receiving an ender pearl (+10 points), finding an air pocket (+10 if the agent is ‘low’ on air, +5 is the agent has ‘medium’ air, and -1 if the agent has ‘a high’ amount of air), as well as finding its goal state, the redstone_block (+100). 
-
-<p align="center">
-<img src="images/floor and air bubbles.png" width="800px">
-</p>
+In order to see how we would go about constructing this problem, let’s outline the MDP in more detail. Firstly, since the environment is 3D, we want to allow the agent to maneuver in a 3D manner as well (in order to simulate the effect of having it swim around, rather than just having it walk on the floor-bed). Thus, its actions consist of the following: right, left, forward, backwards, up, down. The states will consist of x, y, z coordinates, as well as 3 different stages of air capacity (‘low’, ‘medium’, and ‘high’). Lastly, the agent can  come across three different types of rewards: receiving an ender pearl (+10 points), finding an air pocket (+10 if the agent is ‘low’ on air, +5 is the agent has ‘medium’ air, and -1 if the agent has ‘a high’ amount of air), as well as finding its goal state, the redstone_block (+100). 
 
 We believe that AI/reinforcement learning algorithms (specifically, variants of Q-learning) are suitable for this particular problem because the agent is seeking out a goal in uncharted waters. That it is to say, there is a great deal of uncertainty in the environment in which it is placed. Outcomes of actions are not always predictable, rewards are not always clear, and because the agent’s air is constantly depleting, it must constantly monitor its surroundings and react appropriately based off of prior experiences. In this way, it can use its experiences to improve performance. 
 
 
-## Approach ##
+## Approaches ##
 
 Use another level-two header called Approaches, In this section, describe both the baselines and your proposed approach(es). Describe precisely what the advantages and disadvantages of each are, for example, why one might be more accurate, need less data, take more time, overfit, and so on. Include enough technical information to be able to (mostly) reproduce your project, in particular, use pseudocode and equations as much as possible.
 
 <p align="center">
 <img src="images/main environment.png" width="500px">
+</p>
+
+<p align="center">
+<img src="images/floor and air bubbles.png" width="800px">
 </p>
 
 
