@@ -1,1678 +1,1678 @@
-0, tp 1147.5 25.0 -481.5
-0, tp 1142.5 25.0 -481.5
-0, moveeast 1
-0, moveeast 1
-0, tp 1149.5 25.0 -481.5
-0, movewest 1
-0, tp 1153.5 25.0 -481.5
-0, tp 1148.5 25.0 -481.5
-0, moveeast 1
-0, tp 1154.5 25.0 -481.5
-0, tp 1149.5 25.0 -481.5
-0, tp 1154.5 25.0 -481.5
-0, movewest 1
-0, movesouth 1
-0, movenorth 1
-0, moveeast 1
-0, moveeast 1
-0, movewest 1
-0, moveeast 1
-0, tp 1150.5 25.0 -481.5
-0, tp 1145.5 25.0 -481.5
-0, tp 1150.5 25.0 -481.5
-0, tp 1145.5 25.0 -481.5
-0, movewest 1
-0, tp 1149.5 25.0 -481.5
-0, tp 1144.5 25.0 -481.5
-0, moveeast 1
-0, movesouth 1
-0, movesouth 1
-0, tp 1150.5 25.0 -479.5
-0, movenorth 1
-0, tp 1155.5 25.0 -480.5
-0, tp 1150.5 25.0 -480.5
-0, tp 1145.5 25.0 -480.5
-0, movenorth 1
-0, tp 1150.5 25.0 -481.5
-0, movewest 1
-0, movewest 1
-0, tp 1153.5 25.0 -481.5
-0, movesouth 1
-0, movenorth 1
-0, moveeast 1
-0, moveeast 1
-0, movesouth 1
-0, movesouth 1
-0, movesouth 1
-1, movesouth 1
-1, tp 1147.5 25.0 -480.5
-1, movenorth 1
-1, moveeast 1
-1, movewest 1
-1, movesouth 1
-1, movesouth 1
-1, tp 1152.5 25.0 -479.5
-1, movesouth 1
-1, moveeast 1
-1, movenorth 1
-1, movewest 1
-1, moveeast 1
-1, movenorth 1
-1, moveeast 1
-1, movenorth 1
-1, movewest 1
-1, tp 1148.5 25.0 -481.5
-1, tp 1153.5 25.0 -481.5
-1, movesouth 1
-1, movesouth 1
-1, movesouth 1
-1, movenorth 1
-1, movenorth 1
-1, moveeast 1
-1, movewest 1
-1, movenorth 1
-1, moveeast 1
-1, tp 1149.5 25.0 -481.5
-1, movewest 1
-1, moveeast 1
-1, tp 1144.5 25.0 -481.5
-1, moveeast 1
-1, movesouth 1
-1, tp 1150.5 25.0 -480.5
-1, tp 1155.5 25.0 -480.5
-1, movewest 1
-1, movenorth 1
-1, movewest 1
-1, tp 1148.5 25.0 -481.5
-1, tp 1153.5 25.0 -481.5
-1, moveeast 1
-1, movesouth 1
-1, moveeast 1
-1, movenorth 1
-1, movewest 1
-1, tp 1149.5 25.0 -481.5
-1, moveeast 1
-1, movewest 1
-1, moveeast 1
-1, movesouth 1
-1, movesouth 1
-1, tp 1155.5 25.0 -479.5
-1, tp 1150.5 25.0 -479.5
-1, movenorth 1
-1, tp 1155.5 25.0 -480.5
-1, movesouth 1
-1, movenorth 1
-1, movewest 1
-1, movewest 1
-1, movesouth 1
-1, movesouth 1
-1, tp 1148.5 25.0 -478.5
-1, tp 1153.5 25.0 -478.5
-1, movewest 1
-1, movenorth 1
-1, tp 1147.5 25.0 -479.5
-1, movenorth 1
-1, tp 1142.5 25.0 -480.5
-1, movesouth 1
-1, movesouth 1
-1, movenorth 1
-1, movenorth 1
-1, tp 1147.5 25.0 -480.5
-1, tp 1142.5 25.0 -480.5
-1, movenorth 1
-1, movesouth 1
-1, tp 1147.5 25.0 -480.5
-1, movenorth 1
-1, moveeast 1
-1, tp 1153.5 25.0 -481.5
-1, tp 1148.5 25.0 -481.5
-1, tp 1143.5 25.0 -481.5
-1, tp 1148.5 25.0 -481.5
-1, tp 1153.5 25.0 -481.5
-1, movesouth 1
-1, moveeast 1
-1, moveeast 1
-1, tp 1150.5 25.0 -480.5
-1, tp 1145.5 25.0 -480.5
-1, movesouth 1
-1, tp 1150.5 25.0 -479.5
-1, tp 1155.5 25.0 -479.5
-1, movenorth 1
-1, movenorth 1
-1, movewest 1
-1, movesouth 1
-1, moveeast 1
-1, movesouth 1
-1, movesouth 1
-2, tp 1147.5 25.0 -481.5
-2, movesouth 1
-2, movesouth 1
-2, movesouth 1
-2, tp 1152.5 25.0 -478.5
-2, tp 1147.5 25.0 -478.5
-2, movenorth 1
-2, tp 1142.5 25.0 -479.5
-2, tp 1147.5 25.0 -479.5
-2, tp 1152.5 25.0 -479.5
-2, movesouth 1
-2, moveeast 1
-2, movenorth 1
-2, movenorth 1
-2, movesouth 1
-2, movesouth 1
-2, tp 1148.5 25.0 -478.5
-2, moveeast 1
-2, moveeast 1
-2, tp 1155.5 25.0 -478.5
-3, tp 1147.5 25.0 -481.5
-3, moveeast 1
-3, tp 1153.5 25.0 -481.5
-3, moveeast 1
-3, movesouth 1
-3, movewest 1
-3, movenorth 1
-3, movesouth 1
-3, moveeast 1
-3, movenorth 1
-3, moveeast 1
-3, tp 1150.5 25.0 -481.5
-3, movesouth 1
-3, movenorth 1
-3, movesouth 1
-3, tp 1155.5 25.0 -480.5
-3, movewest 1
-3, movewest 1
-3, movesouth 1
-3, movenorth 1
-3, moveeast 1
-3, movenorth 1
-3, tp 1149.5 25.0 -481.5
-3, tp 1154.5 25.0 -481.5
-3, moveeast 1
-3, movesouth 1
-3, tp 1150.5 25.0 -480.5
-3, movenorth 1
-3, movesouth 1
-3, movesouth 1
-3, tp 1155.5 25.0 -479.5
-3, movesouth 1
-4, tp 1147.5 25.0 -481.5
-4, tp 1142.5 25.0 -481.5
-4, tp 1147.5 25.0 -481.5
-4, movesouth 1
-4, movesouth 1
-4, tp 1152.5 25.0 -479.5
-4, tp 1147.5 25.0 -479.5
-4, tp 1152.5 25.0 -479.5
-4, moveeast 1
-4, movewest 1
-4, movesouth 1
-4, tp 1147.5 25.0 -478.5
-4, moveeast 1
-4, tp 1143.5 25.0 -478.5
-4, tp 1148.5 25.0 -478.5
-4, moveeast 1
-4, movewest 1
-4, tp 1153.5 25.0 -478.5
-4, movewest 1
-4, tp 1147.5 25.0 -478.5
-4, tp 1142.5 25.0 -478.5
-4, moveeast 1
-4, tp 1148.5 25.0 -478.5
-4, movewest 1
-4, tp 1152.5 25.0 -478.5
-4, movenorth 1
-4, tp 1147.5 25.0 -479.5
-4, tp 1152.5 25.0 -479.5
-4, moveeast 1
-4, movenorth 1
-4, movenorth 1
-4, moveeast 1
-4, movesouth 1
-4, moveeast 1
-4, movesouth 1
-4, movesouth 1
-5, tp 1147.5 25.0 -481.5
-5, moveeast 1
-5, tp 1153.5 25.0 -481.5
-5, tp 1148.5 25.0 -481.5
-5, tp 1153.5 25.0 -481.5
-5, movesouth 1
-5, movesouth 1
-5, movesouth 1
-5, tp 1148.5 25.0 -478.5
-5, tp 1153.5 25.0 -478.5
-5, movewest 1
-5, moveeast 1
-5, movenorth 1
-5, movewest 1
-5, tp 1147.5 25.0 -479.5
-5, tp 1152.5 25.0 -479.5
-5, tp 1147.5 25.0 -479.5
-5, tp 1152.5 25.0 -479.5
-5, movesouth 1
-5, movenorth 1
-5, moveeast 1
-5, movewest 1
-5, tp 1147.5 25.0 -479.5
-5, movenorth 1
-5, movenorth 1
-5, tp 1142.5 25.0 -481.5
-5, tp 1147.5 25.0 -481.5
-5, movesouth 1
-5, movenorth 1
-5, tp 1142.5 25.0 -481.5
-5, moveeast 1
-5, movewest 1
-5, tp 1147.5 25.0 -481.5
-5, moveeast 1
-5, moveeast 1
-5, tp 1144.5 25.0 -481.5
-5, movewest 1
-5, tp 1148.5 25.0 -481.5
-5, tp 1153.5 25.0 -481.5
-5, moveeast 1
-5, tp 1149.5 25.0 -481.5
-5, tp 1154.5 25.0 -481.5
-5, movewest 1
-5, tp 1148.5 25.0 -481.5
-5, tp 1153.5 25.0 -481.5
-5, tp 1148.5 25.0 -481.5
-5, movewest 1
-5, movesouth 1
-5, tp 1142.5 25.0 -480.5
-5, movenorth 1
-5, tp 1147.5 25.0 -481.5
-5, moveeast 1
-5, tp 1143.5 25.0 -481.5
-5, tp 1148.5 25.0 -481.5
-5, tp 1153.5 25.0 -481.5
-5, moveeast 1
-5, movesouth 1
-5, moveeast 1
-5, movenorth 1
-5, movesouth 1
-5, tp 1150.5 25.0 -480.5
-5, tp 1155.5 25.0 -480.5
-5, movesouth 1
-5, movesouth 1
-6, moveeast 1
-6, tp 1148.5 25.0 -481.5
-6, tp 1153.5 25.0 -481.5
-6, movesouth 1
-6, moveeast 1
-6, movenorth 1
-6, moveeast 1
-6, tp 1150.5 25.0 -481.5
-6, movesouth 1
-6, movenorth 1
-6, movesouth 1
-6, movenorth 1
-6, tp 1145.5 25.0 -481.5
-6, movesouth 1
-6, movenorth 1
-6, movewest 1
-6, tp 1149.5 25.0 -481.5
-6, moveeast 1
-6, tp 1145.5 25.0 -481.5
-6, tp 1150.5 25.0 -481.5
-6, tp 1145.5 25.0 -481.5
-6, tp 1150.5 25.0 -481.5
-6, movewest 1
-6, tp 1154.5 25.0 -481.5
-6, movewest 1
-6, moveeast 1
-6, moveeast 1
-6, movewest 1
-6, tp 1149.5 25.0 -481.5
-6, tp 1154.5 25.0 -481.5
-6, movewest 1
-6, movesouth 1
-6, moveeast 1
-6, movenorth 1
-6, tp 1149.5 25.0 -481.5
-6, tp 1154.5 25.0 -481.5
-6, movewest 1
-6, tp 1148.5 25.0 -481.5
-6, moveeast 1
-6, tp 1154.5 25.0 -481.5
-6, movewest 1
-6, moveeast 1
-6, moveeast 1
-6, tp 1149.5 25.0 -481.5
-6, tp 1154.5 25.0 -481.5
-6, movesouth 1
-6, movewest 1
-6, movesouth 1
-6, movenorth 1
-6, movenorth 1
-6, tp 1148.5 25.0 -481.5
-6, tp 1153.5 25.0 -481.5
-6, tp 1148.5 25.0 -481.5
-6, tp 1153.5 25.0 -481.5
-6, moveeast 1
-6, tp 1149.5 25.0 -481.5
-6, tp 1154.5 25.0 -481.5
-6, movesouth 1
-6, movewest 1
-6, moveeast 1
-6, moveeast 1
-6, movenorth 1
-6, movewest 1
-6, movewest 1
-6, movesouth 1
-6, movesouth 1
-6, movesouth 1
-6, tp 1148.5 25.0 -478.5
-6, tp 1153.5 25.0 -478.5
-6, movewest 1
-6, movenorth 1
-6, movesouth 1
-6, moveeast 1
-6, movenorth 1
-6, movewest 1
-6, moveeast 1
-6, movesouth 1
-6, tp 1148.5 25.0 -478.5
-6, moveeast 1
-6, tp 1144.5 25.0 -478.5
-6, movenorth 1
-6, moveeast 1
-7, tp 1147.5 25.0 -481.5
-7, movesouth 1
-7, tp 1142.5 25.0 -480.5
-7, tp 1147.5 25.0 -480.5
-7, movesouth 1
-7, tp 1152.5 25.0 -480.5
-7, moveeast 1
-7, movenorth 1
-7, moveeast 1
-7, moveeast 1
-7, tp 1150.5 25.0 -481.5
-7, movesouth 1
-7, movenorth 1
-7, movesouth 1
-7, movenorth 1
-7, movesouth 1
-7, tp 1145.5 25.0 -480.5
-7, tp 1150.5 25.0 -480.5
-7, movenorth 1
-7, movesouth 1
-7, movenorth 1
-7, movesouth 1
-7, tp 1155.5 25.0 -480.5
-7, tp 1150.5 25.0 -480.5
-7, tp 1145.5 25.0 -480.5
-7, movenorth 1
-7, movewest 1
-7, movewest 1
-7, movewest 1
-7, tp 1147.5 25.0 -481.5
-7, moveeast 1
-7, moveeast 1
-7, tp 1154.5 25.0 -481.5
-7, tp 1149.5 25.0 -481.5
-7, tp 1154.5 25.0 -481.5
-7, movesouth 1
-7, moveeast 1
-7, movewest 1
-7, movenorth 1
-7, movewest 1
-7, tp 1148.5 25.0 -481.5
-7, tp 1143.5 25.0 -481.5
-7, tp 1148.5 25.0 -481.5
-7, tp 1153.5 25.0 -481.5
-7, movesouth 1
-7, movenorth 1
-7, moveeast 1
-7, movesouth 1
-7, movenorth 1
-7, moveeast 1
-7, tp 1150.5 25.0 -481.5
-7, tp 1145.5 25.0 -481.5
-7, tp 1150.5 25.0 -481.5
-7, tp 1145.5 25.0 -481.5
-7, movesouth 1
-7, movesouth 1
-7, movenorth 1
-7, tp 1150.5 25.0 -480.5
-7, tp 1155.5 25.0 -480.5
-7, movesouth 1
-7, movesouth 1
-8, tp 1147.5 25.0 -481.5
-8, movesouth 1
-8, tp 1142.5 25.0 -480.5
-8, movenorth 1
-8, movesouth 1
-8, tp 1147.5 25.0 -480.5
-8, movenorth 1
-8, tp 1142.5 25.0 -481.5
-8, tp 1147.5 25.0 -481.5
-8, moveeast 1
-8, movewest 1
-8, movesouth 1
-8, movenorth 1
-8, moveeast 1
-8, tp 1153.5 25.0 -481.5
-8, moveeast 1
-8, moveeast 1
-8, tp 1150.5 25.0 -481.5
-8, movesouth 1
-8, movenorth 1
-8, movesouth 1
-8, tp 1155.5 25.0 -480.5
-8, tp 1150.5 25.0 -480.5
-8, movenorth 1
-8, tp 1145.5 25.0 -481.5
-8, tp 1150.5 25.0 -481.5
-8, tp 1145.5 25.0 -481.5
-8, tp 1150.5 25.0 -481.5
-8, tp 1145.5 25.0 -481.5
-8, tp 1150.5 25.0 -481.5
-8, tp 1145.5 25.0 -481.5
-8, tp 1150.5 25.0 -481.5
-8, tp 1145.5 25.0 -481.5
-8, tp 1150.5 25.0 -481.5
-8, tp 1145.5 25.0 -481.5
-8, movesouth 1
-8, tp 1150.5 25.0 -480.5
-8, tp 1155.5 25.0 -480.5
-8, movesouth 1
-8, movesouth 1
-9, tp 1147.5 25.0 -481.5
-9, tp 1142.5 25.0 -481.5
-9, moveeast 1
-9, tp 1148.5 25.0 -481.5
-9, tp 1153.5 25.0 -481.5
-9, tp 1148.5 25.0 -481.5
-9, moveeast 1
-9, tp 1154.5 25.0 -481.5
-9, tp 1149.5 25.0 -481.5
-9, moveeast 1
-9, movesouth 1
-9, movenorth 1
-9, movesouth 1
-9, movenorth 1
-9, movesouth 1
-9, movenorth 1
-9, movesouth 1
-9, movenorth 1
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, tp 1150.5 25.0 -481.5
-9, tp 1145.5 25.0 -481.5
-9, movewest 1
-9, movewest 1
-9, tp 1148.5 25.0 -481.5
-9, tp 1143.5 25.0 -481.5
-9, movewest 1
-9, movesouth 1
-9, tp 1147.5 25.0 -480.5
-9, movenorth 1
-9, movesouth 1
-9, tp 1142.5 25.0 -480.5
-9, tp 1147.5 25.0 -480.5
-9, movesouth 1
-9, tp 1152.5 25.0 -479.5
-9, tp 1147.5 25.0 -479.5
-9, tp 1152.5 25.0 -479.5
-9, moveeast 1
-9, movenorth 1
-9, moveeast 1
-9, movewest 1
-9, movenorth 1
-9, movesouth 1
-9, movesouth 1
-9, movesouth 1
-9, movewest 1
-9, tp 1147.5 25.0 -478.5
-9, tp 1142.5 25.0 -478.5
-9, movenorth 1
-9, movenorth 1
-9, movenorth 1
-9, moveeast 1
-9, tp 1148.5 25.0 -481.5
-9, tp 1143.5 25.0 -481.5
-9, tp 1148.5 25.0 -481.5
-9, tp 1153.5 25.0 -481.5
-9, moveeast 1
-9, movesouth 1
-9, moveeast 1
-9, movesouth 1
-9, movesouth 1
-10, tp 1147.5 25.0 -481.5
-10, tp 1142.5 25.0 -481.5
-10, tp 1147.5 25.0 -481.5
-10, moveeast 1
-10, moveeast 1
-10, moveeast 1
-10, movesouth 1
-10, movenorth 1
-10, movesouth 1
-10, movenorth 1
-10, movesouth 1
-10, movenorth 1
-10, movesouth 1
-10, movenorth 1
-10, movesouth 1
-10, movenorth 1
-10, movesouth 1
-10, movenorth 1
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, tp 1145.5 25.0 -481.5
-10, tp 1150.5 25.0 -481.5
-10, movewest 1
-10, tp 1154.5 25.0 -481.5
-10, movesouth 1
-10, moveeast 1
-10, tp 1150.5 25.0 -480.5
-10, movesouth 1
-10, tp 1145.5 25.0 -479.5
-10, movewest 1
-10, moveeast 1
-10, tp 1150.5 25.0 -479.5
-10, tp 1155.5 25.0 -479.5
-10, movesouth 1
-11, tp 1147.5 25.0 -481.5
-11, movesouth 1
-11, movesouth 1
-11, movesouth 1
-11, movenorth 1
-11, tp 1142.5 25.0 -479.5
-11, tp 1147.5 25.0 -479.5
-11, movenorth 1
-11, tp 1142.5 25.0 -480.5
-11, movesouth 1
-11, tp 1147.5 25.0 -479.5
-11, tp 1152.5 25.0 -479.5
-11, movesouth 1
-11, tp 1147.5 25.0 -478.5
-11, tp 1152.5 25.0 -478.5
-11, movenorth 1
-11, movesouth 1
-11, moveeast 1
-11, movenorth 1
-11, movewest 1
-11, moveeast 1
-11, movesouth 1
-11, tp 1148.5 25.0 -478.5
-11, tp 1153.5 25.0 -478.5
-11, movewest 1
-11, tp 1147.5 25.0 -478.5
-11, movenorth 1
-11, tp 1152.5 25.0 -479.5
-11, tp 1147.5 25.0 -479.5
-11, tp 1142.5 25.0 -479.5
-11, tp 1147.5 25.0 -479.5
-11, movesouth 1
-11, tp 1142.5 25.0 -478.5
-11, movenorth 1
-11, movenorth 1
-11, movenorth 1
-11, movesouth 1
-11, movenorth 1
-11, tp 1147.5 25.0 -481.5
-11, moveeast 1
-11, tp 1153.5 25.0 -481.5
-11, movesouth 1
-11, movesouth 1
-11, movewest 1
-11, tp 1147.5 25.0 -479.5
-11, tp 1152.5 25.0 -479.5
-11, moveeast 1
-11, movenorth 1
-11, moveeast 1
-11, movenorth 1
-11, moveeast 1
-11, tp 1150.5 25.0 -481.5
-11, movesouth 1
-11, movenorth 1
-11, tp 1145.5 25.0 -481.5
-11, tp 1150.5 25.0 -481.5
-11, tp 1145.5 25.0 -481.5
-11, tp 1150.5 25.0 -481.5
-11, tp 1145.5 25.0 -481.5
-11, tp 1150.5 25.0 -481.5
-11, tp 1145.5 25.0 -481.5
-11, tp 1150.5 25.0 -481.5
-11, tp 1145.5 25.0 -481.5
-11, tp 1150.5 25.0 -481.5
-11, tp 1145.5 25.0 -481.5
-11, movesouth 1
-11, tp 1150.5 25.0 -480.5
-11, tp 1155.5 25.0 -480.5
-11, movesouth 1
-11, movesouth 1
-12, moveeast 1
-12, moveeast 1
-12, moveeast 1
-12, tp 1150.5 25.0 -481.5
-12, movesouth 1
-12, movenorth 1
-12, movesouth 1
-12, movenorth 1
-12, movesouth 1
-12, movenorth 1
-12, movesouth 1
-12, movenorth 1
-12, movesouth 1
-12, movenorth 1
-12, movesouth 1
-12, movenorth 1
-12, tp 1145.5 25.0 -481.5
-12, tp 1150.5 25.0 -481.5
-12, tp 1145.5 25.0 -481.5
-12, tp 1150.5 25.0 -481.5
-12, tp 1145.5 25.0 -481.5
-12, tp 1150.5 25.0 -481.5
-12, tp 1145.5 25.0 -481.5
-12, movesouth 1
-12, tp 1150.5 25.0 -480.5
-12, tp 1145.5 25.0 -480.5
-12, tp 1150.5 25.0 -480.5
-12, tp 1155.5 25.0 -480.5
-12, movesouth 1
-12, movesouth 1
-13, tp 1147.5 25.0 -481.5
-13, movesouth 1
-13, movenorth 1
-13, moveeast 1
-13, tp 1153.5 25.0 -481.5
-13, tp 1148.5 25.0 -481.5
-13, movewest 1
-13, movesouth 1
-13, movesouth 1
-13, tp 1152.5 25.0 -479.5
-13, movesouth 1
-13, tp 1147.5 25.0 -478.5
-13, tp 1152.5 25.0 -478.5
-13, tp 1147.5 25.0 -478.5
-13, tp 1152.5 25.0 -478.5
-13, moveeast 1
-13, movewest 1
-13, moveeast 1
-13, tp 1148.5 25.0 -478.5
-13, moveeast 1
-13, moveeast 1
-13, movenorth 1
-13, tp 1145.5 25.0 -479.5
-13, movenorth 1
-13, tp 1150.5 25.0 -480.5
-13, movenorth 1
-13, movesouth 1
-13, movenorth 1
-13, movesouth 1
-13, movenorth 1
-13, movesouth 1
-13, movenorth 1
-13, movesouth 1
-13, movenorth 1
-13, movesouth 1
-13, movenorth 1
-13, movesouth 1
-13, tp 1155.5 25.0 -480.5
-13, movesouth 1
-13, movesouth 1
-14, tp 1147.5 25.0 -481.5
-14, moveeast 1
-14, tp 1153.5 25.0 -481.5
-14, moveeast 1
-14, movewest 1
-14, tp 1148.5 25.0 -481.5
-14, tp 1143.5 25.0 -481.5
-14, tp 1148.5 25.0 -481.5
-14, tp 1153.5 25.0 -481.5
-14, movesouth 1
-14, movesouth 1
-14, movesouth 1
-14, movewest 1
-14, movenorth 1
-14, tp 1147.5 25.0 -479.5
-14, movesouth 1
-14, tp 1152.5 25.0 -478.5
-14, movenorth 1
-14, movesouth 1
-14, tp 1147.5 25.0 -478.5
-14, moveeast 1
-14, moveeast 1
-14, moveeast 1
-14, tp 1155.5 25.0 -478.5
-15, movesouth 1
-15, tp 1147.5 25.0 -480.5
-15, tp 1142.5 25.0 -480.5
-15, tp 1147.5 25.0 -480.5
-15, movesouth 1
-15, tp 1142.5 25.0 -479.5
-15, tp 1147.5 25.0 -479.5
-15, tp 1152.5 25.0 -479.5
-15, movesouth 1
-15, moveeast 1
-15, movenorth 1
-15, movewest 1
-15, moveeast 1
-15, movenorth 1
-15, movenorth 1
-15, tp 1148.5 25.0 -481.5
-15, tp 1153.5 25.0 -481.5
-15, tp 1148.5 25.0 -481.5
-15, tp 1143.5 25.0 -481.5
-15, movewest 1
-15, tp 1147.5 25.0 -481.5
-15, tp 1142.5 25.0 -481.5
-15, movesouth 1
-15, tp 1147.5 25.0 -480.5
-15, movesouth 1
-15, tp 1152.5 25.0 -479.5
-15, tp 1147.5 25.0 -479.5
-15, tp 1142.5 25.0 -479.5
-15, tp 1147.5 25.0 -479.5
-15, movenorth 1
-15, tp 1142.5 25.0 -480.5
-15, movesouth 1
-15, movenorth 1
-15, movenorth 1
-15, moveeast 1
-15, tp 1148.5 25.0 -481.5
-15, tp 1153.5 25.0 -481.5
-15, moveeast 1
-15, tp 1149.5 25.0 -481.5
-15, moveeast 1
-15, movesouth 1
-15, movenorth 1
-15, movesouth 1
-15, movenorth 1
-15, movesouth 1
-15, movenorth 1
-15, movesouth 1
-15, movenorth 1
-15, movesouth 1
-15, movenorth 1
-15, tp 1145.5 25.0 -481.5
-15, tp 1150.5 25.0 -481.5
-15, tp 1145.5 25.0 -481.5
-15, tp 1150.5 25.0 -481.5
-15, tp 1145.5 25.0 -481.5
-15, tp 1150.5 25.0 -481.5
-15, tp 1155.5 25.0 -481.5
-15, movesouth 1
-15, movesouth 1
-15, movesouth 1
-16, movesouth 1
-16, tp 1147.5 25.0 -480.5
-16, tp 1142.5 25.0 -480.5
-16, tp 1147.5 25.0 -480.5
-16, tp 1142.5 25.0 -480.5
-16, tp 1147.5 25.0 -480.5
-16, movesouth 1
-16, movesouth 1
-16, moveeast 1
-16, tp 1153.5 25.0 -478.5
-16, tp 1148.5 25.0 -478.5
-16, tp 1153.5 25.0 -478.5
-16, tp 1148.5 25.0 -478.5
-16, tp 1143.5 25.0 -478.5
-16, tp 1148.5 25.0 -478.5
-16, movewest 1
-16, tp 1152.5 25.0 -478.5
-16, moveeast 1
-16, movenorth 1
-16, movenorth 1
-16, moveeast 1
-16, moveeast 1
-16, movesouth 1
-16, movesouth 1
-17, moveeast 1
-17, tp 1148.5 25.0 -481.5
-17, tp 1153.5 25.0 -481.5
-17, movesouth 1
-17, moveeast 1
-17, moveeast 1
-17, tp 1150.5 25.0 -480.5
-17, movenorth 1
-17, movesouth 1
-17, movenorth 1
-17, movesouth 1
-17, tp 1145.5 25.0 -480.5
-17, tp 1150.5 25.0 -480.5
-17, movenorth 1
-17, movesouth 1
-17, movenorth 1
-17, tp 1155.5 25.0 -481.5
-17, movesouth 1
-17, movesouth 1
-17, movesouth 1
-18, tp 1147.5 25.0 -481.5
-18, movesouth 1
-18, movenorth 1
-18, tp 1142.5 25.0 -481.5
-18, movesouth 1
-18, tp 1147.5 25.0 -480.5
-18, tp 1142.5 25.0 -480.5
-18, movesouth 1
-18, tp 1147.5 25.0 -479.5
-18, tp 1152.5 25.0 -479.5
-18, movesouth 1
-18, tp 1147.5 25.0 -478.5
-18, tp 1152.5 25.0 -478.5
-18, movenorth 1
-18, moveeast 1
-18, movesouth 1
-18, movewest 1
-18, tp 1147.5 25.0 -478.5
-18, tp 1142.5 25.0 -478.5
-18, tp 1147.5 25.0 -478.5
-18, tp 1152.5 25.0 -478.5
-18, movenorth 1
-18, moveeast 1
-18, movewest 1
-18, tp 1147.5 25.0 -479.5
-18, movesouth 1
-18, tp 1152.5 25.0 -478.5
-18, tp 1147.5 25.0 -478.5
-18, tp 1152.5 25.0 -478.5
-18, movenorth 1
-18, movesouth 1
-18, moveeast 1
-18, movewest 1
-18, tp 1147.5 25.0 -478.5
-18, moveeast 1
-18, tp 1153.5 25.0 -478.5
-18, tp 1148.5 25.0 -478.5
-18, tp 1153.5 25.0 -478.5
-18, movewest 1
-18, moveeast 1
-18, movenorth 1
-18, movesouth 1
-18, tp 1148.5 25.0 -478.5
-18, movewest 1
-18, movenorth 1
-18, tp 1142.5 25.0 -479.5
-18, movesouth 1
-18, tp 1147.5 25.0 -478.5
-18, moveeast 1
-18, moveeast 1
-18, tp 1144.5 25.0 -478.5
-18, movewest 1
-18, moveeast 1
-18, tp 1149.5 25.0 -478.5
-18, tp 1144.5 25.0 -478.5
-18, tp 1149.5 25.0 -478.5
-18, moveeast 1
-18, tp 1155.5 25.0 -478.5
-19, tp 1147.5 25.0 -481.5
-19, moveeast 1
-19, moveeast 1
-19, moveeast 1
-19, movesouth 1
-19, movenorth 1
-19, movesouth 1
-19, movenorth 1
-19, movesouth 1
-19, movenorth 1
-19, tp 1155.5 25.0 -481.5
-19, tp 1150.5 25.0 -481.5
-19, movesouth 1
-19, movenorth 1
-19, movesouth 1
-19, movenorth 1
-19, tp 1155.5 25.0 -481.5
-19, movesouth 1
-19, movesouth 1
-19, movesouth 1
-20, tp 1147.5 25.0 -481.5
-20, moveeast 1
-20, movewest 1
-20, movesouth 1
-20, movesouth 1
-20, tp 1152.5 25.0 -479.5
-20, tp 1147.5 25.0 -479.5
-20, tp 1152.5 25.0 -479.5
-20, movesouth 1
-20, moveeast 1
-20, movenorth 1
-20, movesouth 1
-20, tp 1148.5 25.0 -478.5
-20, tp 1153.5 25.0 -478.5
-20, movewest 1
-20, tp 1147.5 25.0 -478.5
-20, tp 1152.5 25.0 -478.5
-20, movenorth 1
-20, moveeast 1
-20, movesouth 1
-20, tp 1148.5 25.0 -478.5
-20, moveeast 1
-20, tp 1144.5 25.0 -478.5
-20, tp 1149.5 25.0 -478.5
-20, moveeast 1
-20, tp 1155.5 25.0 -478.5
-21, moveeast 1
-21, moveeast 1
-21, tp 1149.5 25.0 -481.5
-21, moveeast 1
-21, movesouth 1
-21, movenorth 1
-21, movesouth 1
-21, movenorth 1
-21, movesouth 1
-21, movenorth 1
-21, movesouth 1
-21, movenorth 1
-21, movesouth 1
-21, movesouth 1
-21, tp 1155.5 25.0 -479.5
-21, movesouth 1
-22, tp 1147.5 25.0 -481.5
-22, moveeast 1
-22, tp 1143.5 25.0 -481.5
-22, tp 1148.5 25.0 -481.5
-22, tp 1153.5 25.0 -481.5
-22, moveeast 1
-22, movesouth 1
-22, movewest 1
-22, movesouth 1
-22, movewest 1
-22, tp 1147.5 25.0 -479.5
-22, tp 1152.5 25.0 -479.5
-22, moveeast 1
-22, movenorth 1
-22, movenorth 1
-22, tp 1148.5 25.0 -481.5
-22, movewest 1
-22, tp 1142.5 25.0 -481.5
-22, tp 1147.5 25.0 -481.5
-22, movesouth 1
-22, tp 1142.5 25.0 -480.5
-22, tp 1147.5 25.0 -480.5
-22, movenorth 1
-22, moveeast 1
-22, tp 1153.5 25.0 -481.5
-22, movesouth 1
-22, moveeast 1
-22, moveeast 1
-22, movesouth 1
-22, movesouth 1
-23, moveeast 1
-23, movewest 1
-23, movesouth 1
-23, tp 1147.5 25.0 -480.5
-23, tp 1142.5 25.0 -480.5
-23, movesouth 1
-23, movesouth 1
-23, tp 1147.5 25.0 -478.5
-23, tp 1152.5 25.0 -478.5
-23, movenorth 1
-23, movesouth 1
-23, moveeast 1
-23, tp 1148.5 25.0 -478.5
-23, movewest 1
-23, tp 1152.5 25.0 -478.5
-23, tp 1147.5 25.0 -478.5
-23, moveeast 1
-23, tp 1143.5 25.0 -478.5
-23, tp 1148.5 25.0 -478.5
-23, moveeast 1
-23, moveeast 1
-23, movewest 1
-23, moveeast 1
-23, tp 1155.5 25.0 -478.5
-24, moveeast 1
-24, tp 1148.5 25.0 -481.5
-24, moveeast 1
-24, moveeast 1
-24, movesouth 1
-24, movenorth 1
-24, movesouth 1
-24, movenorth 1
-24, movesouth 1
-24, movenorth 1
-24, movesouth 1
-24, tp 1155.5 25.0 -480.5
-24, movesouth 1
-24, movesouth 1
-25, moveeast 1
-25, tp 1148.5 25.0 -481.5
-25, tp 1153.5 25.0 -481.5
-25, tp 1148.5 25.0 -481.5
-25, movewest 1
-25, movesouth 1
-25, movesouth 1
-25, movenorth 1
-25, tp 1142.5 25.0 -480.5
-25, tp 1147.5 25.0 -480.5
-25, movesouth 1
-25, tp 1152.5 25.0 -479.5
-25, tp 1147.5 25.0 -479.5
-25, movesouth 1
-25, tp 1142.5 25.0 -478.5
-25, tp 1147.5 25.0 -478.5
-25, movenorth 1
-25, tp 1152.5 25.0 -479.5
-25, tp 1147.5 25.0 -479.5
-25, tp 1152.5 25.0 -479.5
-25, moveeast 1
-25, movewest 1
-25, movesouth 1
-25, moveeast 1
-25, movenorth 1
-25, movenorth 1
-25, movenorth 1
-25, movesouth 1
-25, movesouth 1
-25, movesouth 1
-25, tp 1148.5 25.0 -478.5
-25, moveeast 1
-25, moveeast 1
-25, tp 1155.5 25.0 -478.5
-26, movesouth 1
-26, tp 1147.5 25.0 -480.5
-26, movenorth 1
-26, moveeast 1
-26, moveeast 1
-26, moveeast 1
-26, movesouth 1
-26, movenorth 1
-26, movesouth 1
-26, movenorth 1
-26, movesouth 1
-26, movenorth 1
-26, movesouth 1
-26, movenorth 1
-26, movesouth 1
-26, movenorth 1
-26, tp 1155.5 25.0 -481.5
-26, movesouth 1
-26, movesouth 1
-26, movesouth 1
-27, movesouth 1
-27, tp 1147.5 25.0 -480.5
-27, tp 1142.5 25.0 -480.5
-27, movesouth 1
-27, tp 1147.5 25.0 -479.5
-27, movesouth 1
-27, tp 1142.5 25.0 -478.5
-27, tp 1147.5 25.0 -478.5
-27, movenorth 1
-27, tp 1142.5 25.0 -479.5
-27, tp 1147.5 25.0 -479.5
-27, tp 1152.5 25.0 -479.5
-27, moveeast 1
-27, movewest 1
-27, tp 1147.5 25.0 -479.5
-27, tp 1152.5 25.0 -479.5
-27, tp 1147.5 25.0 -479.5
-27, tp 1152.5 25.0 -479.5
-27, moveeast 1
-27, movewest 1
-27, tp 1147.5 25.0 -479.5
-27, tp 1152.5 25.0 -479.5
-27, movesouth 1
-27, tp 1147.5 25.0 -478.5
-27, tp 1142.5 25.0 -478.5
-27, moveeast 1
-27, tp 1148.5 25.0 -478.5
-27, moveeast 1
-27, moveeast 1
-27, tp 1155.5 25.0 -478.5
-28, tp 1147.5 25.0 -481.5
-28, movesouth 1
-28, movesouth 1
-28, tp 1152.5 25.0 -479.5
-28, moveeast 1
-28, movesouth 1
-28, movenorth 1
-28, movenorth 1
-28, movesouth 1
-28, movesouth 1
-28, tp 1148.5 25.0 -478.5
-28, tp 1153.5 25.0 -478.5
-28, movewest 1
-28, movenorth 1
-28, movesouth 1
-28, moveeast 1
-28, tp 1148.5 25.0 -478.5
-28, moveeast 1
-28, moveeast 1
-28, tp 1155.5 25.0 -478.5
-29, tp 1147.5 25.0 -481.5
-29, tp 1142.5 25.0 -481.5
-29, movesouth 1
-29, tp 1147.5 25.0 -480.5
-29, tp 1142.5 25.0 -480.5
-29, movesouth 1
-29, tp 1147.5 25.0 -479.5
-29, tp 1142.5 25.0 -479.5
-29, movenorth 1
-29, tp 1147.5 25.0 -480.5
-29, movesouth 1
-29, tp 1152.5 25.0 -479.5
-29, movesouth 1
-29, tp 1147.5 25.0 -478.5
-29, tp 1152.5 25.0 -478.5
-29, moveeast 1
-29, movewest 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, moveeast 1
-29, movenorth 1
-29, moveeast 1
-29, movenorth 1
-29, tp 1149.5 25.0 -481.5
-29, tp 1144.5 25.0 -481.5
-29, tp 1149.5 25.0 -481.5
-29, tp 1154.5 25.0 -481.5
-29, movewest 1
-29, tp 1148.5 25.0 -481.5
-29, tp 1153.5 25.0 -481.5
-29, movesouth 1
-29, movenorth 1
-29, tp 1148.5 25.0 -481.5
-29, moveeast 1
-29, tp 1154.5 25.0 -481.5
-29, moveeast 1
-29, movesouth 1
-29, movenorth 1
-29, tp 1150.5 25.0 -481.5
-29, movewest 1
-29, tp 1154.5 25.0 -481.5
-29, tp 1149.5 25.0 -481.5
-29, tp 1154.5 25.0 -481.5
-29, movesouth 1
-29, movewest 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movewest 1
-29, tp 1147.5 25.0 -479.5
-29, movenorth 1
-29, movenorth 1
-29, movesouth 1
-29, tp 1142.5 25.0 -480.5
-29, tp 1147.5 25.0 -480.5
-29, tp 1142.5 25.0 -480.5
-29, tp 1147.5 25.0 -480.5
-29, movesouth 1
-29, tp 1152.5 25.0 -479.5
-29, moveeast 1
-29, movenorth 1
-29, movenorth 1
-29, moveeast 1
-29, moveeast 1
-29, tp 1150.5 25.0 -481.5
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, movesouth 1
-29, movenorth 1
-29, tp 1155.5 25.0 -481.5
-29, tp 1150.5 25.0 -481.5
-30, moveeast 1
-30, moveeast 1
-30, tp 1149.5 25.0 -481.5
-30, moveeast 1
-30, movesouth 1
-30, movenorth 1
-30, movesouth 1
-30, movenorth 1
-30, movesouth 1
-30, movenorth 1
-30, movesouth 1
-30, movenorth 1
-30, movesouth 1
-30, movenorth 1
-30, movesouth 1
-30, movenorth 1
-30, tp 1155.5 25.0 -480.5
-30, movesouth 1
-30, movesouth 1
-31, movesouth 1
-31, movesouth 1
-31, movesouth 1
-31, tp 1147.5 25.0 -478.5
-31, tp 1152.5 25.0 -478.5
-31, tp 1147.5 25.0 -478.5
-31, moveeast 1
-31, movewest 1
-31, tp 1152.5 25.0 -478.5
-31, movenorth 1
-31, tp 1147.5 25.0 -479.5
-31, tp 1142.5 25.0 -479.5
-31, tp 1147.5 25.0 -479.5
-31, movesouth 1
-31, movenorth 1
-31, tp 1152.5 25.0 -479.5
-31, tp 1147.5 25.0 -479.5
-31, movenorth 1
-31, movesouth 1
-31, tp 1142.5 25.0 -479.5
-31, movesouth 1
-31, tp 1147.5 25.0 -478.5
-31, tp 1152.5 25.0 -478.5
-31, moveeast 1
-31, tp 1148.5 25.0 -478.5
-31, moveeast 1
-31, moveeast 1
-31, tp 1155.5 25.0 -478.5
-32, tp 1147.5 25.0 -481.5
-32, moveeast 1
-32, tp 1143.5 25.0 -481.5
-32, tp 1148.5 25.0 -481.5
-32, moveeast 1
-32, moveeast 1
-32, movesouth 1
-32, movenorth 1
-32, tp 1155.5 25.0 -481.5
-32, tp 1150.5 25.0 -481.5
-32, movesouth 1
-32, movenorth 1
-32, movesouth 1
-32, movenorth 1
-32, movesouth 1
-32, movenorth 1
-32, tp 1155.5 25.0 -481.5
-32, movesouth 1
-32, movesouth 1
-32, movesouth 1
-33, tp 1147.5 25.0 -481.5
-33, moveeast 1
-33, moveeast 1
-33, moveeast 1
-33, movesouth 1
-33, movenorth 1
-33, movesouth 1
-33, movenorth 1
-33, movesouth 1
-33, movenorth 1
-33, movesouth 1
-33, movenorth 1
-33, movesouth 1
-33, movenorth 1
-33, movesouth 1
-33, tp 1145.5 25.0 -480.5
-33, tp 1150.5 25.0 -480.5
-33, tp 1155.5 25.0 -480.5
-33, movesouth 1
-33, movesouth 1
-34, moveeast 1
-34, tp 1148.5 25.0 -481.5
-34, moveeast 1
-34, moveeast 1
-34, movesouth 1
-34, movenorth 1
-34, movesouth 1
-34, movenorth 1
-34, movesouth 1
-34, movenorth 1
-34, tp 1155.5 25.0 -481.5
-34, tp 1150.5 25.0 -481.5
-34, movesouth 1
-34, movenorth 1
-34, movesouth 1
-34, movesouth 1
-34, tp 1155.5 25.0 -479.5
-34, movesouth 1
-35, moveeast 1
-35, tp 1148.5 25.0 -481.5
-35, moveeast 1
-35, moveeast 1
-35, movesouth 1
-35, movenorth 1
-35, movesouth 1
-35, movenorth 1
-35, movesouth 1
-35, movenorth 1
-35, movesouth 1
-35, movenorth 1
-35, movesouth 1
-35, movenorth 1
-35, movesouth 1
-35, movenorth 1
-35, tp 1155.5 25.0 -481.5
-35, movesouth 1
-35, movesouth 1
-35, movesouth 1
-36, tp 1147.5 25.0 -481.5
-36, moveeast 1
-36, moveeast 1
-36, moveeast 1
-36, movesouth 1
-36, movenorth 1
-36, movesouth 1
-36, movenorth 1
-36, movesouth 1
-36, tp 1145.5 25.0 -480.5
-36, tp 1150.5 25.0 -480.5
-36, tp 1145.5 25.0 -480.5
-36, tp 1150.5 25.0 -480.5
-36, movenorth 1
-36, movesouth 1
-36, movenorth 1
-36, tp 1155.5 25.0 -481.5
-36, movesouth 1
-36, movesouth 1
-36, movesouth 1
-37, tp 1147.5 25.0 -481.5
-37, movesouth 1
-37, movenorth 1
-37, tp 1142.5 25.0 -481.5
-37, movesouth 1
-37, tp 1147.5 25.0 -480.5
-37, movesouth 1
-37, tp 1152.5 25.0 -479.5
-37, moveeast 1
-37, movesouth 1
-37, movenorth 1
-37, movewest 1
-37, movesouth 1
-37, moveeast 1
-37, tp 1148.5 25.0 -478.5
-37, tp 1153.5 25.0 -478.5
-37, tp 1148.5 25.0 -478.5
-37, tp 1153.5 25.0 -478.5
-37, movenorth 1
-37, movenorth 1
-37, movesouth 1
-37, movesouth 1
-37, tp 1148.5 25.0 -478.5
-37, moveeast 1
-37, moveeast 1
-37, tp 1155.5 25.0 -478.5
-38, tp 1147.5 25.0 -481.5
-38, moveeast 1
-38, moveeast 1
-38, moveeast 1
-38, movesouth 1
-38, movenorth 1
-38, movesouth 1
-38, movenorth 1
-38, movesouth 1
-38, movenorth 1
-38, movesouth 1
-38, movenorth 1
-38, movewest 1
-38, moveeast 1
-38, movesouth 1
-38, movenorth 1
-38, tp 1155.5 25.0 -481.5
-38, movesouth 1
-38, movesouth 1
-38, movesouth 1
-39, moveeast 1
-39, moveeast 1
-39, tp 1149.5 25.0 -481.5
-39, moveeast 1
-39, movesouth 1
-39, movenorth 1
-39, movesouth 1
-39, movenorth 1
-39, movesouth 1
-39, movenorth 1
-39, movesouth 1
-39, movenorth 1
-39, movesouth 1
-39, movenorth 1
-39, movesouth 1
-39, movenorth 1
-39, tp 1155.5 25.0 -481.5
-39, movesouth 1
-39, movesouth 1
-39, movesouth 1
-40, tp 1147.5 25.0 -481.5
-40, movesouth 1
-40, tp 1142.5 25.0 -480.5
-40, movesouth 1
-40, movenorth 1
-40, tp 1147.5 25.0 -480.5
-40, movesouth 1
-40, tp 1142.5 25.0 -479.5
-40, tp 1147.5 25.0 -479.5
-40, tp 1152.5 25.0 -479.5
-40, tp 1147.5 25.0 -479.5
-40, movesouth 1
-40, tp 1152.5 25.0 -478.5
-40, tp 1147.5 25.0 -478.5
-40, moveeast 1
-40, tp 1153.5 25.0 -478.5
-40, tp 1148.5 25.0 -478.5
-40, moveeast 1
-40, movewest 1
-40, tp 1153.5 25.0 -478.5
-40, tp 1148.5 25.0 -478.5
-40, tp 1143.5 25.0 -478.5
-40, movewest 1
-40, tp 1147.5 25.0 -478.5
-40, moveeast 1
-40, tp 1153.5 25.0 -478.5
-40, tp 1148.5 25.0 -478.5
-40, tp 1143.5 25.0 -478.5
-40, tp 1148.5 25.0 -478.5
-40, tp 1153.5 25.0 -478.5
-40, movewest 1
-40, moveeast 1
-40, movenorth 1
-40, movesouth 1
-40, tp 1148.5 25.0 -478.5
-40, moveeast 1
-40, moveeast 1
-40, tp 1155.5 25.0 -478.5
-41, moveeast 1
-41, tp 1148.5 25.0 -481.5
-41, moveeast 1
-41, moveeast 1
-41, movesouth 1
-41, movenorth 1
-41, movesouth 1
-41, movenorth 1
-41, movesouth 1
-41, movenorth 1
-41, movesouth 1
-41, tp 1145.5 25.0 -480.5
-41, tp 1150.5 25.0 -480.5
-41, movenorth 1
-41, tp 1145.5 25.0 -481.5
-41, tp 1150.5 25.0 -481.5
-41, tp 1155.5 25.0 -481.5
-41, movesouth 1
-41, movesouth 1
-41, movesouth 1
-42, moveeast 1
-42, tp 1148.5 25.0 -481.5
-42, moveeast 1
-42, moveeast 1
-42, movesouth 1
-42, movenorth 1
-42, movesouth 1
-42, movenorth 1
-42, movesouth 1
-42, movenorth 1
-42, movesouth 1
-42, movenorth 1
-42, movewest 1
-42, moveeast 1
-42, movesouth 1
-42, movenorth 1
-42, tp 1155.5 25.0 -481.5
-42, movesouth 1
-42, movesouth 1
-42, movesouth 1
-43, movesouth 1
-43, tp 1147.5 25.0 -480.5
-43, movenorth 1
-43, moveeast 1
-43, moveeast 1
-43, moveeast 1
-43, movesouth 1
-43, movenorth 1
-43, movesouth 1
-43, tp 1155.5 25.0 -480.5
-43, movesouth 1
-43, movesouth 1
-44, tp 1147.5 25.0 -481.5
-44, moveeast 1
-44, moveeast 1
-44, moveeast 1
-44, movesouth 1
-44, movenorth 1
-44, movesouth 1
-44, movenorth 1
-44, movesouth 1
-44, movenorth 1
-44, movesouth 1
-44, movenorth 1
-44, movesouth 1
-44, movenorth 1
-44, movesouth 1
-44, movenorth 1
-44, tp 1155.5 25.0 -481.5
-44, movesouth 1
-44, movesouth 1
-44, movesouth 1
-45, moveeast 1
-45, movewest 1
-45, tp 1147.5 25.0 -481.5
-45, tp 1142.5 25.0 -481.5
-45, moveeast 1
-45, tp 1148.5 25.0 -481.5
-45, moveeast 1
-45, moveeast 1
-45, movesouth 1
-45, movenorth 1
-45, movesouth 1
-45, movenorth 1
-45, movesouth 1
-45, tp 1155.5 25.0 -480.5
-45, movewest 1
-45, moveeast 1
-45, movesouth 1
-45, movesouth 1
-46, movesouth 1
-46, tp 1147.5 25.0 -480.5
-46, tp 1142.5 25.0 -480.5
-46, movenorth 1
-46, tp 1147.5 25.0 -481.5
-46, moveeast 1
-46, moveeast 1
-46, moveeast 1
-46, movesouth 1
-46, movenorth 1
-46, movesouth 1
-46, movenorth 1
-46, movesouth 1
-46, movenorth 1
-46, movesouth 1
-46, movenorth 1
-46, movesouth 1
-46, movenorth 1
-46, movesouth 1
-46, movenorth 1
-46, tp 1155.5 25.0 -481.5
-46, movesouth 1
-46, movesouth 1
-46, movesouth 1
-47, tp 1147.5 25.0 -481.5
-47, moveeast 1
-47, moveeast 1
-47, moveeast 1
-47, movesouth 1
-47, movenorth 1
-47, movesouth 1
-47, movenorth 1
-47, movesouth 1
-47, movenorth 1
-47, movesouth 1
-47, movenorth 1
-47, movesouth 1
-47, movenorth 1
-47, movesouth 1
-47, movenorth 1
-47, tp 1155.5 25.0 -481.5
-47, movesouth 1
-47, movesouth 1
-47, movesouth 1
-48, movesouth 1
-48, movesouth 1
-48, movesouth 1
-48, moveeast 1
-48, tp 1148.5 25.0 -478.5
-48, tp 1143.5 25.0 -478.5
-48, tp 1148.5 25.0 -478.5
-48, moveeast 1
-48, moveeast 1
-48, movewest 1
-48, moveeast 1
-48, tp 1155.5 25.0 -478.5
-49, moveeast 1
-49, tp 1148.5 25.0 -481.5
-49, moveeast 1
-49, moveeast 1
-49, movesouth 1
-49, movenorth 1
-49, movesouth 1
-49, movenorth 1
-49, movesouth 1
-49, movenorth 1
-49, movesouth 1
-49, movenorth 1
-49, movesouth 1
-49, movenorth 1
-49, movesouth 1
-49, movenorth 1
-49, tp 1155.5 25.0 -481.5
-49, movesouth 1
-49, movesouth 1
-49, movesouth 1
-50, moveeast 1
-50, tp 1148.5 25.0 -481.5
-50, moveeast 1
-50, moveeast 1
-50, movesouth 1
-50, movenorth 1
-50, movesouth 1
-50, movenorth 1
-50, movesouth 1
-50, movenorth 1
-50, movesouth 1
-50, movenorth 1
-50, movewest 1
-50, moveeast 1
-50, movesouth 1
-50, tp 1145.5 25.0 -480.5
-50, tp 1150.5 25.0 -480.5
-50, movesouth 1
-50, tp 1155.5 25.0 -479.5
-50, movesouth 1
+0 tp
+0 tp
+0 moveeast 
+0 moveeast 
+0 tp
+0 movewest 
+0 tp
+0 tp
+0 moveeast 
+0 tp
+0 tp
+0 tp
+0 movewest 
+0 movesouth 
+0 movenorth 
+0 moveeast 
+0 moveeast 
+0 movewest 
+0 moveeast 
+0 tp
+0 tp
+0 tp
+0 tp
+0 movewest 
+0 tp
+0 tp
+0 moveeast 
+0 movesouth 
+0 movesouth 
+0 tp
+0 movenorth 
+0 tp
+0 tp
+0 tp
+0 movenorth 
+0 tp
+0 movewest 
+0 movewest 
+0 tp
+0 movesouth 
+0 movenorth 
+0 moveeast 
+0 moveeast 
+0 movesouth 
+0 movesouth 
+0 movesouth 
+1 movesouth 
+1 tp
+1 movenorth 
+1 moveeast 
+1 movewest 
+1 movesouth 
+1 movesouth 
+1 tp
+1 movesouth 
+1 moveeast 
+1 movenorth 
+1 movewest 
+1 moveeast 
+1 movenorth 
+1 moveeast 
+1 movenorth 
+1 movewest 
+1 tp
+1 tp
+1 movesouth 
+1 movesouth 
+1 movesouth 
+1 movenorth 
+1 movenorth 
+1 moveeast 
+1 movewest 
+1 movenorth 
+1 moveeast 
+1 tp
+1 movewest 
+1 moveeast 
+1 tp
+1 moveeast 
+1 movesouth 
+1 tp
+1 tp
+1 movewest 
+1 movenorth 
+1 movewest 
+1 tp
+1 tp
+1 moveeast 
+1 movesouth 
+1 moveeast 
+1 movenorth 
+1 movewest 
+1 tp
+1 moveeast 
+1 movewest 
+1 moveeast 
+1 movesouth 
+1 movesouth 
+1 tp
+1 tp
+1 movenorth 
+1 tp
+1 movesouth 
+1 movenorth 
+1 movewest 
+1 movewest 
+1 movesouth 
+1 movesouth 
+1 tp
+1 tp
+1 movewest 
+1 movenorth 
+1 tp
+1 movenorth 
+1 tp
+1 movesouth 
+1 movesouth 
+1 movenorth 
+1 movenorth 
+1 tp
+1 tp
+1 movenorth 
+1 movesouth 
+1 tp
+1 movenorth 
+1 moveeast 
+1 tp
+1 tp
+1 tp
+1 tp
+1 tp
+1 movesouth 
+1 moveeast 
+1 moveeast 
+1 tp
+1 tp
+1 movesouth 
+1 tp
+1 tp
+1 movenorth 
+1 movenorth 
+1 movewest 
+1 movesouth 
+1 moveeast 
+1 movesouth 
+1 movesouth 
+2 tp
+2 movesouth 
+2 movesouth 
+2 movesouth 
+2 tp
+2 tp
+2 movenorth 
+2 tp
+2 tp
+2 tp
+2 movesouth 
+2 moveeast 
+2 movenorth 
+2 movenorth 
+2 movesouth 
+2 movesouth 
+2 tp
+2 moveeast 
+2 moveeast 
+2 tp
+3 tp
+3 moveeast 
+3 tp
+3 moveeast 
+3 movesouth 
+3 movewest 
+3 movenorth 
+3 movesouth 
+3 moveeast 
+3 movenorth 
+3 moveeast 
+3 tp
+3 movesouth 
+3 movenorth 
+3 movesouth 
+3 tp
+3 movewest 
+3 movewest 
+3 movesouth 
+3 movenorth 
+3 moveeast 
+3 movenorth 
+3 tp
+3 tp
+3 moveeast 
+3 movesouth 
+3 tp
+3 movenorth 
+3 movesouth 
+3 movesouth 
+3 tp
+3 movesouth 
+4 tp
+4 tp
+4 tp
+4 movesouth 
+4 movesouth 
+4 tp
+4 tp
+4 tp
+4 moveeast 
+4 movewest 
+4 movesouth 
+4 tp
+4 moveeast 
+4 tp
+4 tp
+4 moveeast 
+4 movewest 
+4 tp
+4 movewest 
+4 tp
+4 tp
+4 moveeast 
+4 tp
+4 movewest 
+4 tp
+4 movenorth 
+4 tp
+4 tp
+4 moveeast 
+4 movenorth 
+4 movenorth 
+4 moveeast 
+4 movesouth 
+4 moveeast 
+4 movesouth 
+4 movesouth 
+5 tp
+5 moveeast 
+5 tp
+5 tp
+5 tp
+5 movesouth 
+5 movesouth 
+5 movesouth 
+5 tp
+5 tp
+5 movewest 
+5 moveeast 
+5 movenorth 
+5 movewest 
+5 tp
+5 tp
+5 tp
+5 tp
+5 movesouth 
+5 movenorth 
+5 moveeast 
+5 movewest 
+5 tp
+5 movenorth 
+5 movenorth 
+5 tp
+5 tp
+5 movesouth 
+5 movenorth 
+5 tp
+5 moveeast 
+5 movewest 
+5 tp
+5 moveeast 
+5 moveeast 
+5 tp
+5 movewest 
+5 tp
+5 tp
+5 moveeast 
+5 tp
+5 tp
+5 movewest 
+5 tp
+5 tp
+5 tp
+5 movewest 
+5 movesouth 
+5 tp
+5 movenorth 
+5 tp
+5 moveeast 
+5 tp
+5 tp
+5 tp
+5 moveeast 
+5 movesouth 
+5 moveeast 
+5 movenorth 
+5 movesouth 
+5 tp
+5 tp
+5 movesouth 
+5 movesouth 
+6 moveeast 
+6 tp
+6 tp
+6 movesouth 
+6 moveeast 
+6 movenorth 
+6 moveeast 
+6 tp
+6 movesouth 
+6 movenorth 
+6 movesouth 
+6 movenorth 
+6 tp
+6 movesouth 
+6 movenorth 
+6 movewest 
+6 tp
+6 moveeast 
+6 tp
+6 tp
+6 tp
+6 tp
+6 movewest 
+6 tp
+6 movewest 
+6 moveeast 
+6 moveeast 
+6 movewest 
+6 tp
+6 tp
+6 movewest 
+6 movesouth 
+6 moveeast 
+6 movenorth 
+6 tp
+6 tp
+6 movewest 
+6 tp
+6 moveeast 
+6 tp
+6 movewest 
+6 moveeast 
+6 moveeast 
+6 tp
+6 tp
+6 movesouth 
+6 movewest 
+6 movesouth 
+6 movenorth 
+6 movenorth 
+6 tp
+6 tp
+6 tp
+6 tp
+6 moveeast 
+6 tp
+6 tp
+6 movesouth 
+6 movewest 
+6 moveeast 
+6 moveeast 
+6 movenorth 
+6 movewest 
+6 movewest 
+6 movesouth 
+6 movesouth 
+6 movesouth 
+6 tp
+6 tp
+6 movewest 
+6 movenorth 
+6 movesouth 
+6 moveeast 
+6 movenorth 
+6 movewest 
+6 moveeast 
+6 movesouth 
+6 tp
+6 moveeast 
+6 tp
+6 movenorth 
+6 moveeast 
+7 tp
+7 movesouth 
+7 tp
+7 tp
+7 movesouth 
+7 tp
+7 moveeast 
+7 movenorth 
+7 moveeast 
+7 moveeast 
+7 tp
+7 movesouth 
+7 movenorth 
+7 movesouth 
+7 movenorth 
+7 movesouth 
+7 tp
+7 tp
+7 movenorth 
+7 movesouth 
+7 movenorth 
+7 movesouth 
+7 tp
+7 tp
+7 tp
+7 movenorth 
+7 movewest 
+7 movewest 
+7 movewest 
+7 tp
+7 moveeast 
+7 moveeast 
+7 tp
+7 tp
+7 tp
+7 movesouth 
+7 moveeast 
+7 movewest 
+7 movenorth 
+7 movewest 
+7 tp
+7 tp
+7 tp
+7 tp
+7 movesouth 
+7 movenorth 
+7 moveeast 
+7 movesouth 
+7 movenorth 
+7 moveeast 
+7 tp
+7 tp
+7 tp
+7 tp
+7 movesouth 
+7 movesouth 
+7 movenorth 
+7 tp
+7 tp
+7 movesouth 
+7 movesouth 
+8 tp
+8 movesouth 
+8 tp
+8 movenorth 
+8 movesouth 
+8 tp
+8 movenorth 
+8 tp
+8 tp
+8 moveeast 
+8 movewest 
+8 movesouth 
+8 movenorth 
+8 moveeast 
+8 tp
+8 moveeast 
+8 moveeast 
+8 tp
+8 movesouth 
+8 movenorth 
+8 movesouth 
+8 tp
+8 tp
+8 movenorth 
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 tp
+8 movesouth 
+8 tp
+8 tp
+8 movesouth 
+8 movesouth 
+9 tp
+9 tp
+9 moveeast 
+9 tp
+9 tp
+9 tp
+9 moveeast 
+9 tp
+9 tp
+9 moveeast 
+9 movesouth 
+9 movenorth 
+9 movesouth 
+9 movenorth 
+9 movesouth 
+9 movenorth 
+9 movesouth 
+9 movenorth 
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 tp
+9 movewest 
+9 movewest 
+9 tp
+9 tp
+9 movewest 
+9 movesouth 
+9 tp
+9 movenorth 
+9 movesouth 
+9 tp
+9 tp
+9 movesouth 
+9 tp
+9 tp
+9 tp
+9 moveeast 
+9 movenorth 
+9 moveeast 
+9 movewest 
+9 movenorth 
+9 movesouth 
+9 movesouth 
+9 movesouth 
+9 movewest 
+9 tp
+9 tp
+9 movenorth 
+9 movenorth 
+9 movenorth 
+9 moveeast 
+9 tp
+9 tp
+9 tp
+9 tp
+9 moveeast 
+9 movesouth 
+9 moveeast 
+9 movesouth 
+9 movesouth 
+10 tp
+10 tp
+10 tp
+10 moveeast 
+10 moveeast 
+10 moveeast 
+10 movesouth 
+10 movenorth 
+10 movesouth 
+10 movenorth 
+10 movesouth 
+10 movenorth 
+10 movesouth 
+10 movenorth 
+10 movesouth 
+10 movenorth 
+10 movesouth 
+10 movenorth 
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 tp
+10 movewest 
+10 tp
+10 movesouth 
+10 moveeast 
+10 tp
+10 movesouth 
+10 tp
+10 movewest 
+10 moveeast 
+10 tp
+10 tp
+10 movesouth 
+11 tp
+11 movesouth 
+11 movesouth 
+11 movesouth 
+11 movenorth 
+11 tp
+11 tp
+11 movenorth 
+11 tp
+11 movesouth 
+11 tp
+11 tp
+11 movesouth 
+11 tp
+11 tp
+11 movenorth 
+11 movesouth 
+11 moveeast 
+11 movenorth 
+11 movewest 
+11 moveeast 
+11 movesouth 
+11 tp
+11 tp
+11 movewest 
+11 tp
+11 movenorth 
+11 tp
+11 tp
+11 tp
+11 tp
+11 movesouth 
+11 tp
+11 movenorth 
+11 movenorth 
+11 movenorth 
+11 movesouth 
+11 movenorth 
+11 tp
+11 moveeast 
+11 tp
+11 movesouth 
+11 movesouth 
+11 movewest 
+11 tp
+11 tp
+11 moveeast 
+11 movenorth 
+11 moveeast 
+11 movenorth 
+11 moveeast 
+11 tp
+11 movesouth 
+11 movenorth 
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 tp
+11 movesouth 
+11 tp
+11 tp
+11 movesouth 
+11 movesouth 
+12 moveeast 
+12 moveeast 
+12 moveeast 
+12 tp
+12 movesouth 
+12 movenorth 
+12 movesouth 
+12 movenorth 
+12 movesouth 
+12 movenorth 
+12 movesouth 
+12 movenorth 
+12 movesouth 
+12 movenorth 
+12 movesouth 
+12 movenorth 
+12 tp
+12 tp
+12 tp
+12 tp
+12 tp
+12 tp
+12 tp
+12 movesouth 
+12 tp
+12 tp
+12 tp
+12 tp
+12 movesouth 
+12 movesouth 
+13 tp
+13 movesouth 
+13 movenorth 
+13 moveeast 
+13 tp
+13 tp
+13 movewest 
+13 movesouth 
+13 movesouth 
+13 tp
+13 movesouth 
+13 tp
+13 tp
+13 tp
+13 tp
+13 moveeast 
+13 movewest 
+13 moveeast 
+13 tp
+13 moveeast 
+13 moveeast 
+13 movenorth 
+13 tp
+13 movenorth 
+13 tp
+13 movenorth 
+13 movesouth 
+13 movenorth 
+13 movesouth 
+13 movenorth 
+13 movesouth 
+13 movenorth 
+13 movesouth 
+13 movenorth 
+13 movesouth 
+13 movenorth 
+13 movesouth 
+13 tp
+13 movesouth 
+13 movesouth 
+14 tp
+14 moveeast 
+14 tp
+14 moveeast 
+14 movewest 
+14 tp
+14 tp
+14 tp
+14 tp
+14 movesouth 
+14 movesouth 
+14 movesouth 
+14 movewest 
+14 movenorth 
+14 tp
+14 movesouth 
+14 tp
+14 movenorth 
+14 movesouth 
+14 tp
+14 moveeast 
+14 moveeast 
+14 moveeast 
+14 tp
+15 movesouth 
+15 tp
+15 tp
+15 tp
+15 movesouth 
+15 tp
+15 tp
+15 tp
+15 movesouth 
+15 moveeast 
+15 movenorth 
+15 movewest 
+15 moveeast 
+15 movenorth 
+15 movenorth 
+15 tp
+15 tp
+15 tp
+15 tp
+15 movewest 
+15 tp
+15 tp
+15 movesouth 
+15 tp
+15 movesouth 
+15 tp
+15 tp
+15 tp
+15 tp
+15 movenorth 
+15 tp
+15 movesouth 
+15 movenorth 
+15 movenorth 
+15 moveeast 
+15 tp
+15 tp
+15 moveeast 
+15 tp
+15 moveeast 
+15 movesouth 
+15 movenorth 
+15 movesouth 
+15 movenorth 
+15 movesouth 
+15 movenorth 
+15 movesouth 
+15 movenorth 
+15 movesouth 
+15 movenorth 
+15 tp
+15 tp
+15 tp
+15 tp
+15 tp
+15 tp
+15 tp
+15 movesouth 
+15 movesouth 
+15 movesouth 
+16 movesouth 
+16 tp
+16 tp
+16 tp
+16 tp
+16 tp
+16 movesouth 
+16 movesouth 
+16 moveeast 
+16 tp
+16 tp
+16 tp
+16 tp
+16 tp
+16 tp
+16 movewest 
+16 tp
+16 moveeast 
+16 movenorth 
+16 movenorth 
+16 moveeast 
+16 moveeast 
+16 movesouth 
+16 movesouth 
+17 moveeast 
+17 tp
+17 tp
+17 movesouth 
+17 moveeast 
+17 moveeast 
+17 tp
+17 movenorth 
+17 movesouth 
+17 movenorth 
+17 movesouth 
+17 tp
+17 tp
+17 movenorth 
+17 movesouth 
+17 movenorth 
+17 tp
+17 movesouth 
+17 movesouth 
+17 movesouth 
+18 tp
+18 movesouth 
+18 movenorth 
+18 tp
+18 movesouth 
+18 tp
+18 tp
+18 movesouth 
+18 tp
+18 tp
+18 movesouth 
+18 tp
+18 tp
+18 movenorth 
+18 moveeast 
+18 movesouth 
+18 movewest 
+18 tp
+18 tp
+18 tp
+18 tp
+18 movenorth 
+18 moveeast 
+18 movewest 
+18 tp
+18 movesouth 
+18 tp
+18 tp
+18 tp
+18 movenorth 
+18 movesouth 
+18 moveeast 
+18 movewest 
+18 tp
+18 moveeast 
+18 tp
+18 tp
+18 tp
+18 movewest 
+18 moveeast 
+18 movenorth 
+18 movesouth 
+18 tp
+18 movewest 
+18 movenorth 
+18 tp
+18 movesouth 
+18 tp
+18 moveeast 
+18 moveeast 
+18 tp
+18 movewest 
+18 moveeast 
+18 tp
+18 tp
+18 tp
+18 moveeast 
+18 tp
+19 tp
+19 moveeast 
+19 moveeast 
+19 moveeast 
+19 movesouth 
+19 movenorth 
+19 movesouth 
+19 movenorth 
+19 movesouth 
+19 movenorth 
+19 tp
+19 tp
+19 movesouth 
+19 movenorth 
+19 movesouth 
+19 movenorth 
+19 tp
+19 movesouth 
+19 movesouth 
+19 movesouth 
+20 tp
+20 moveeast 
+20 movewest 
+20 movesouth 
+20 movesouth 
+20 tp
+20 tp
+20 tp
+20 movesouth 
+20 moveeast 
+20 movenorth 
+20 movesouth 
+20 tp
+20 tp
+20 movewest 
+20 tp
+20 tp
+20 movenorth 
+20 moveeast 
+20 movesouth 
+20 tp
+20 moveeast 
+20 tp
+20 tp
+20 moveeast 
+20 tp
+21 moveeast 
+21 moveeast 
+21 tp
+21 moveeast 
+21 movesouth 
+21 movenorth 
+21 movesouth 
+21 movenorth 
+21 movesouth 
+21 movenorth 
+21 movesouth 
+21 movenorth 
+21 movesouth 
+21 movesouth 
+21 tp
+21 movesouth 
+22 tp
+22 moveeast 
+22 tp
+22 tp
+22 tp
+22 moveeast 
+22 movesouth 
+22 movewest 
+22 movesouth 
+22 movewest 
+22 tp
+22 tp
+22 moveeast 
+22 movenorth 
+22 movenorth 
+22 tp
+22 movewest 
+22 tp
+22 tp
+22 movesouth 
+22 tp
+22 tp
+22 movenorth 
+22 moveeast 
+22 tp
+22 movesouth 
+22 moveeast 
+22 moveeast 
+22 movesouth 
+22 movesouth 
+23 moveeast 
+23 movewest 
+23 movesouth 
+23 tp
+23 tp
+23 movesouth 
+23 movesouth 
+23 tp
+23 tp
+23 movenorth 
+23 movesouth 
+23 moveeast 
+23 tp
+23 movewest 
+23 tp
+23 tp
+23 moveeast 
+23 tp
+23 tp
+23 moveeast 
+23 moveeast 
+23 movewest 
+23 moveeast 
+23 tp
+24 moveeast 
+24 tp
+24 moveeast 
+24 moveeast 
+24 movesouth 
+24 movenorth 
+24 movesouth 
+24 movenorth 
+24 movesouth 
+24 movenorth 
+24 movesouth 
+24 tp
+24 movesouth 
+24 movesouth 
+25 moveeast 
+25 tp
+25 tp
+25 tp
+25 movewest 
+25 movesouth 
+25 movesouth 
+25 movenorth 
+25 tp
+25 tp
+25 movesouth 
+25 tp
+25 tp
+25 movesouth 
+25 tp
+25 tp
+25 movenorth 
+25 tp
+25 tp
+25 tp
+25 moveeast 
+25 movewest 
+25 movesouth 
+25 moveeast 
+25 movenorth 
+25 movenorth 
+25 movenorth 
+25 movesouth 
+25 movesouth 
+25 movesouth 
+25 tp
+25 moveeast 
+25 moveeast 
+25 tp
+26 movesouth 
+26 tp
+26 movenorth 
+26 moveeast 
+26 moveeast 
+26 moveeast 
+26 movesouth 
+26 movenorth 
+26 movesouth 
+26 movenorth 
+26 movesouth 
+26 movenorth 
+26 movesouth 
+26 movenorth 
+26 movesouth 
+26 movenorth 
+26 tp
+26 movesouth 
+26 movesouth 
+26 movesouth 
+27 movesouth 
+27 tp
+27 tp
+27 movesouth 
+27 tp
+27 movesouth 
+27 tp
+27 tp
+27 movenorth 
+27 tp
+27 tp
+27 tp
+27 moveeast 
+27 movewest 
+27 tp
+27 tp
+27 tp
+27 tp
+27 moveeast 
+27 movewest 
+27 tp
+27 tp
+27 movesouth 
+27 tp
+27 tp
+27 moveeast 
+27 tp
+27 moveeast 
+27 moveeast 
+27 tp
+28 tp
+28 movesouth 
+28 movesouth 
+28 tp
+28 moveeast 
+28 movesouth 
+28 movenorth 
+28 movenorth 
+28 movesouth 
+28 movesouth 
+28 tp
+28 tp
+28 movewest 
+28 movenorth 
+28 movesouth 
+28 moveeast 
+28 tp
+28 moveeast 
+28 moveeast 
+28 tp
+29 tp
+29 tp
+29 movesouth 
+29 tp
+29 tp
+29 movesouth 
+29 tp
+29 tp
+29 movenorth 
+29 tp
+29 movesouth 
+29 tp
+29 movesouth 
+29 tp
+29 tp
+29 moveeast 
+29 movewest 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 moveeast 
+29 movenorth 
+29 moveeast 
+29 movenorth 
+29 tp
+29 tp
+29 tp
+29 tp
+29 movewest 
+29 tp
+29 tp
+29 movesouth 
+29 movenorth 
+29 tp
+29 moveeast 
+29 tp
+29 moveeast 
+29 movesouth 
+29 movenorth 
+29 tp
+29 movewest 
+29 tp
+29 tp
+29 tp
+29 movesouth 
+29 movewest 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movewest 
+29 tp
+29 movenorth 
+29 movenorth 
+29 movesouth 
+29 tp
+29 tp
+29 tp
+29 tp
+29 movesouth 
+29 tp
+29 moveeast 
+29 movenorth 
+29 movenorth 
+29 moveeast 
+29 moveeast 
+29 tp
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 movesouth 
+29 movenorth 
+29 tp
+29 tp
+30 moveeast 
+30 moveeast 
+30 tp
+30 moveeast 
+30 movesouth 
+30 movenorth 
+30 movesouth 
+30 movenorth 
+30 movesouth 
+30 movenorth 
+30 movesouth 
+30 movenorth 
+30 movesouth 
+30 movenorth 
+30 movesouth 
+30 movenorth 
+30 tp
+30 movesouth 
+30 movesouth 
+31 movesouth 
+31 movesouth 
+31 movesouth 
+31 tp
+31 tp
+31 tp
+31 moveeast 
+31 movewest 
+31 tp
+31 movenorth 
+31 tp
+31 tp
+31 tp
+31 movesouth 
+31 movenorth 
+31 tp
+31 tp
+31 movenorth 
+31 movesouth 
+31 tp
+31 movesouth 
+31 tp
+31 tp
+31 moveeast 
+31 tp
+31 moveeast 
+31 moveeast 
+31 tp
+32 tp
+32 moveeast 
+32 tp
+32 tp
+32 moveeast 
+32 moveeast 
+32 movesouth 
+32 movenorth 
+32 tp
+32 tp
+32 movesouth 
+32 movenorth 
+32 movesouth 
+32 movenorth 
+32 movesouth 
+32 movenorth 
+32 tp
+32 movesouth 
+32 movesouth 
+32 movesouth 
+33 tp
+33 moveeast 
+33 moveeast 
+33 moveeast 
+33 movesouth 
+33 movenorth 
+33 movesouth 
+33 movenorth 
+33 movesouth 
+33 movenorth 
+33 movesouth 
+33 movenorth 
+33 movesouth 
+33 movenorth 
+33 movesouth 
+33 tp
+33 tp
+33 tp
+33 movesouth 
+33 movesouth 
+34 moveeast 
+34 tp
+34 moveeast 
+34 moveeast 
+34 movesouth 
+34 movenorth 
+34 movesouth 
+34 movenorth 
+34 movesouth 
+34 movenorth 
+34 tp
+34 tp
+34 movesouth 
+34 movenorth 
+34 movesouth 
+34 movesouth 
+34 tp
+34 movesouth 
+35 moveeast 
+35 tp
+35 moveeast 
+35 moveeast 
+35 movesouth 
+35 movenorth 
+35 movesouth 
+35 movenorth 
+35 movesouth 
+35 movenorth 
+35 movesouth 
+35 movenorth 
+35 movesouth 
+35 movenorth 
+35 movesouth 
+35 movenorth 
+35 tp
+35 movesouth 
+35 movesouth 
+35 movesouth 
+36 tp
+36 moveeast 
+36 moveeast 
+36 moveeast 
+36 movesouth 
+36 movenorth 
+36 movesouth 
+36 movenorth 
+36 movesouth 
+36 tp
+36 tp
+36 tp
+36 tp
+36 movenorth 
+36 movesouth 
+36 movenorth 
+36 tp
+36 movesouth 
+36 movesouth 
+36 movesouth 
+37 tp
+37 movesouth 
+37 movenorth 
+37 tp
+37 movesouth 
+37 tp
+37 movesouth 
+37 tp
+37 moveeast 
+37 movesouth 
+37 movenorth 
+37 movewest 
+37 movesouth 
+37 moveeast 
+37 tp
+37 tp
+37 tp
+37 tp
+37 movenorth 
+37 movenorth 
+37 movesouth 
+37 movesouth 
+37 tp
+37 moveeast 
+37 moveeast 
+37 tp
+38 tp
+38 moveeast 
+38 moveeast 
+38 moveeast 
+38 movesouth 
+38 movenorth 
+38 movesouth 
+38 movenorth 
+38 movesouth 
+38 movenorth 
+38 movesouth 
+38 movenorth 
+38 movewest 
+38 moveeast 
+38 movesouth 
+38 movenorth 
+38 tp
+38 movesouth 
+38 movesouth 
+38 movesouth 
+39 moveeast 
+39 moveeast 
+39 tp
+39 moveeast 
+39 movesouth 
+39 movenorth 
+39 movesouth 
+39 movenorth 
+39 movesouth 
+39 movenorth 
+39 movesouth 
+39 movenorth 
+39 movesouth 
+39 movenorth 
+39 movesouth 
+39 movenorth 
+39 tp
+39 movesouth 
+39 movesouth 
+39 movesouth 
+40 tp
+40 movesouth 
+40 tp
+40 movesouth 
+40 movenorth 
+40 tp
+40 movesouth 
+40 tp
+40 tp
+40 tp
+40 tp
+40 movesouth 
+40 tp
+40 tp
+40 moveeast 
+40 tp
+40 tp
+40 moveeast 
+40 movewest 
+40 tp
+40 tp
+40 tp
+40 movewest 
+40 tp
+40 moveeast 
+40 tp
+40 tp
+40 tp
+40 tp
+40 tp
+40 movewest 
+40 moveeast 
+40 movenorth 
+40 movesouth 
+40 tp
+40 moveeast 
+40 moveeast 
+40 tp
+41 moveeast 
+41 tp
+41 moveeast 
+41 moveeast 
+41 movesouth 
+41 movenorth 
+41 movesouth 
+41 movenorth 
+41 movesouth 
+41 movenorth 
+41 movesouth 
+41 tp
+41 tp
+41 movenorth 
+41 tp
+41 tp
+41 tp
+41 movesouth 
+41 movesouth 
+41 movesouth 
+42 moveeast 
+42 tp
+42 moveeast 
+42 moveeast 
+42 movesouth 
+42 movenorth 
+42 movesouth 
+42 movenorth 
+42 movesouth 
+42 movenorth 
+42 movesouth 
+42 movenorth 
+42 movewest 
+42 moveeast 
+42 movesouth 
+42 movenorth 
+42 tp
+42 movesouth 
+42 movesouth 
+42 movesouth 
+43 movesouth 
+43 tp
+43 movenorth 
+43 moveeast 
+43 moveeast 
+43 moveeast 
+43 movesouth 
+43 movenorth 
+43 movesouth 
+43 tp
+43 movesouth 
+43 movesouth 
+44 tp
+44 moveeast 
+44 moveeast 
+44 moveeast 
+44 movesouth 
+44 movenorth 
+44 movesouth 
+44 movenorth 
+44 movesouth 
+44 movenorth 
+44 movesouth 
+44 movenorth 
+44 movesouth 
+44 movenorth 
+44 movesouth 
+44 movenorth 
+44 tp
+44 movesouth 
+44 movesouth 
+44 movesouth 
+45 moveeast 
+45 movewest 
+45 tp
+45 tp
+45 moveeast 
+45 tp
+45 moveeast 
+45 moveeast 
+45 movesouth 
+45 movenorth 
+45 movesouth 
+45 movenorth 
+45 movesouth 
+45 tp
+45 movewest 
+45 moveeast 
+45 movesouth 
+45 movesouth 
+46 movesouth 
+46 tp
+46 tp
+46 movenorth 
+46 tp
+46 moveeast 
+46 moveeast 
+46 moveeast 
+46 movesouth 
+46 movenorth 
+46 movesouth 
+46 movenorth 
+46 movesouth 
+46 movenorth 
+46 movesouth 
+46 movenorth 
+46 movesouth 
+46 movenorth 
+46 movesouth 
+46 movenorth 
+46 tp
+46 movesouth 
+46 movesouth 
+46 movesouth 
+47 tp
+47 moveeast 
+47 moveeast 
+47 moveeast 
+47 movesouth 
+47 movenorth 
+47 movesouth 
+47 movenorth 
+47 movesouth 
+47 movenorth 
+47 movesouth 
+47 movenorth 
+47 movesouth 
+47 movenorth 
+47 movesouth 
+47 movenorth 
+47 tp
+47 movesouth 
+47 movesouth 
+47 movesouth 
+48 movesouth 
+48 movesouth 
+48 movesouth 
+48 moveeast 
+48 tp
+48 tp
+48 tp
+48 moveeast 
+48 moveeast 
+48 movewest 
+48 moveeast 
+48 tp
+49 moveeast 
+49 tp
+49 moveeast 
+49 moveeast 
+49 movesouth 
+49 movenorth 
+49 movesouth 
+49 movenorth 
+49 movesouth 
+49 movenorth 
+49 movesouth 
+49 movenorth 
+49 movesouth 
+49 movenorth 
+49 movesouth 
+49 movenorth 
+49 tp
+49 movesouth 
+49 movesouth 
+49 movesouth 
+50 moveeast 
+50 tp
+50 moveeast 
+50 moveeast 
+50 movesouth 
+50 movenorth 
+50 movesouth 
+50 movenorth 
+50 movesouth 
+50 movenorth 
+50 movesouth 
+50 movenorth 
+50 movewest 
+50 moveeast 
+50 movesouth 
+50 tp
+50 tp
+50 movesouth 
+50 tp
+50 movesouth 
