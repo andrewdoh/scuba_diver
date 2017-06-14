@@ -110,7 +110,7 @@ We also manually observed the agent’s health bar and the amount of air they ha
 <p align="center">
 <img src="images/hole.png" width="700px">
  </p>
-As a final note, there were times when the agent would turn a corner or step inside a narrow path, and the perspective of the camera would close up on the back of the agent’s head, disallowing us to view the surrounding area. This didn’t impeded us from making necessary observations and evaluations, but in the future, we would like to fix the perspective of the camera so that we can always view the general area in which the agent is standing. 
+At the beginning, there were times when the agent would turn a corner or step inside a narrow path, and the perspective of the camera would close up on the back of the agent’s head, disallowing us to view the surrounding area. This didn’t impeded us from making necessary observations and evaluations, but it was still an annoyance that made it hard for us to get good recording of the agent in action. So between the time of the status report and the final report, we went from teleporting the agent up/down to teleporting it 4 blocks to the left or right as way to simulate teleporting between floors. This change allowed us to then change the angle of how we look at the agent. Now, we are able to record the agent in action as we look at him from a top down view and thus making it easier to observe the agent.
 
 
 ## Remaining Goals and Challenges ##
