@@ -114,7 +114,7 @@ Overall, if the agent is able to both increase the amount of time it stays alive
 
 As a last note, we currently have alpha set to a high value so as to promote a high learning rate for the agent. Gamma is also set to a rather high value (approximately 0.7 as of now) so that the agent may favor future results over immediate ones. This is mainly because exploring new depths in this type of environment is a good thing; it could lead to finding more items and potential rewards. Both of these values have allowed us to observe the agent completing missions more quickly (which we hope is a sign that will better lead us to optimal values for convergence). In regards to the epsilon value, we are satisfied with keeping it around a value of 0.1, as that appears to be a common tactic in reinforcement learning in order to prevent the agent from acting ‘too’ randomly. Regardless, we plan on monitoring all of these values more closely in the future. 
 
-From our analysis, we tested several different levels of $$\alpha$$, $$\gamma$$, and $$\epsilon$$ and found that the optimal levels to set the algorithm to are $$ \alpha = 0.1, 0.9 \gte \gamma \lte 1, \epislon = 0.1$$. 
+From our analysis, we tested several different levels of $$\alpha$$, $$\gamma$$, and $$\epsilon$$ and found that the optimal levels to set the algorithm to are $$ \alpha = 0.1, 0.9 \geq \gamma \leq 1, \epislon = 0.1$$. 
 
 #### Qualitative ####
 
