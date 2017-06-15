@@ -107,6 +107,7 @@ $$ \alpha = 0.1, \gamma =1, \epsilon = 0.1$$
 <h5 align="center"> <b>Example 2 </b></h5>
 $$ \alpha = 0.1, \gamma =0.9, \epsilon = 0.1$$
 </p>
+
  We can see from first glance that our agent is steadily increasing and accumulating reward as the number of episodes increase. Each episodes, our agent begins by taking actions that result in some form of reward which can be negative or positive. The agent's cumulative reward per episode will indicate whether it's performing its given task which is to search for the red stone block while simultaneously try to find as much treasure as it can. This is computed directly through the number of actions the agent takes which over time should begin to converge to an efficient sequence of actions resulting in maximum reward. While each sequence of action directly affects the maximum reward the differences in double Q-learning and single Q-learning can easily be seen from the cumulative rewards as well. In single Q-learning, by always taking the $$\max(S,A)$$ there is a bias that is occurs from always taking this The maximization bias single Q-learning has is decoupled in this instance by taking the average of two tables counteracting this effect. With the limited time we had we opted to run each map $$50$$ episodes which at first evidently seems to be well behaved but as the difficultly of the map increases tends to bounce between lows and highs. While there are times where cumulative reward drops drastically, we attribute this fluctuation to the relative sizes of the map as the agent trying explore more area which increases. In it worthwhile to note that this doesn't affect the performance or efficiency of our agent in the long run.   
  
 Another way in which we were able to evaluate our agent, quantitatively, was by observing how long it was able to stay alive per mission. If the agent is dying rather early (before times runs out), then we know it most likely wasn’t able to sustain the amount of air it had very well. On the other hand, if the agent stays alive for a relatively long time, or dies from running out of time, then it was most likely to have found air in a sufficient manner.
@@ -121,9 +122,11 @@ $$ \alpha = 0.1, \gamma =1, \epsilon = 0.1$$
  <img src="images/singlevsdouble_ex_1_5_time.png" width="350px">
   <img src="images/singlevsdouble_ex_1_10_time.png" width="350px">
  </div>
+<p align="middle">
 <h5 align="center"> <b>Example 2 </b></h5>
 $$ \alpha = 0.1, \gamma =0.9, \epsilon = 0.1$$
 </p>
+
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
 
 Overall, if the agent is able to both increase the amount of time it stays alive by sustaining the appropriate amount of air as well increasing the amount of rewards it receives per mission, we are satisfied in knowing that our agent is moving towards convergence and finding an optimal policy. And with the information that we have been able to gather thus far, we believe it is doing just that. 
