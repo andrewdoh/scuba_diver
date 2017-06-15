@@ -63,10 +63,10 @@ However, we still came across the problem where the agent would end up dying rig
 
 To reiterate, the reward policy is the following:
 
--Ender Pearl (+10 points)
--Air pockets (+10 if low air; +5 if medium air; -1 if high air)
--Goal state (+100)
--Each step (-1)
+- Ender Pearl (+10 points)
+- Air pockets (+10 if low air; +5 if medium air; -1 if high air)
+- Goal state (+100)
+- Each step (-1)
 
 We found that the reward policy above provides the agent with enough knowledge of its environment in order to assess the situation at-hand appropriately, and determine a course of actions to maximize its rewards. But let’s check out the results below to prove our point; we think they went swimmingly! 
  
