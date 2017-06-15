@@ -42,9 +42,10 @@ Another key aspect of the state space involves the amount of air the agent has l
 
 Now that we have the idea behind our setup more clearly laid out, let’s jump into (again, no pun intended) the more technical side of things:
 
-<p align="center">
-<img src="images/new_double_q.png" width="1200px">
-</p>
+<div align="center">
+<img src="images/double_q_learning.png" width="400px">
+<img src="images/state_space.png" width="400px">
+</div>
 
 One of our first tasks, and main hurdle, was to simply get our agent to survive in this underwater maze (i.e. finding the goal state before running out of air), and doing so efficiently. Well, as one of the first breakthroughs in reinforcement learning, the Q-learning algorithm has very unique and interesting properties (Watkins, 1989), which made it an easy choice for the basis of our project. With this in mind, we decided to do some research on different approaches to the Q-learning algorithm. We soon came across the method of ‘Double Q-Learning’ and found that it would fit nicely with the idea of our project in terms of efficiency. Double Q-learning is just what it sounds like, it’s using two Q-tables instead of just one. However, the advantages are rather intriguing; by separating out reward values into two separate Q-tables, we can inherently separate the value of a state from the value of an action taken to get there. Thus, one Q-table will essentially represent the value of a given state (independent of action), and the other will represent the value of an action given a particular state. This is beneficial for the framework of our project because choosing a particular action may not necessarily be as important as the value of the state itself. For instance, the amount of air our agent has is constantly depleting, and depending on how much air it has left (which is included in the description of its current state), it may choose to travel to a nearby air space, or to simply ignore it and continue exploring other areas in more depth. And though we may find that taking a step forward leads us to an air pocket, if we happen to have a large amount of air left, going to the space may essentially be a waste of time. Thus, its current state may be more beneficial in determining what to do next versus where a particular action takes it.
 
@@ -96,6 +97,7 @@ To demonstrate our project is working as intended, we show quantitative proof us
  <div align="center">
 <img src="images/singlevsdouble_ex_1_3.png" width="400px">
 <img src="images/singlevsdouble_ex_1_5.png" width="400px">
+<img src="images/singlevsdouble_ex_1_10.png" width="400px">
  </div> 
  We can see from first glance that our agent is steadily increasing and accumulating reward as the number of episodes increase. Each episodes, our agent begins by taking actions that result in some form of reward which can be negative or positive. The agent's action will indicate whether it's performing its given task which is to search for the red stone block while simultaneously try to find as much treasure as it can. The differences in double Q-learning and single Q-learning can easily be seen. In single Q-learning, by always taking the $$\max(S,A)$$ there is a bias that is occurs from always taking this The maximization bias single Q-learning has is decoupled in this instance by taking the average of two tables counteracting this effect. While there are times where cumulative reward drops drastically, which we attribute to either the agent trying explore or some form of bug in our code, this doesn't affect in the long run its performance or efficiency.  
  
@@ -106,6 +108,7 @@ We expected for the agent to have a rather short life span in beginning missions
  <div align="center">
  <img src="images/singlevsdouble_ex_1_3_time.png" width="400px">
  <img src="images/singlevsdouble_ex_1_5_time.png" width="400px">
+  <img src="images/singlevsdouble_ex_1_10_time.png" width="400px">
  </div>
 
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
