@@ -142,7 +142,9 @@ At the beginning, there were times when the agent would turn a corner or step in
 
 ## Final Notes ##
 
- ???
+As a last note, we wanted to point out that one of our goals stated in the status report was increasing the depth complexity of our environment, as well as adding in value function approximation in order to help reduce the size of our state space. However, after analyzing all of the peer reviews, many people had implied that we were biting off more than we could chew. This was mainly because, at the time, our agent was not even converging properly (there was quite a plethora of little bugs in our code). Thus, though we stated such goals in our status report, we realized that reaching convergence, as well as obtaining sufficient data to prove that our agent was functioning properly and efficiently would be a reasonable goal in of itself. 
+
+Even so, we did manage to explore further depths with our agent (i.e. going from exploring 3 floors, to 5, and even up to 10), as can be seen in the evaluation section above. Overall, this project was both a challenging and rewarding experience for all of us, and we had a splash making it!
 
 
 ### References ###
