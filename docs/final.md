@@ -104,11 +104,6 @@ Another way in which we were able to evaluate our agent, quantitatively, was by 
 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
-<div align="center">
-<img src="images/singleQ_time.png" width="500px">
- 
-<img src="images/doubleQ_time.png" width="500px">
-</div>
  <p align="center">
  <img src="images/singleQ_vs_doubleQ_time.png" width="500px">
  </p>
