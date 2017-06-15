@@ -9,7 +9,7 @@ An application of reinforcement learning to a scuba diving agent in Minecraft. F
 
 ## Screenshots ## 
 
-<img src="images/screenshots.png" width="1500px">
+<img src="images/screenshots.png" width="1000px">
 
 # Code repository #
 - [code repository](https://github.com/andrewdoh/scuba_diver)
