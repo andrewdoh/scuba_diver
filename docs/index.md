@@ -9,8 +9,6 @@ An application of reinforcement learning to a scuba diving agent in Minecraft. F
 
 For this problem, we attempt to expand on the Q-learning algorithm to the double Q-learning algorithm in order to solve the known problem of maximum bias with a single Q-learner. We experiment our algorithms on three, unique maps. The first map has 3 floors, the second has 5 floors, and the third has 10 floors. All are scattered with rewards (as well as air pockets) to drive the incentive of our agent to explore its surroundings. Our main goal is to maximize the amount of rewards our agent receives, as well as experimenting with and evaluating the effects that depth has on the environment. 
 
-<img src="images/depth.png" width="500px">
-
 ## Screenshots ## 
 
 <img src="images/screenshots.png" width="1000px">
