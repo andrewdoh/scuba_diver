@@ -95,9 +95,9 @@ To demonstrate our project is working as intended, we show quantitative proof us
 <h5 align="center"> Example 1 </h5>
 
  <div align="center">
-<img src="images/singlevsdouble_ex_1_3.png" width="400px">
-<img src="images/singlevsdouble_ex_1_5.png" width="400px">
-<img src="images/singlevsdouble_ex_1_10.png" width="400px">
+<img src="images/singlevsdouble_ex_1_3.png" width="350px">
+<img src="images/singlevsdouble_ex_1_5.png" width="350px">
+<img src="images/singlevsdouble_ex_1_10.png" width="350px">
  </div> 
  We can see from first glance that our agent is steadily increasing and accumulating reward as the number of episodes increase. Each episodes, our agent begins by taking actions that result in some form of reward which can be negative or positive. The agent's action will indicate whether it's performing its given task which is to search for the red stone block while simultaneously try to find as much treasure as it can. The differences in double Q-learning and single Q-learning can easily be seen. In single Q-learning, by always taking the $$\max(S,A)$$ there is a bias that is occurs from always taking this The maximization bias single Q-learning has is decoupled in this instance by taking the average of two tables counteracting this effect. While there are times where cumulative reward drops drastically, which we attribute to either the agent trying explore or some form of bug in our code, this doesn't affect in the long run its performance or efficiency.  
  
@@ -106,9 +106,9 @@ Another way in which we were able to evaluate our agent, quantitatively, was by 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
  <div align="center">
- <img src="images/singlevsdouble_ex_1_3_time.png" width="400px">
- <img src="images/singlevsdouble_ex_1_5_time.png" width="400px">
-  <img src="images/singlevsdouble_ex_1_10_time.png" width="400px">
+ <img src="images/singlevsdouble_ex_1_3_time.png" width="350px">
+ <img src="images/singlevsdouble_ex_1_5_time.png" width="350px">
+  <img src="images/singlevsdouble_ex_1_10_time.png" width="350px">
  </div>
 
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
