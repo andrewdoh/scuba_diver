@@ -95,7 +95,7 @@ To demonstrate our project is working as intended, we show quantitative proof us
 
 <p align="middle">
 <h5 align="center"> <b>Example 1 </b></h5>
-$$ \alpha = 0.1, 0.9 \gamma =1, \epsilon = 0.1$$
+$$ \alpha = 0.1, \gamma =1, \epsilon = 0.1$$
 </p>
 
  <div align="center">
@@ -107,7 +107,7 @@ $$ \alpha = 0.1, 0.9 \gamma =1, \epsilon = 0.1$$
 
 <p align="middle">
 <h5 align="center"> <b>Example 2 </b></h5>
-$$ \alpha = 0.1, 0.9 \gamma =0.9, \epsilon = 0.1$$
+$$ \alpha = 0.1, \gamma =0.9, \epsilon = 0.1$$
 </p>
  We can see from first glance that our agent is steadily increasing and accumulating reward as the number of episodes increase. Each episodes, our agent begins by taking actions that result in some form of reward which can be negative or positive. The agent's action will indicate whether it's performing its given task which is to search for the red stone block while simultaneously try to find as much treasure as it can. The differences in double Q-learning and single Q-learning can easily be seen. In single Q-learning, by always taking the $$\max(S,A)$$ there is a bias that is occurs from always taking this The maximization bias single Q-learning has is decoupled in this instance by taking the average of two tables counteracting this effect. While there are times where cumulative reward drops drastically, which we attribute to either the agent trying explore or some form of bug in our code, this doesn't affect in the long run its performance or efficiency.  
  
