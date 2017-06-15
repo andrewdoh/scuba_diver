@@ -88,34 +88,15 @@ We found that the reward policy above provides the agent with enough knowledge o
 
 #### Quantitative ####
 
-In order to evaluate our project in a quantitative manner, we analyzed the rewards that we were receiving at each episode, and made sure that each Q table was correctly computing those rewards. Intuitively, we know that if our rewards our increasing with each consecutive mission, and the difference in consecutive rewards is not too large (i.e. reward values are not random and there is some consistency to them), then our agent is learning something useful.  An episode, in our case, ends when either the agent dies from running out of breath, running out of time (which we set to 100 seconds), or when the agent reaches the end goal (the redstone block). We can view a sample of missions and the respective rewards received at each below: 
-<h5 align="center"> Example 1 </h5>
- <div align="center">
-<img src="images/singleQ_ex_1.png" width="500px">
+To demonstrate our project is working as intended, we show quantitative proof using data we gathered and several different metrics to test the efficiency of our project. For example, we begin by gathering every action, reward, and time spent in an episode. An episode for our agent runs until a number of things occur. Namely, the agent dies from running out of air, running out of time, or if the agent reaches the end goal(red stone block). Using these values we graph to show visually that our agent is working as intended. The first analysis we make and graph is the cumulative reward per episode. Intuitively, we can see that the agent should gradually accumulate more rewards as the number of episodes increases. Additionally, these rewards should be consistent and not fluctuate too often indicating that the agent is learning what action is best to take. From here, we make additional graphs using the other data we gathered to prove that the agent is working efficiently. This can be seen from the distributions of actions, time taken per episode and whether or not the agent died which are all denoted below:  
+  
  
-<img src="images/doubleQ_ex_1.png" width="500px">
-</div>
- <p align="center">
- <img src="images/singleQ_vs_doubleQ_ex_1.png" width="500px">
- </p>
- <h5 align="center"> Example 2 </h5>
- <div align="center">
-<img src="images/singleQ_ex_2.png" width="500px">
+<h5 align="center"> Example 1 </h5>
 
-<img src="images/doubleQ_ex_2.png" width="500px">
-</div>
  <p align="center">
 <img src="images/singleQ_vs_doubleQ_ex_2.png" width="500px">
  </p>
-  <div align="center">
-<img src="images/swarm.png" width="500px">
 
-<img src="images/seabar.png" width="500px">
-<img src="images/seabox.png" width="500px">
-</div>
-  <div align="center">
-  <img src="images/count.png" width="500px">
-  </div>
 
 With the above, we can see that our agent begins receiving rewards in the negative 200s, but that soon decreases into the negative 100s, and eventually the agent is able to find a redstone block, where the reward decrease even further (specifically, to -81). Afterwards, the agent continues receiving rewards in the 100s again, but even so, it appears that it is still decreasing in some manner.  We assume the latter is due to the fact that is exploring other areas of the maze, and perhaps different routes to arrive at the redstone block again. Regardless, from the above data, we can confirm that our agent is learning how to maximize its rewards.  
  
