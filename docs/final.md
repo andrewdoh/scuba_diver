@@ -94,7 +94,7 @@ To demonstrate our project is working as intended, we show quantitative proof us
 <h5 align="center"> Example 1 </h5>
 
  <p align="center">
-<img src="images/singleQ_vs_doubleQ_ex_2.png" width="500px">
+<img src="images/singlevsdouble_ex_1_3.png" width="500px">
  </p>
 
 
@@ -105,7 +105,7 @@ Another way in which we were able to evaluate our agent, quantitatively, was by 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
 
  <p align="center">
- <img src="images/singleQ_vs_doubleQ_time.png" width="500px">
+ <img src="images/singlevsdouble_ex_1_3_time.png" width="500px">
  </p>
 
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
