@@ -92,25 +92,33 @@ We found that the reward policy above provides the agent with enough knowledge o
 To demonstrate our project is working as intended, we show quantitative proof using data we gathered and several different metrics to test the efficiency of our project. For example, we begin by gathering every action, reward, and time spent in an episode. An episode for our agent runs until a number of things occur. Namely, the agent dies from running out of air, running out of time, or if the agent reaches the end goal(red stone block). Using these values we graph to show visually that our agent is working as intended. The first analysis we make and graph is the cumulative reward per episode. Intuitively, we can see that the agent should gradually accumulate more rewards as the number of episodes increases. Additionally, these rewards should be consistent and not fluctuate too often indicating that the agent is learning what action is best to take. From here, we make additional graphs using the other data we gathered to prove that the agent is working efficiently. This can be seen from the distributions of actions, time taken per episode and whether or not the agent died which are all denoted below:  
   
  
-<h5 align="center"> Example 1 </h5>
+<h5 align="center"> <b>Example 1 </b></h5>
+<p align="middle">
+$$ \alpha = 0.1, 0.9 \gamma =1, \epsilon = 0.1$$
+</p>
 
  <div align="center">
 <img src="images/singlevsdouble_ex_1_3.png" width="350px">
 <img src="images/singlevsdouble_ex_1_5.png" width="350px">
 <img src="images/singlevsdouble_ex_1_10.png" width="350px">
  </div> 
+  
+<h5 align="center"> <b>Example 2 </b></h5>
+<p align="middle">
+$$ \alpha = 0.1, 0.9 \gamma =0.9, \epsilon = 0.1$$
+</p>
  We can see from first glance that our agent is steadily increasing and accumulating reward as the number of episodes increase. Each episodes, our agent begins by taking actions that result in some form of reward which can be negative or positive. The agent's action will indicate whether it's performing its given task which is to search for the red stone block while simultaneously try to find as much treasure as it can. The differences in double Q-learning and single Q-learning can easily be seen. In single Q-learning, by always taking the $$\max(S,A)$$ there is a bias that is occurs from always taking this The maximization bias single Q-learning has is decoupled in this instance by taking the average of two tables counteracting this effect. While there are times where cumulative reward drops drastically, which we attribute to either the agent trying explore or some form of bug in our code, this doesn't affect in the long run its performance or efficiency.  
  
 Another way in which we were able to evaluate our agent, quantitatively, was by observing how long it was able to stay alive per mission. If the agent is dying rather early (before times runs out), then we know it most likely wasn’t able to sustain the amount of air it had very well. On the other hand, if the agent stays alive for a relatively long time, or dies from running out of time, then it was most likely to have found air in a sufficient manner.
 
 We expected for the agent to have a rather short life span in beginning missions, then to increase this time span as it learns how to properly maintain its breath. However, as it nears convergence, we expected the agent to begin decreasing the amount time spent per mission again, which would signify that it has learned a quicker path to maximize its rewards and reach the final goal. Below, we can view a sample of how long the agent is spending in each mission. 
-
+<h5 align="center"> <b>Example 1 </b></h5>
  <div align="center">
  <img src="images/singlevsdouble_ex_1_3_time.png" width="350px">
  <img src="images/singlevsdouble_ex_1_5_time.png" width="350px">
   <img src="images/singlevsdouble_ex_1_10_time.png" width="350px">
  </div>
-
+<h5 align="center"> <b>Example 2 </b></h5>
 The results were more or less what we expected. It begins starting off with short life spans, which begins increasing over time. Due to technical difficulties (which we plan on fixing before our final project), our agent had troubles converging, and so we weren’t able to observe if the agent would start decreasing the amount of time spent per mission near convergence. In the future, we plan to supply the agent with a reward that is dependent upon how long it took them to find the final goal. 
 
 Overall, if the agent is able to both increase the amount of time it stays alive by sustaining the appropriate amount of air as well increasing the amount of rewards it receives per mission, we are satisfied in knowing that our agent is moving towards convergence and finding an optimal policy. And with the information that we have been able to gather thus far, we believe it is doing just that. 
